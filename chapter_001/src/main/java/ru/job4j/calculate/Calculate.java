@@ -8,7 +8,7 @@ package ru.job4j.calculate;
     */
 
 public class Calculate {
-    /* 
+    /** 
     * Main
     * @params args - аргументы консоли.
     */
