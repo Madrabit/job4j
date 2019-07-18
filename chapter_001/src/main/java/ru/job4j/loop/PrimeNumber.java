@@ -21,7 +21,6 @@ public class PrimeNumber {
                 } else if (i == j) {
                     count++;
                 }
-
             }
         }
         return count;
