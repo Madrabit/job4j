@@ -43,4 +43,25 @@ public class FindLoop {
         }
         return rst;
     }
+
+    /**
+     * Сориторвка выборкой.
+     * @param data Массив чисел.
+     * @return Отсортированный по возрастанию массив.
+     */
+    public int[] sort(int[] data) {
+        int min = 1;
+        int found;
+        for (int i = 0; i < data.length; i++) {
+            found = indexOf(data, min, i, data.length);
+            if (data[found] != -1) {
+                int temp = data[i];
+                data[i] = data[found];
+                data[found] = temp;
+                min++;
+            }
+
+        }
+        return data;
+    }
 }
