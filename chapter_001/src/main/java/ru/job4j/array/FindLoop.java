@@ -24,4 +24,23 @@ public class FindLoop {
         }
         return rst;
     }
+
+    /**
+     * Поиск индекса в диапазоне.
+     * @param data Массив чисел.
+     * @param el Искомый элемент.
+     * @param start Начальная позиция поиска.
+     * @param finish Конечная позиция поиска.
+     * @return Индекс искомого элемента.
+     */
+    public int indexOf(int[] data, int el, int start, int finish) {
+        int rst = -1;
+        for (int i = start; i < finish; i++) {
+            if (data[i] == el) {
+                rst = i;
+                break;
+            }
+        }
+        return rst;
+    }
 }
