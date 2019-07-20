@@ -23,6 +23,7 @@ public class ArrayDuplicate {
                     array[array.length - (1 + counter)] = array[j];
                     array[j] = temp;
                     counter++;
+                    j--;
                 }
             }
         }
