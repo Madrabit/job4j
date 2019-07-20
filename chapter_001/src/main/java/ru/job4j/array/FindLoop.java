@@ -53,7 +53,7 @@ public class FindLoop {
         int min = 1;
         int found;
         for (int i = 0; i < data.length; i++) {
-            found = indexOf(data, min, i, data.length);
+            found = indexOf(data, min, i, data.length - 1);
             if (data[found] != -1) {
                 int temp = data[i];
                 data[i] = data[found];
