@@ -70,10 +70,13 @@ public class Logic {
         int[][] table = this.convert();
         boolean resultA = false;
         boolean resultB = false;
+        int count = 0;
+        int count2 = 0;
         for (int i = 0; i <= table.length - 1; i++) {
             for (int j = 0; j <= table.length - 1; j++) {
                if (table[i][j] == 1) {
                     resultA = true;
+                    count++;
 
                 }  else {
                     resultA = false;
@@ -85,6 +88,7 @@ public class Logic {
             for (int j = 0; j <= table.length - 1; j++) {
                 if (table[j][i] == 1) {
                     resultB = true;
+                    count2++;
                 }  else {
                     resultB = false;
                     break;
@@ -93,7 +97,7 @@ public class Logic {
             }
 
 
-            if (resultA || resultB) {
+            if ((count == table.length || count2 == table.length) || resultA || resultB) {
                 break;
             }
         }
