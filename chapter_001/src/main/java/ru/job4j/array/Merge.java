@@ -8,31 +8,14 @@ package ru.job4j.array;
  */
 public class Merge {
     public int[] merge(int[] left, int[] right) {
-        int arrayLength = left.length + right.length;
-        int[] merged = new int[arrayLength];
 
-        for(int i = 0; i < merged.length; i++) {
+        int[] merged = new int[left.length + right.length];
 
-            if (i < left.length) {
-                if(left[i] < right[i]) {
+        int[] smallest = left[0] < right[0] ? left : right;
+        int[] biggest = left[0] > right[0] ? left : right;
 
-                    merged[i] = left[i];
-
-                } else {
-                    merged[i] = right[i];
-                }
-            } else {
-                if(left[i - left.length] < right[i - left.length]) {
-
-                    merged[i] = right[i - left.length];
-
-                } else {
-                    merged[i] = left[i -left.length];
-                }
-            }
-
-        }
-
+        System.arraycopy(smallest, 0,  merged, 0, smallest.length);
+        System.arraycopy(biggest, 0,  merged, smallest.length, biggest.length);
 
         return merged;
     }
