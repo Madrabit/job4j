@@ -11,26 +11,26 @@ import static org.junit.Assert.assertThat;
 public class MergeTest {
 
     @Test
-    public void WhenTwoArraysThenMergeIntoOne() {
+    public void whenTwoArraysThenMergeIntoOne() {
         Merge merge = new Merge();
         int[] result = merge.merge(new int[] {1, 2}, new int[] {3, 4});
-        int [] expected = new int[] {1, 2, 3, 4};
+        int[] expected = new int[] {1, 2, 3, 4};
         assertThat(result, is(expected));
     }
 
     @Test
-    public void WhenTwoArraysThenMergeIntoOne2() {
+    public void whenTwoArraysThenMergeIntoOne2() {
         Merge merge = new Merge();
         int[] result = merge.merge(new int[] {5, 6, 7}, new int[] {2, 3, 4});
-        int [] expected = new int[] {2, 3, 4, 5, 6, 7};
+        int[] expected = new int[] {2, 3, 4, 5, 6, 7};
         assertThat(result, is(expected));
     }
 
     @Test
-    public void WhenTwoArraysThenMergeIntoOne3() {
+    public void whenTwoArraysThenMergeIntoOne3() {
         Merge merge = new Merge();
         int[] result = merge.merge(new int[] {5, 6, 7, 8, 9, 10}, new int[] {2, 3});
-        int [] expected = new int[] {2, 3, 5, 6, 7, 8, 9, 10};
+        int[] expected = new int[] {2, 3, 5, 6, 7, 8, 9, 10};
         assertThat(result, is(expected));
     }
 }
