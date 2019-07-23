@@ -60,7 +60,6 @@ public class FindLoop {
                 data[found] = temp;
                 min++;
             }
-
         }
         return data;
     }

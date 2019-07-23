@@ -13,7 +13,6 @@ public class Check {
      * @return Результат проеврки.
      */
     public boolean mono(boolean[] data) {
-
         boolean flag = data[0];
         for (int i = 1; i < data.length; i++) {
             if (flag != data[i]) {

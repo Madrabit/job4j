@@ -13,8 +13,6 @@ public class MatrixCheck {
      * @return Результат проверки.
      */
     public boolean mono(boolean[][] data) {
-
-
         for (int i = 0; i < data.length - 1; i++) {
             if (data[i][i] != data[i + 1][i + 1]) {
                 return false;
@@ -23,7 +21,6 @@ public class MatrixCheck {
                 return false;
             }
         }
-
         return true;
     }
 }

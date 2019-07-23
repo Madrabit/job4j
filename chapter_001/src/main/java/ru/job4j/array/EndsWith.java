@@ -13,7 +13,6 @@ public class EndsWith {
      * @return если слово начинаеться с префикса
      */
     public boolean endsWith(String word, String post) {
-
         char[] pst = post.toCharArray();
         char[] wrd = word.toCharArray();
 
