@@ -7,12 +7,24 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class Merge {
+    /**
+     * Слияние двух отсортерованных массивов.
+     * @param left первый массив
+     * @param right второй массив
+     * @return Объеденный отсортерованный массив.
+     */
     public int[] merge(int[] left, int[] right) {
         int[] merged = new int[left.length + right.length];
         int[] smallest = left[0] < right[0] ? left : right;
         int[] biggest = left[0] > right[0] ? left : right;
-        System.arraycopy(smallest, 0,  merged, 0, smallest.length);
-        System.arraycopy(biggest, 0,  merged, smallest.length, biggest.length);
+        for(int i = 0, j = 0; i < merged.length; i++) {
+            if (i < smallest.length) {
+                merged[i] = smallest[i];
+            } else {
+                merged[i] = biggest[j];
+                j++;
+            }
+        }
         return merged;
     }
 }
