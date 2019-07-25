@@ -6,6 +6,7 @@ package ru.job4j.condition;
  * @version $Id$
  * @since 1
  */
+@SuppressWarnings("ALL")
 public class MultiMax {
     /**
      * Вычисление макисмума

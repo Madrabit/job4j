@@ -10,6 +10,7 @@ import ru.job4j.puzzle.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
+@SuppressWarnings("ALL")
 public class Logic {
     private final int size;
     private final Figure[] figures;
@@ -69,8 +70,8 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
-        int count = 0;
-        int count2 = 0;
+        int count;
+        int count2;
 
         for (int i = 0; i <= table.length - 1; i++) {
             count = 0;
