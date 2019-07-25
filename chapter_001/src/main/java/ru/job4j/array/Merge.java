@@ -15,15 +15,26 @@ public class Merge {
      */
     public int[] merge(int[] left, int[] right) {
         int[] merged = new int[left.length + right.length];
-        int[] smallest = left[0] < right[0] ? left : right;
-        int[] biggest = left[0] > right[0] ? left : right;
-        for (int i = 0, j = 0; i < merged.length; i++) {
-            if (i < smallest.length) {
-                merged[i] = smallest[i];
+        int i = 0, j = 0, k = 0;
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                merged[k] = left[i];
+                i++;
             } else {
-                merged[i] = biggest[j];
+                merged[k] = right[j];
                 j++;
             }
+            k++;
+        }
+        while (i < left.length) {
+            merged[k] = left[i];
+            i++;
+            k++;
+        }
+        while (j < right.length) {
+            merged[k] = right[j];
+            j++;
+            k++;
         }
         return merged;
     }

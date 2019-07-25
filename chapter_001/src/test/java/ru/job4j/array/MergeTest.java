@@ -33,4 +33,12 @@ public class MergeTest {
         int[] expected = new int[] {2, 3, 5, 6, 7, 8, 9, 10};
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void whenTwoArraysThenMergeIntoOne4() {
+        Merge merge = new Merge();
+        int[] result = merge.merge(new int[] {5, 6, 7, 9}, new int[] {2, 3, 8, 10});
+        int[] expected = new int[] {2, 3, 5, 6, 7, 8, 9, 10};
+        assertThat(result, is(expected));
+    }
 }
