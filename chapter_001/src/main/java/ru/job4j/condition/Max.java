@@ -27,7 +27,7 @@ public class Max {
      * @return Максимальное число
      */
     public int max(int a, int b, int c) {
-        return  max(max(a, b), max(b, c));
+        return  max(max(a, b),  c);
     }
 
     /**
@@ -39,6 +39,6 @@ public class Max {
      * @return Максимальное число
      */
     public int max(int a, int b, int c, int d) {
-        return  max(max(a, b, c), max(a, d));
+        return  max(max(a, b, c), d);
     }
 }
