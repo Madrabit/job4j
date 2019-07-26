@@ -37,4 +37,20 @@ public class PointTest {
         Point second = new Point(2, 2);
         second.info();
     }
+
+    @Test
+    public void whenCheckItself3D() {
+        Point point = new Point(0, 0, 0);
+        double result = point.distance(point);
+        assertThat(result, is(0D));
+    }
+
+    @Test
+    public void whenZeroAndTenThenTen3D() {
+        Point first = new Point(0, 0, 0);
+        Point second = new Point(0, 10, 0);
+        double result = first.distance3D(second);
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(10D));
+    }
 }

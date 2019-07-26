@@ -7,6 +7,7 @@ package ru.job4j.condition;
  * @since 0.1
  */
 
+@SuppressWarnings("ManualMinMaxCalculation")
 public class Max {
 
     /**

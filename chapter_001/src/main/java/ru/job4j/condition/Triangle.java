@@ -7,6 +7,7 @@ package ru.job4j.condition;
  * @since 1
  */
 
+@SuppressWarnings("CanBeFinal")
 public class Triangle {
     /**
      * Координаты точек треугольника
