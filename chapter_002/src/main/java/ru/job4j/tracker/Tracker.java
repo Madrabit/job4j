@@ -39,12 +39,12 @@ public class Tracker {
     }
     /**
      * редактирование заявок
-     * @param id
-     * @param item
+     * @param id  Идентификатор записи.
+     * @param item Запись.
      * @return Результат произошла ли замена
      */
     public boolean replace(String id, Item item) {
-         for (int i = 0; i < this.items.length; i++) {
+         for (int i = 0; i < this.position; i++) {
              if (this.items[i].getId().equals(id)) {
                  this.items[i] = item;
              }
@@ -54,15 +54,15 @@ public class Tracker {
     }
     /**
      * удаление заявок
-     * @param id
+     * @param id Идентификатор записи
      * @return Рузльтат. Получилось ли удалить.
      */
-    @SuppressWarnings("UnusedAssignment")
     public boolean delete(String id) {
-        for (int i = 0; i < this.items.length; i++) {
+        for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = null;
                 System.arraycopy(this.items, i, this.items, i, this.items.length - 1);
+                position--;
                 return true;
             }
             return true;
@@ -76,14 +76,7 @@ public class Tracker {
      */
     public Item[] findAll() {
         Item[] arr = new Item[this.items.length];
-        int j = 0;
-        for (Item item : this.items) {
-            if (item != null) {
-                arr[j] = item;
-                j++;
-            }
-        }
-        return Arrays.copyOf(arr, j);
+        return Arrays.copyOf(arr, position);
     }
 
     /**
@@ -94,7 +87,7 @@ public class Tracker {
     public Item[] findByName(String key) {
         Item[] result = new Item[this.items.length];
         int i = 0;
-        for (; i < this.items.length; i++) {
+        for (; i < position; i++) {
             if (this.items[i] != null && this.items[i].getName().equals(key)) {
                 result[i] = this.items[i];
             }
