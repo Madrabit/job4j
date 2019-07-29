@@ -5,6 +5,7 @@ package ru.job4j.inheritance;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("SameReturnValue")
 public class Dentist extends Doctor {
     private int teeth;
     private boolean satisfaction;

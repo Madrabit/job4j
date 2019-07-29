@@ -9,6 +9,7 @@ import java.util.Random;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings({"LoopStatementThatDoesntLoop", "UnusedReturnValue", "UnusedAssignment"})
 public class Tracker {
     /**
      * Массив для хранение заявок.
@@ -18,6 +19,11 @@ public class Tracker {
      * Указатель ячейки для новой заявки.
      */
     private int position = 0;
+
+    public int getPosition() {
+        return position;
+    }
+
     private static final Random RND = new Random();
     /**
      * добавление заявок
@@ -43,6 +49,7 @@ public class Tracker {
      * @param item Запись.
      * @return Результат произошла ли замена
      */
+    @SuppressWarnings("LoopStatementThatDoesntLoop")
     public boolean replace(String id, Item item) {
          for (int i = 0; i < this.position; i++) {
              if (this.items[i].getId().equals(id)) {
@@ -75,13 +82,12 @@ public class Tracker {
      * @return Список всех заявок без нулевых значений.
      */
     public Item[] findAll() {
-        Item[] arr = new Item[this.items.length];
-        return Arrays.copyOf(arr, position);
+        return Arrays.copyOf(this.items, position);
     }
 
     /**
      * получение списка по имени
-     * @param key
+     * @param key Название заявки.
      * @return Поиск заявки по имени.
      */
     public Item[] findByName(String key) {
@@ -97,7 +103,7 @@ public class Tracker {
 
     /**
      * получение заявки по id
-     * @param id
+     * @param id Id заявки.
      * @return поиск заявки по id.
      */
     public Item findById(String id) {
