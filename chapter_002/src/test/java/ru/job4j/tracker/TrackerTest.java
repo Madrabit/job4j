@@ -29,4 +29,17 @@ public class TrackerTest {
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
+
+    @Test
+    public void whenDeleteItemThenTrue() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("test1", "testDescription", System.currentTimeMillis());
+        Item item2 = new Item("test1", "testDescription", System.currentTimeMillis());
+        Item item3 = new Item("test1", "testDescription", System.currentTimeMillis());
+        tracker.add(item);
+        tracker.add(item2);
+        tracker.add(item3);
+        boolean result = tracker.delete(item2.getId());
+        assertThat(result, is(true));
+    }
 }
