@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import org.w3c.dom.ls.LSOutput;
 
 /**
@@ -151,11 +152,17 @@ public class StartUI {
         System.out.println("------------ Поиск заявки по ID --------------");
         String id = this.input.ask("Введите ID заявки, которую хотите найти: ");
         Item item =  this.tracker.findById(id);
-        System.out.println("------------ Найденная заявка: " + item.getName()
-                + "-----------"
-                + item.getDecs()
-        );
+        if (item != null) {
+            System.out.println("------------ Найденная заявка: " + item.getName()
+                        + "-----------"
+                        + item.getDecs()
+                );
+        } else {
+            System.out.println("-------------- Такой заявки не существует --------------");
+        }
+
     }
+
     /**
      * Поиск заявки по имени.
      */
