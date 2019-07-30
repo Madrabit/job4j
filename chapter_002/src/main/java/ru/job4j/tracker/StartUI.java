@@ -1,8 +1,5 @@
 package ru.job4j.tracker;
 
-import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
-import org.w3c.dom.ls.LSOutput;
-
 /**
  * Точка входа в программу.
  * @author madrabit on 29.07.2019
@@ -171,10 +168,12 @@ public class StartUI {
         String name = this.input.ask("Введите имя заявки, которую хотите найти: ");
         Item[] items =  this.tracker.findByName(name);
         for (Item el : items) {
-            System.out.println("------------ Найденная заявка: " + el.getName()
-                    + "-----------"
-                    + el.getDecs()
-            );
+            if (el != null) {
+                System.out.println("------------ Найденная заявка: " + el.getName()
+                        + "-----------"
+                        + el.getDecs()
+                );
+            }
         }
     }
     private void showMenu() {
