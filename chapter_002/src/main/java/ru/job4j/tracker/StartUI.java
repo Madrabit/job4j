@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
+import org.w3c.dom.ls.LSOutput;
+
 /**
  * Точка входа в программу.
  * @author madrabit on 29.07.2019
@@ -117,10 +120,15 @@ public class StartUI {
         String name = this.input.ask("Введите новое имя заявки :");
         String desc = this.input.ask("Введите новое описание заявки :");
         Item item = new Item(name, desc, System.currentTimeMillis());
-        this.tracker.replace(id, item);
-        System.out.println("------------ Отредактированная заявка с новыми данными : "
-                + item.getName()
-                + " " + item.getDecs());
+        boolean result = this.tracker.replace(id, item);
+        if (result) {
+            System.out.println("------------ Отредактированная заявка с новыми данными : "
+                    + item.getName()
+                    + " " + item.getDecs());
+        } else {
+            System.out.println("Не удалось отредактировать заявку.");
+        }
+
     }
 
     /**
@@ -129,7 +137,12 @@ public class StartUI {
     private void delete() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите ID заявки, которую хотите удалить: ");
-        this.tracker.delete(id);
+        boolean result = this.tracker.delete(id);
+        if (result) {
+            System.out.println("Заявка удалена.");
+        } else {
+            System.out.println("Заявка не удалилась.");
+        }
     }
 
     /**
@@ -139,11 +152,17 @@ public class StartUI {
         System.out.println("------------ Поиск заявки по ID --------------");
         String id = this.input.ask("Введите ID заявки, которую хотите найти: ");
         Item item =  this.tracker.findById(id);
-        System.out.println("------------ Найденная заявка: " + item.getName()
-                + "-----------"
-                + item.getDecs()
-        );
+        if (item != null) {
+            System.out.println("------------ Найденная заявка: " + item.getName()
+                        + "-----------"
+                        + item.getDecs()
+                );
+        } else {
+            System.out.println("-------------- Такой заявки не существует --------------");
+        }
+
     }
+
     /**
      * Поиск заявки по имени.
      */

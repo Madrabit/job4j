@@ -27,7 +27,7 @@ public class Item {
     }
 
     public String getName() {
-        return name;
+        return "";
     }
 
     public void setName(String name) {

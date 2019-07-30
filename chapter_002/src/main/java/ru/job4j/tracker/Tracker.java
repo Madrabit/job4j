@@ -68,7 +68,7 @@ public class Tracker {
         for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = null;
-                System.arraycopy(this.items, i + 1, this.items, i  , this.items.length - (i + 1));
+                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - (i + 1));
                 position--;
                 return true;
             }
