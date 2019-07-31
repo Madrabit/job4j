@@ -15,24 +15,27 @@ import static org.junit.Assert.assertThat;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("StringBufferReplaceableByString")
 public class StartUITest {
-    final String menu = "Меню."
-            + System.lineSeparator()
-            + "--------------"
-            + System.lineSeparator()
-            + "Создать заявку - 0"
-            + System.lineSeparator()
-            + "Показать список заявок - 1"
-            + System.lineSeparator()
-            + "Редактировать заявку - 2"
-            + System.lineSeparator()
-            + "Удалить заявку - 3"
-            + System.lineSeparator()
-            + "Найти заявку по ID - 4"
-            + System.lineSeparator()
-            + "Найти все заявки по назаванию - 5"
-            + System.lineSeparator() + "Выйти - 6"
-            + System.lineSeparator();
+    final StringBuilder menu = new StringBuilder()
+            .append("Меню.")
+            .append(System.lineSeparator())
+            .append("--------------")
+            .append(System.lineSeparator())
+            .append("Создать заявку - 0")
+            .append(System.lineSeparator())
+            .append("Показать список заявок - 1")
+            .append(System.lineSeparator())
+            .append("Редактировать заявку - 2")
+            .append(System.lineSeparator())
+            .append("Удалить заявку - 3")
+            .append(System.lineSeparator())
+            .append("Найти заявку по ID - 4")
+            .append(System.lineSeparator())
+            .append("Найти все заявки по назаванию - 5")
+            .append(System.lineSeparator())
+            .append("Выйти - 6")
+            .append(System.lineSeparator());
     final PrintStream stdout = System.out;
     final ByteArrayOutputStream out = new ByteArrayOutputStream();
     @Before
@@ -116,15 +119,18 @@ public class StartUITest {
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertEquals(new String(out.toByteArray()), menu
-                + "------------ Поиск заявки по ID --------------"
-                + System.lineSeparator()
-                + "------------ Найденная заявка: "
-                + "test name1"
-                + "-----------"
-                + "desc"
-                + System.lineSeparator()
-                + menu);
+        assertEquals(new String(out.toByteArray()), new StringBuilder()
+                .append(menu)
+                .append("------------ Поиск заявки по ID --------------")
+                .append(System.lineSeparator())
+                .append("------------ Найденная заявка: ")
+                .append("test name1")
+                .append("-----------")
+                .append("desc")
+                .append(System.lineSeparator())
+                .append(menu)
+                .toString()
+        );
     }
 
     @Test
@@ -135,13 +141,16 @@ public class StartUITest {
         Item item3 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[]{"5", "test name1", "6"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()), is(menu
-                + "------------ Поиск заявки по имени --------------"
-                + System.lineSeparator()
-                + "------------ Найденная заявка: test name1-----------desc"
-                + System.lineSeparator()
-                + "------------ Найденная заявка: test name1-----------desc"
-                + System.lineSeparator()
-                + menu));
+        assertThat(new String(out.toByteArray()), is(new StringBuilder()
+                .append(menu)
+                .append("------------ Поиск заявки по имени --------------")
+                .append(System.lineSeparator())
+                .append("------------ Найденная заявка: test name1-----------desc")
+                .append(System.lineSeparator())
+                .append("------------ Найденная заявка: test name1-----------desc")
+                .append(System.lineSeparator())
+                .append(menu)
+                .toString()
+        ));
     }
 }
