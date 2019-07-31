@@ -89,10 +89,15 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
-                    .append("test name1")
-                    .append("desc")
-                    .append(System.lineSeparator())
-                    .toString()
+                        .append("Меню.\\n--------------\\nСоздать заявку - 0\\nПоказать список заявок - 1\\nРедактировать заявку - 2\\nУдалить заявку - 3\\nНайти заявку по ID - 4\\nНайти все заявки по назаванию - 5\\nВыйти - 6\\n")
+                        .append("------------ Поиск заявки по ID --------------")
+                        .append(System.lineSeparator())
+                        .append("------------ Найденная заявка: ")
+                        .append("test name1")
+                        .append("-----------")
+                        .append("desc")
+                        .append("\nМеню.\n--------------\nСоздать заявку - 0\nПоказать список заявок - 1\nРедактировать заявку - 2\nУдалить заявку - 3\nНайти заявку по ID - 4\nНайти все заявки по назаванию - 5\nВыйти - 6\n")
+                        .toString()
         ));
         System.setOut(stdout);
     }
