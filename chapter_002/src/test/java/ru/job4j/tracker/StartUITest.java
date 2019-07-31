@@ -70,9 +70,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
+        String id = item1.getId();
+        Input input = new StubInput(new String[]{"4", id, "6"});
         new StartUI(input, tracker).init();
-        assertThat(item1.getName(), is("test name1"));
+        assertThat(tracker.findAll()[0].getId(), is(id));
     }
 
     @Test
