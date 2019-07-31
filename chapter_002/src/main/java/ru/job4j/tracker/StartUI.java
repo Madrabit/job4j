@@ -186,7 +186,6 @@ public class StartUI {
         System.out.println("Найти заявку по ID - 4");
         System.out.println("Найти все заявки по назаванию - 5");
         System.out.println("Выйти - 6");
-        // добавить остальные пункты меню.
     }
 
     /**
