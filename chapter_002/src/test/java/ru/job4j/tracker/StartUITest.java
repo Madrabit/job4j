@@ -1,6 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 /**
@@ -49,6 +53,18 @@ public class StartUITest {
         assertThat(result, is(original - 1));
     }
 
+
+    @Test
+    public void whenFindByNameThenReturnItemsWithName() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
+        Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
+        Item item3 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
+        Input input = new StubInput(new String[]{"5", "test name1", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findAll()[0].getName() + tracker.findAll()[2].getName(), is("test name1" + "test name1"));
+    }
+
     @Test
     public void whenFindByIdThenFoundItem() {
         Tracker tracker = new Tracker();
@@ -60,13 +76,23 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindByNameThenReturnItemsWithName() {
+    public void whenFindByIdThenItemOut() {
+
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
-        Item item3 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"5", "test name1", "6"});
+        Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
+        PrintStream stdout = System.out;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName() + tracker.findAll()[2].getName(), is("test name1" + "test name1"));
+        assertThat(new String(out.toByteArray()), is(
+                new StringBuilder()
+                    .append("test name1")
+                    .append("desc")
+                    .append(System.lineSeparator())
+                    .toString()
+        ));
+        System.setOut(stdout);
     }
 }
