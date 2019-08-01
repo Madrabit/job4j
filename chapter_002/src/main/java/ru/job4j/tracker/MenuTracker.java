@@ -17,7 +17,7 @@ public class MenuTracker {
     /**
      * хранит ссылку на массив типа UserAction.
      */
-    private final UserAction[] actions = new UserAction[7];
+    private final UserAction[] actions = new UserAction[6];
 
     /**
      * Конструктор.
