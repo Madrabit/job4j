@@ -18,23 +18,17 @@ import static org.junit.Assert.assertThat;
 @SuppressWarnings("StringBufferReplaceableByString")
 public class StartUITest {
     final StringBuilder menu = new StringBuilder()
-            .append("Меню.")
+            .append("Add new Item.")
             .append(System.lineSeparator())
-            .append("--------------")
+            .append("Show All Items.")
             .append(System.lineSeparator())
-            .append("Создать заявку - 0")
+            .append("Update Item")
             .append(System.lineSeparator())
-            .append("Показать список заявок - 1")
+            .append("Delete Item")
             .append(System.lineSeparator())
-            .append("Редактировать заявку - 2")
+            .append("Find Item by ID")
             .append(System.lineSeparator())
-            .append("Удалить заявку - 3")
-            .append(System.lineSeparator())
-            .append("Найти заявку по ID - 4")
-            .append(System.lineSeparator())
-            .append("Найти все заявки по назаванию - 5")
-            .append(System.lineSeparator())
-            .append("Выйти - 6")
+            .append("Find Items by Name")
             .append(System.lineSeparator());
     final PrintStream stdout = System.out;
     final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -52,7 +46,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
@@ -61,7 +55,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker).init();
         String result = tracker.findById(item.getId()).getName();
         assertThat(result, is("test replace"));
@@ -72,7 +66,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
         int result = tracker.getPosition();
         assertThat(result, is(2));
@@ -83,7 +77,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         int original = tracker.getPosition();
-        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         int result = tracker.getPosition();
         assertThat(result, is(original - 1));
@@ -96,7 +90,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
         Item item3 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"5", "test name1", "6"});
+        Input input = new StubInput(new String[]{"5", "test name1", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName() + tracker.findAll()[2].getName(), is("test name1" + "test name1"));
     }
@@ -107,7 +101,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
         String id = item1.getId();
-        Input input = new StubInput(new String[]{"4", id, "6"});
+        Input input = new StubInput(new String[]{"4", id, "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getId(), is(id));
     }
@@ -117,7 +111,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
+        Input input = new StubInput(new String[]{"4", item1.getId(), "y"});
         new StartUI(input, tracker).init();
         assertEquals(new String(out.toByteArray()), new StringBuilder()
                 .append(menu)
@@ -128,7 +122,6 @@ public class StartUITest {
                 .append("-----------")
                 .append("desc")
                 .append(System.lineSeparator())
-                .append(menu)
                 .toString()
         );
     }
@@ -139,9 +132,9 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("test name2", "desc", System.currentTimeMillis()));
         Item item3 = tracker.add(new Item("test name1", "desc", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"5", "test name1", "6"});
+        Input input = new StubInput(new String[]{"5", "test name1", "y"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()), is(new StringBuilder()
+        assertEquals(new String(out.toByteArray()), new StringBuilder()
                 .append(menu)
                 .append("------------ Поиск заявки по имени --------------")
                 .append(System.lineSeparator())
@@ -149,8 +142,7 @@ public class StartUITest {
                 .append(System.lineSeparator())
                 .append("------------ Найденная заявка: test name1-----------desc")
                 .append(System.lineSeparator())
-                .append(menu)
                 .toString()
-        ));
+        );
     }
 }
