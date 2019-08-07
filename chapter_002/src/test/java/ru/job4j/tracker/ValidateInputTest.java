@@ -41,4 +41,16 @@ public class ValidateInputTest {
                         String.format("Please enter validate data again.%n")
         );
     }
+
+    @Test
+    public void whenOutOfRangeInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"100", "1"})
+        );
+        input.ask("Enter", new int[] {1});
+        assertEquals(
+                this.mem.toString(),
+                String.format("Please select key from menu.%n")
+        );
+    }
 }
