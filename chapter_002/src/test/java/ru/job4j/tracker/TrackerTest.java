@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * @author madrabit on 27.07.2019
@@ -41,5 +41,33 @@ public class TrackerTest {
         tracker.add(item3);
         boolean result = tracker.delete(item2.getId());
         assertThat(result, is(true));
+    }
+
+    @Test
+    public void whenTrackerEnumThenOneInstance() {
+        TrackerSingleEnum tracker1 = TrackerSingleEnum.INSTANCE;
+        TrackerSingleEnum tracker2 = TrackerSingleEnum.INSTANCE;
+        assertSame(tracker1, tracker2);
+    }
+
+    @Test
+    public void whenTrackerStaticFieldThenSingleton() {
+        TrackerSingleStaticField tracker1 = TrackerSingleStaticField.getInstance();
+        TrackerSingleStaticField tracker2 = TrackerSingleStaticField.getInstance();
+        assertSame(tracker1, tracker2);
+    }
+
+    @Test
+    public void whenTrackerStaticFinalFieldThenSingleton() {
+        TrackerSingleStaticFinalField tracker1 = TrackerSingleStaticFinalField.getInstance();
+        TrackerSingleStaticFinalField tracker2 = TrackerSingleStaticFinalField.getInstance();
+        assertSame(tracker1, tracker2);
+    }
+
+    @Test
+    public void whenTrackerPrivateStaticFieldThenSingleton() {
+        TrackerSinglePrivateStaticFinal tracker1 = TrackerSinglePrivateStaticFinal.getInstance();
+        TrackerSinglePrivateStaticFinal tracker2 = TrackerSinglePrivateStaticFinal.getInstance();
+        assertSame(tracker1, tracker2);
     }
 }
