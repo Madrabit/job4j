@@ -2,6 +2,7 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.FigureNotFoundException;
 import ru.job4j.chess.firuges.ImposableMoveException;
 
 import java.util.Optional;
@@ -24,6 +25,9 @@ public class Logic {
     public boolean move(Cell source, Cell dest)  {
         boolean rst = false;
         int index = this.findBy(source);
+        if (this.findBy(dest) != -1) {
+            throw new FigureNotFoundException("Клетка занята другой фигурой");
+        }
         if (index != -1) {
                 Cell[] steps = this.figures[index].way(source, dest);
                 if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
