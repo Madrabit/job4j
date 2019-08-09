@@ -23,7 +23,14 @@ public class BishopBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        return new Cell[] { dest };
+        int deltaX = source.x - dest.x;
+        int deltaY = source.y - dest.y;
+        Cell[] steps = new Cell[Math.abs(deltaX)];
+        for (int i = 0; i < steps.length; i++ ) {
+            if (Math.abs(deltaX) == Math.abs(deltaY))
+                steps[i] = dest;
+        }
+        return steps;
     }
 
     @Override

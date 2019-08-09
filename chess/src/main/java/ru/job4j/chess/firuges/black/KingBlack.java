@@ -25,7 +25,7 @@ public class KingBlack implements Figure {
     @Override
     public Cell[] way(Cell source, Cell dest) {
         Cell[] steps = new Cell[0];
-        if (!(
+        if (
                 (source.x == dest.x && source.y == dest.y + 1 )
                 || (source.x == dest.x && source.y == dest.y - 1 )
                 || (source.x == dest.x + 1 && source.y == dest.y)
@@ -34,10 +34,10 @@ public class KingBlack implements Figure {
                 || (source.x == dest.x + 1 && source.y == dest.y + 1)
                 || (source.x == dest.x - 1 && source.y == dest.y + 1)
                 || (source.x == dest.x + 1 && source.y == dest.y - 1)
-        )) {
-            throw new ImposableMoveException("Так фигура ходить не может.");
+        ) {
+            steps = new Cell[] { dest };
         }
-        return steps = new Cell[] { dest };
+        return steps;
     }
     @Override
     public Figure copy(Cell dest) {

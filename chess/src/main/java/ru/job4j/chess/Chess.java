@@ -14,6 +14,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.FigureNotFoundException;
+import ru.job4j.chess.firuges.ImposableMoveException;
 import ru.job4j.chess.firuges.black.*;
 import ru.job4j.chess.firuges.white.*;
 
@@ -60,12 +62,15 @@ public class Chess extends Application {
         );
         rect.setOnMouseReleased(
                 event -> {
+
+
                     if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
                         rect.setX(((int) event.getX() / 40) * 40 + 5);
                         rect.setY(((int) event.getY() / 40) * 40 + 5);
                     } else {
                         rect.setX(((int) momento.getX() / 40) * 40 + 5);
                         rect.setY(((int) momento.getY() / 40) * 40 + 5);
+                        throw new ImposableMoveException("Так фигура ходить не может.");
                     }
                 }
         );
