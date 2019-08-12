@@ -1,9 +1,6 @@
 package ru.job4j.chess;
 
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.FigureNotFoundException;
-import ru.job4j.chess.firuges.ImposableMoveException;
+import ru.job4j.chess.firuges.*;
 
 import java.util.Optional;
 
@@ -30,10 +27,18 @@ public class Logic {
         }
         if (index != -1) {
                 Cell[] steps = this.figures[index].way(source, dest);
+                for (Cell cell : steps) {
+                    for (Figure figure : figures) {
+                        if(cell.equals(figure.position())) {
+                            throw new OccupiedWayException("Путь занят");
+                        }
+                    }
+                }
                 if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
+
         }
         return rst;
     }
