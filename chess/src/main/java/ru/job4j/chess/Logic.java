@@ -19,7 +19,7 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest)  {
+    public boolean move(Cell source, Cell dest) throws ImposableMoveException {
         boolean rst = false;
         int index = this.findBy(source);
         if (this.findBy(dest) != -1) {
