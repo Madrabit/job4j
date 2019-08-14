@@ -2,6 +2,7 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.Queen;
 
 /**
  *
@@ -9,21 +10,12 @@ import ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class QueenBlack implements Figure {
+public class QueenBlack extends Queen {
     private final Cell position;
 
     public QueenBlack(final Cell position) {
+        super(position);
         this.position = position;
-    }
-
-    @Override
-    public Cell position() {
-        return this.position;
-    }
-
-    @Override
-    public Cell[] way(Cell source, Cell dest) {
-        return new Cell[] { dest };
     }
 
     @Override
