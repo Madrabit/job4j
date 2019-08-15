@@ -11,11 +11,9 @@ import ru.job4j.chess.firuges.Queen;
  * @since 0.1
  */
 public class QueenWhite extends Queen {
-    private final Cell position;
 
     public QueenWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

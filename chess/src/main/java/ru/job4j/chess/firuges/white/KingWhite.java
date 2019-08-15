@@ -11,11 +11,9 @@ import ru.job4j.chess.firuges.King;
  * @since 0.1
  */
 public class KingWhite extends King {
-    private final Cell position;
 
     public KingWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

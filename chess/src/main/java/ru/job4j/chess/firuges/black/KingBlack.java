@@ -2,7 +2,6 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.ImposableMoveException;
 import ru.job4j.chess.firuges.King;
 
 /**
@@ -12,11 +11,9 @@ import ru.job4j.chess.firuges.King;
  * @since 0.1
  */
 public class KingBlack extends King {
-    private final Cell position;
 
     public KingBlack(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

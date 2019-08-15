@@ -21,14 +21,13 @@ public abstract class Knight implements Figure {
     public Cell[] way(Cell source, Cell dest) {
         int deltaY = source.y - dest.y;
         int deltaX = source.x - dest.x;
-        boolean direction = Math.abs(deltaX) - Math.abs(deltaY) > 0 ? true : false;
+        boolean direction = Math.abs(deltaX) - Math.abs(deltaY) > 0;
         if (
                 (direction && !(Math.abs(deltaX) == 2 && Math.abs(deltaY) == 1))
                         || (!direction && !(Math.abs(deltaX) == 1 && Math.abs(deltaY) == 2))
-        )
-        {
+        ) {
             throw new ImposableMoveException("Ход невозможен");
         }
-        return new Cell[] { dest };
+        return new Cell[] {dest};
     }
 }

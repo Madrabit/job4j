@@ -5,7 +5,7 @@ package ru.job4j.chess.firuges;
  * @version 1$
  * @since 0.1
  */
-public abstract class Rook implements Figure{
+public abstract class Rook implements Figure {
     private final Cell position;
 
     public Rook(final Cell position) {
@@ -20,14 +20,12 @@ public abstract class Rook implements Figure{
     private boolean isDiagonal(Cell source, Cell dest) {
         int deltaX = source.x - dest.x;
         int deltaY = source.y - dest.y;
-        if (Math.abs(deltaX) == Math.abs(deltaY)) {
-            return true;
-        }
-        return false;
+        return Math.abs(deltaX) == Math.abs(deltaY);
     }
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        if(isDiagonal(source, dest)) {
+        if (isDiagonal(source, dest)) {
             throw new ImposableMoveException("Такой ход невозможен");
         }
         int delta = 0;

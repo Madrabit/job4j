@@ -11,11 +11,9 @@ import ru.job4j.chess.firuges.Knight;
  * @since 0.1
  */
 public class KnightWhite extends Knight {
-    private final Cell position;
 
     public KnightWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

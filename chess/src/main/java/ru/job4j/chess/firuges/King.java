@@ -5,7 +5,7 @@ package ru.job4j.chess.firuges;
  * @version 1$
  * @since 0.1
  */
-public abstract class King implements Figure{
+public abstract class King implements Figure {
     private final Cell position;
 
     public King(final Cell position) {
@@ -25,7 +25,7 @@ public abstract class King implements Figure{
         if (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
             throw new ImposableMoveException("Ход невозможен");
         }
-        steps[0] = dest ;
+        steps[0] = dest;
         return steps;
     }
 }

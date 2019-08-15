@@ -13,11 +13,9 @@ import ru.job4j.chess.firuges.Pawn;
  * @since 0.1
  */
 public class PawnWhite extends Pawn {
-    private final Cell position;
 
     public PawnWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override
@@ -28,9 +26,9 @@ public class PawnWhite extends Pawn {
     @Override
     public Cell[] way(Cell source, Cell dest) {
         Cell[] steps = new Cell[0];
-        if (! (source.y == dest.y - 1 && source.x == dest.x)) {
+        if (!(source.y == dest.y - 1 && source.x == dest.x)) {
             throw new ImposableMoveException("Такой ход не возможен");
         }
-        return new Cell[] { dest };
+        return new Cell[] {dest};
     }
 }

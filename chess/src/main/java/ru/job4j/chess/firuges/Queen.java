@@ -5,6 +5,7 @@ package ru.job4j.chess.firuges;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("DuplicatedCode")
 public abstract class Queen implements Figure {
     private final Cell position;
 
@@ -20,10 +21,7 @@ public abstract class Queen implements Figure {
     private boolean isDiagonal(Cell source, Cell dest) {
         int deltaX = source.x - dest.x;
         int deltaY = source.y - dest.y;
-        if (Math.abs(deltaX) == Math.abs(deltaY)) {
-            return true;
-        }
-        return false;
+        return Math.abs(deltaX) == Math.abs(deltaY);
     }
     @Override
     public Cell[] way(Cell source, Cell dest) {
@@ -35,18 +33,18 @@ public abstract class Queen implements Figure {
         }
         int deltaY = source.y - dest.y < 0 ? -1 : 1;
         int deltaX = source.x - dest.x > 0 ? -1 : 1;
-        int kX = source.x - dest.x > 0 ? -1 : 1;
         int kY = source.y - dest.y > 0 ? -1 : 1;
         int size = Math.abs(delta);
         Cell[] steps = new Cell[size];
         int index = 0;
         for (int i = 0, k = 1; i < size; i++, k++) {
+            int part = 8 * (source.x + k  * deltaX);
             if (isDiagonal(source, dest)) {
-                index = 8 * (source.x + k  * kX ) + (source.y + k * kY);
+                index = part + (source.y + k * kY);
             } else if (source.x == dest.x) {
                 index = 8 * source.x + (source.y - k * deltaY);
             } else if (source.y == dest.y) {
-                index = 8 *  (source.x + k * deltaX) + source.y;
+                index = part + source.y;
             }
             steps[i] = Cell.values()[index];
         }

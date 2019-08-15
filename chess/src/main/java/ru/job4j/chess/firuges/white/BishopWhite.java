@@ -11,11 +11,9 @@ import ru.job4j.chess.firuges.Figure;
  * @since 0.1
  */
 public class BishopWhite extends Bishop {
-    private final Cell position;
 
     public BishopWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

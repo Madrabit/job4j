@@ -1,7 +1,6 @@
 package ru.job4j.chess.firuges.white;
 
 import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.Rook;
 
 /**
@@ -11,11 +10,9 @@ import ru.job4j.chess.firuges.Rook;
  * @since 0.1
  */
 public class RookWhite extends Rook {
-    private final Cell position;
 
     public RookWhite(final Cell position) {
         super(position);
-        this.position = position;
     }
 
     @Override

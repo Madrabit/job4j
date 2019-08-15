@@ -2,7 +2,7 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.*;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 /**
  * //TODO add comments.
@@ -29,7 +29,7 @@ public class Logic {
                 Cell[] steps = this.figures[index].way(source, dest);
                 for (Cell cell : steps) {
                     for (Figure figure : figures) {
-                        if(cell.equals(figure.position())) {
+                        if (cell.equals(figure.position())) {
                             throw new OccupiedWayException("Путь занят");
                         }
                     }
@@ -44,9 +44,7 @@ public class Logic {
     }
 
     public void clean() {
-        for (int position = 0; position != this.figures.length; position++) {
-            this.figures[position] = null;
-        }
+        Arrays.fill(this.figures, null);
         this.index = 0;
     }
 
