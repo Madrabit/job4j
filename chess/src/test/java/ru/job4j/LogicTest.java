@@ -17,7 +17,7 @@ public class LogicTest {
     @Test
     public void whenBishopInDiagonalWayThenTrue() {
         BishopWhite bishopWhite = new BishopWhite(Cell.C1);
-       Cell[] result = bishopWhite.way(Cell.C1,Cell.D2);
+       Cell[] result = bishopWhite.way(Cell.C1, Cell.D2);
         assertThat(result, is(new Cell[]{Cell.D2}));
     }
 
@@ -56,35 +56,35 @@ public class LogicTest {
     @Test
     public void whenRookInLineThenTrue() {
        RookWhite rookWhite = new RookWhite(Cell.A1);
-       Cell[] result = rookWhite.way(Cell.A1,Cell.A4);
+       Cell[] result = rookWhite.way(Cell.A1, Cell.A4);
        assertThat(result, is(new Cell[]{Cell.A2, Cell.A3, Cell.A4}));
     }
 
     @Test
     public void whenPawnInOneVerticalStepThenTrue() {
         PawnWhite pawnWhite = new PawnWhite(Cell.B2);
-        Cell[] result = pawnWhite.way(Cell.B2,Cell.B3);
+        Cell[] result = pawnWhite.way(Cell.B2, Cell.B3);
         assertThat(result, is(new Cell[]{Cell.B3}));
     }
 
     @Test
     public void whenQueenInDiagonalOrStraightWayThenTrue() {
         QueenWhite queenWhite = new QueenWhite(Cell.B2);
-        Cell[] result = queenWhite.way(Cell.B2,Cell.B5);
+        Cell[] result = queenWhite.way(Cell.B2, Cell.B5);
         assertThat(result, is(new Cell[]{Cell.B3, Cell.B4, Cell.B5}));
     }
 
     @Test
     public void whenKingInOneStepThenTrue() {
         KingWhite kingWhite = new KingWhite(Cell.E1);
-        Cell[] result = kingWhite.way(Cell.E1,Cell.E2);
+        Cell[] result = kingWhite.way(Cell.E1, Cell.E2);
         assertThat(result, is(new Cell[]{Cell.E2}));
     }
 
     @Test
     public void whenKnightInKnigthWayThenTrue() {
         KnightWhite knightWhite = new KnightWhite(Cell.B1);
-        Cell[] result = knightWhite.way(Cell.B1,Cell.D2);
+        Cell[] result = knightWhite.way(Cell.B1, Cell.D2);
         assertThat(result, is(new Cell[]{Cell.D2}));
     }
 

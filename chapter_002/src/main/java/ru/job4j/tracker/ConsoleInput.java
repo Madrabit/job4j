@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("DuplicatedCode")
 public class ConsoleInput implements Input  {
     private final Scanner scanner = new Scanner(System.in);
     @Override
