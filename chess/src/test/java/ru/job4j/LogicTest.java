@@ -82,7 +82,7 @@ public class LogicTest {
     }
 
     @Test
-    public void whenKnightInKnigthWayThenTrue() {
+    public void whenKnightInKnightWayThenTrue() {
         KnightWhite knightWhite = new KnightWhite(Cell.B1);
         Cell[] result = knightWhite.way(Cell.B1, Cell.D2);
         assertThat(result, is(new Cell[]{Cell.D2}));
