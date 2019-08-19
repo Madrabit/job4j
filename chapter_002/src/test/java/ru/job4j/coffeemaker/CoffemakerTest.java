@@ -26,4 +26,12 @@ public class CoffemakerTest {
         int[] expected = {10, 5, 2, 1};
         Assert.assertThat(result, is(expected));
     }
+
+    @Test
+    public void whenAdd50Then25() {
+        Coffeemaker coffeemaker = new Coffeemaker();
+        int[] result =  coffeemaker.changes(50, 25);
+        int[] expected = {10, 10, 5};
+        Assert.assertThat(result, is(expected));
+    }
 }
