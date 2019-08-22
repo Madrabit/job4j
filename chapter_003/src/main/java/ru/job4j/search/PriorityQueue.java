@@ -20,10 +20,13 @@ public class PriorityQueue {
     public void put(Task task) {
         if (tasks.isEmpty()) {
             tasks.add(task);
-        } else if (tasks.getFirst().getPriority() > task.getPriority()) {
-            tasks.add(0, task);
         } else {
-            tasks.add(task);
+            for (Task task1 : tasks) {
+                if (task1.getPriority() >= task.getPriority()) {
+                    tasks.add(tasks.indexOf(task1), task);
+                    break;
+                }
+            }
         }
     }
 
