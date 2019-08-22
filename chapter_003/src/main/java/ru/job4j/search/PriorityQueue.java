@@ -21,20 +21,25 @@ public class PriorityQueue {
         if (tasks.isEmpty()) {
             tasks.add(task);
         } else {
-            for (Task task1 : tasks) {
-                if (task1.getPriority() >= task.getPriority()) {
-                    tasks.add(tasks.indexOf(task1), task);
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).getPriority() > task.getPriority()) {
+                    tasks.add(i, task);
+                    break;
+                } else if (i == tasks.size() - 1) {
+                    tasks.add(task);
                     break;
                 }
-            }
+             }
         }
     }
-
     /**
      * Возвращает и удаляет приоритетный элемент
      * @return Элемент с самым высоким значением приоритетности
      */
     public Task take() {
+        for (Task task : tasks) {
+            System.out.println(task.getPriority());
+        }
         return this.tasks.poll();
     }
 }
