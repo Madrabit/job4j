@@ -22,7 +22,7 @@ public class ConvertMatrix2List {
         for (int[] ints : array) {
             for (int anInt : ints) {
                 if (count2 == array[count].length - 1) {
-                    list.add(array[count][count2]);
+                    list.add(anInt);
                     count2 = 0;
                     break;
                 }
