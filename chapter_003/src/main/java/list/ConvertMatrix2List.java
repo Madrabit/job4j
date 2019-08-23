@@ -26,7 +26,8 @@ public class ConvertMatrix2List {
                     count2 = 0;
                     break;
                 }
-                list.add(array[count][count2++]);
+                list.add(anInt);
+                count2++;
             }
             count++;
         }
