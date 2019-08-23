@@ -17,19 +17,10 @@ public class ConvertMatrix2List {
      */
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
-        int count = 0;
-        int count2 = 0;
         for (int[] ints : array) {
             for (int anInt : ints) {
-                if (count2 == array[count].length - 1) {
-                    list.add(anInt);
-                    count2 = 0;
-                    break;
-                }
                 list.add(anInt);
-                count2++;
             }
-            count++;
         }
         return list;
     }
