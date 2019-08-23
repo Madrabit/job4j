@@ -10,19 +10,16 @@ import java.util.List;
  */
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = list.size() / rows + 1;
+        int cells = list.size() % rows == 0 ? list.size() / rows : list.size() / rows + 1;
         int[][] array = new int[rows][cells];
-        Iterator iterator = list.iterator();
         int count = 0;
         int count2 = 0;
-        for (int[] el : array) {
-            for (int i : el) {
-                if (iterator.hasNext()) {
-                    array[count][count2++] = (int) iterator.next();
-                }
+        for (Integer integer : list) {
+            if (count2 == 3) {
+                count++;
+                count2 = 0;
             }
-            count2 = 0;
-            count++;
+            array[count][count2++] = integer;
         }
         return array;
     }
