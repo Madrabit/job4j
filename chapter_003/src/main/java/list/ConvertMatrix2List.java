@@ -12,7 +12,8 @@ import java.util.List;
 public class ConvertMatrix2List {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
-        int count = 0, count2 = 0;
+        int count = 0;
+        int count2 = 0;
         for (int[] ints : array) {
             for (int anInt : ints) {
                 if (count2 == array[count].length - 1) {
