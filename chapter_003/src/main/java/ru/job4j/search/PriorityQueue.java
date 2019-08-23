@@ -1,6 +1,7 @@
 package ru.job4j.search;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Приоритетная очередь
@@ -21,15 +22,22 @@ public class PriorityQueue {
         if (tasks.isEmpty()) {
             tasks.add(task);
         } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getPriority() > task.getPriority()) {
-                    tasks.add(i, task);
+            ListIterator<Task> iterator = tasks.listIterator();
+            while (iterator.hasNext()) {
+                if (task.getPriority() <= iterator.next().getPriority()) {
+                    iterator.previous();
+                    iterator.add(task);
                     break;
-                } else if (i == tasks.size() - 1) {
-                    tasks.add(task);
+                } else if (!iterator.hasNext()) {
+                    iterator.add(task);
+                    break;
+                } else if (task.getPriority() > iterator.previous().getPriority()) {
+                    iterator.next();
+                } else {
+                    iterator.add(task);
                     break;
                 }
-             }
+            }
         }
     }
     /**
