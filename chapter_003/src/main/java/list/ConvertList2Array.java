@@ -15,7 +15,7 @@ public class ConvertList2Array {
         int count = 0;
         int count2 = 0;
         for (Integer integer : list) {
-            if (count2 == 3) {
+            if (count2 == rows) {
                 count++;
                 count2 = 0;
             }
