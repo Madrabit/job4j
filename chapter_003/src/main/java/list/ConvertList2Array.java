@@ -1,5 +1,6 @@
 package list;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -9,29 +10,17 @@ import java.util.List;
  */
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = list.size() / rows + 1;
+        int cells = list.size() % rows == 0 ? list.size() / rows : list.size() / rows + 1;
         int[][] array = new int[rows][cells];
-        int counter = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cells; j++) {
-                if (counter >= list.size()) {
-                    array[i][j] = 0;
-                } else {
-                    array[i][j] = list.get(counter);
-                }
-                counter++;
+        int count = 0;
+        int count2 = 0;
+        for (Integer integer : list) {
+            if (count2 == rows) {
+                count++;
+                count2 = 0;
             }
+            array[count][count2++] = integer;
         }
-
-        for (int[] ints : array) {
-            for (int anInt : ints) {
-
-            }
-            for (Integer integer : list) {
-                
-            }
-        }
-        
         return array;
     }
 }
