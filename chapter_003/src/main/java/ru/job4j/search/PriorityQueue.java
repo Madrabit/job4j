@@ -23,20 +23,17 @@ public class PriorityQueue {
             tasks.add(task);
         } else {
             ListIterator<Task> iterator = tasks.listIterator();
+            int count = 0;
             while (iterator.hasNext()) {
                 if (task.getPriority() <= iterator.next().getPriority()) {
                     iterator.previous();
                     iterator.add(task);
                     break;
-                } else if (!iterator.hasNext()) {
-                    iterator.add(task);
-                    break;
-                } else if (task.getPriority() > iterator.previous().getPriority()) {
-                    iterator.next();
-                } else {
-                    iterator.add(task);
-                    break;
                 }
+                count++;
+            }
+            if (count == tasks.size()) {
+                tasks.add(task);
             }
         }
     }
