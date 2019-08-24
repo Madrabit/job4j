@@ -1,5 +1,6 @@
 package list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,4 +30,15 @@ public class ConvertList2Array {
         }
         return array;
     }
+
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> temp = new ArrayList<>();
+        for (int[] ints : list) {
+            for (int anInt : ints) {
+                temp.add(anInt);
+            }
+        }
+        return temp;
+    }
+
 }
