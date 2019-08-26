@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author madrabit on 01.08.2019
  * @version 1$
@@ -17,7 +20,7 @@ public class MenuTracker {
     /**
      * хранит ссылку на массив типа UserAction.
      */
-    private final UserAction[] actions = new UserAction[6];
+    private final List<UserAction> actions = new ArrayList<>();
 
     /**
      * Конструктор.
@@ -36,19 +39,19 @@ public class MenuTracker {
      * @return длину массива
      */
     public int getActionsLength() {
-        return this.actions.length;
+        return this.actions.size();
     }
 
     /**
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions[0] = new AddItem(0, "Add new Item.");
-        this.actions[1] = new ShowItems(1, "Show All Items.");
-        this.actions[2] = new UpdateItem(2, "Update Item");
-        this.actions[3] = new DeleteItem(3, "Delete Item");
-        this.actions[4] = new FindItemById(4, "Find Item by ID");
-        this.actions[5] = new FindItemsByName(5, "Find Items by Name");
+        actions.add(new AddItem(0, "Add new Item."));
+        actions.add(new ShowItems(1, "Show All Items."));
+        actions.add(new UpdateItem(2, "Update Item"));
+        actions.add(new DeleteItem(3, "Delete Item"));
+        actions.add(new FindItemById(4, "Find Item by ID"));
+        actions.add(new FindItemsByName(5, "Find Items by Name"));
     }
 
     /**
@@ -57,7 +60,7 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -66,7 +69,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                System.out.println(action.infoMenu());
             }
         }
     }
@@ -101,7 +104,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Получение списка заявок --------------");
-            Item[] items = tracker.findAll();
+            List<Item> items = tracker.findAll();
             System.out.println("------------ Список заявок: ");
             for (Item element : items) {
                 System.out.println(element.getId()
@@ -191,7 +194,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Поиск заявки по имени --------------");
             String name = input.ask("Введите имя заявки, которую хотите найти: ");
-            Item[] items =  tracker.findByName(name);
+            List<Item> items =  tracker.findByName(name);
             for (Item el : items) {
                 if (el != null) {
                     System.out.println("------------ Найденная заявка: " + el.getName()
