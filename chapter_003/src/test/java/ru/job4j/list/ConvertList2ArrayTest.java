@@ -1,6 +1,5 @@
 package ru.job4j.list;
 
-import list.ConvertList2Array;
 import org.junit.Test;
 
 import java.util.ArrayList;
