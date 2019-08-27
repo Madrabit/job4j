@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Точка входа в программу.
  * @author madrabit on 29.07.2019
@@ -60,10 +63,10 @@ public class StartUI {
      */
     public void init()  {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        int[] range = new int[6];
+        List<Integer> range = new ArrayList<>();
         menu.fillActions();
         for (int i = 0; i < menu.getActionsLength(); i++) {
-            range[i] = i;
+            range.add(i);
         }
         do {
             menu.show();

@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -14,7 +13,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     /**
      * Указатель ячейки для новой заявки.
      */
@@ -32,7 +31,8 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[position++] = item;
+        this.items.add(item);
+        position++;
         return item;
     }
     /**
@@ -52,8 +52,8 @@ public class Tracker {
     @SuppressWarnings("LoopStatementThatDoesntLoop")
     public boolean replace(String id, Item item) {
          for (int i = 0; i < this.position; i++) {
-             if (this.items[i].getId().equals(id)) {
-                 this.items[i] = item;
+             if (this.items.get(i).getId().equals(id)) {
+                 this.items.set(i, item);
                  item.setId(id);
              }
              return true;
@@ -67,9 +67,8 @@ public class Tracker {
      */
     public boolean delete(String id) {
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = null;
-                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - (i + 1));
+            if (this.items.get(i).getId().equals(id)) {
+                this.items.remove(i);
                 position--;
                 return true;
             }
@@ -81,8 +80,8 @@ public class Tracker {
      * получение списка всех заявок
      * @return Список всех заявок без нулевых значений.
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, position);
+    public List<Item> findAll() {
+        return new ArrayList<>(this.items);
     }
 
     /**
@@ -90,15 +89,15 @@ public class Tracker {
      * @param key Название заявки.
      * @return Поиск заявки по имени.
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[this.items.length];
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         int i = 0;
         for (; i < position; i++) {
-            if (this.items[i] != null && this.items[i].getName().equals(key)) {
-                result[i] = this.items[i];
+            if (this.items.get(i) != null && this.items.get(i).getName().equals(key)) {
+                result.add(this.items.get(i));
             }
         }
-        return Arrays.copyOf(result, i);
+        return result;
     }
 
     /**
