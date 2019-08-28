@@ -22,6 +22,9 @@ public class ListCompare implements Comparator<String> {
         if (left.length() == right.length()) {
             for (int i = 0; i < left.length(); i++) {
                 comp += Character.compare(left.charAt(i), right.charAt(i));
+                if (comp !=0) {
+                    break;
+                }
             }
         } else {
             for (int i = 0; i < len; i++) {

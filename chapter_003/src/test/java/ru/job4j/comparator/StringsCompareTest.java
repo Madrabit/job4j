@@ -62,4 +62,14 @@ public class StringsCompareTest {
         );
         assertThat(rst, lessThan(0));
     }
+
+    @Test
+    public void sameCharsDifferentPostitions() {
+        ListCompare compare = new ListCompare();
+        int rst = compare.compare(
+                "affa",
+                "faaf"
+        );
+        assertThat(rst, lessThan(0));
+    }
 }
