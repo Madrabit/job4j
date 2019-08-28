@@ -1,7 +1,7 @@
 package ru.job4j.chess.firuges;
 
 /**
- * @author madrabit on 09.08.2019
+ * @author madrabit on 12.08.2019
  * @version 1$
  * @since 0.1
  */

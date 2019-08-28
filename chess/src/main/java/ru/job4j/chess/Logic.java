@@ -2,10 +2,7 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.*;
 
-import java.util.Optional;
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.OccupiedWayException;
+import java.util.Arrays;
 
 /**
  * //TODO add comments.
@@ -32,7 +29,7 @@ public class Logic {
                 Cell[] steps = this.figures[index].way(source, dest);
                 for (Cell cell : steps) {
                     for (Figure figure : figures) {
-                        if(cell.equals(figure.position())) {
+                        if (cell.equals(figure.position())) {
                             throw new OccupiedWayException("Путь занят");
                         }
                     }
@@ -41,14 +38,13 @@ public class Logic {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
+
         }
         return rst;
     }
 
     public void clean() {
-        for (int position = 0; position != this.figures.length; position++) {
-            this.figures[position] = null;
-        }
+        Arrays.fill(this.figures, null);
         this.index = 0;
     }
 

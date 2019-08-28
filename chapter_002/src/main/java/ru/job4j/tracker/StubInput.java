@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * @author madrabit on 30.07.2019
  * @version 1$
@@ -42,7 +44,7 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         int key = Integer.parseInt(this.ask(question));
         boolean exist = false;
         for (int value : range) {
@@ -53,7 +55,6 @@ public class StubInput implements Input {
         }
         if (!exist) {
             throw new MenuOutException("Out of menu range.");
-
         }
         return key;
     }

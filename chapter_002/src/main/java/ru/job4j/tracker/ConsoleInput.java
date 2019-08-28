@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Scanner;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("DuplicatedCode")
 public class ConsoleInput implements Input  {
     private final Scanner scanner = new Scanner(System.in);
     @Override
@@ -17,7 +19,7 @@ public class ConsoleInput implements Input  {
     }
 
     @Override
-    public int ask(String question, int[] range)  {
+    public int ask(String question, List<Integer> range)  {
         int key = Integer.parseInt(this.ask(question));
         boolean exist = false;
         for (int value : range) {

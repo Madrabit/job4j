@@ -22,4 +22,6 @@ public interface UserAction {
      * @return Строка меню
      */
     String info();
+
+    String infoMenu();
 }
