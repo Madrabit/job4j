@@ -48,7 +48,7 @@ public class StringsCompareTest {
         ListCompare compare = new ListCompare();
         int rst = compare.compare(
                 "Petrov",
-                "Petrov"
+                "Patrov"
         );
         assertThat(rst, greaterThan(0));
     }
