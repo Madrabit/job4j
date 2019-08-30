@@ -47,7 +47,7 @@ public class StringsCompareTest {
     public void secondCharOfLeftGreaterThanRightShouldBePositive() {
         ListCompare compare = new ListCompare();
         int rst = compare.compare(
-                "Petrov",
+                "Petrov1",
                 "Patrov"
         );
         assertThat(rst, greaterThan(0));
