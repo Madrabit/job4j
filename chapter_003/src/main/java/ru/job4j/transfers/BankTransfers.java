@@ -9,16 +9,24 @@ import java.util.*;
  */
 @SuppressWarnings("JavaDoc")
 public class BankTransfers {
-    final TreeMap<User, List<Account>> clients = new TreeMap<>();
+    final TreeMap<User, List<Account>> clients = new TreeMap<>(new Comparator<User>() {
+        @Override
+        public int compare(User user, User t1) {
+            return 0;
+        }
+    });
+
+    public TreeMap<User, List<Account>> getClients() {
+        return clients;
+    }
+
     /**
      * добавление пользователя
      * @param user
      */
     public void addUser(User user) {
         List<Account> accounts = new ArrayList<>();
-        if (!clients.containsKey(user)) {
-            clients.put(user, accounts);
-        }
+        clients.putIfAbsent(user, accounts);
     }
 
     /**
@@ -35,12 +43,15 @@ public class BankTransfers {
      * @param requisite
      * @return
      */
-    public Account findByPassAndReq(String passport, String requisite) {
-        for (Map.Entry el : clients.entrySet()) {
-            if (el.getKey().equals(passport)) {
-                int index = clients.get(el).indexOf(requisite);
-                return clients.get(el).get(index);
+    public Account findByPassAndReq(String passport, int requisite) {
+        if (clients.containsKey(new User("name", passport))) {
+           List<Account> accounts = clients.get(new User("name", passport));
+            for (Account account : accounts) {
+                if (account.getRequisites() == requisite) {
+                    return account;
+                }
             }
+           return new Account();
         }
         return new Account();
     }
@@ -50,11 +61,9 @@ public class BankTransfers {
      * @param account
      */
     public void addAccountToUser(String passport, Account account) {
-        for (Map.Entry el : clients.entrySet()) {
-            if (el.getKey().equals(passport)) {
-                clients.get(el).add(account);
+            if (clients.containsKey(new User("name", passport))) {
+                clients.get(new User("name", passport)).add(account);
             }
-        }
     }
 
     /**
@@ -63,8 +72,8 @@ public class BankTransfers {
      * @param account
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (Map.Entry el : clients.entrySet()) {
-            if (el.getKey().equals(passport)) {
+        for (User el : clients.keySet()) {
+            if (el.getPassport().equals(passport)) {
                 clients.get(el).remove(account);
             }
         }
@@ -76,13 +85,15 @@ public class BankTransfers {
      * @return
      */
     public List<Account> getUserAccounts(String passport) {
-        for (Map.Entry el : clients.entrySet()) {
-            if (el.getKey().equals(passport)) {
+        List<Account> list = new ArrayList<>();
+        for (User el : clients.keySet()) {
+            if (el.getPassport().equals(passport)) {
                 return clients.get(el);
             } else {
-                return new ArrayList<>();
+                return list;
             }
         }
+        return list;
     }
 
     /**
@@ -95,9 +106,9 @@ public class BankTransfers {
      * @return
      */
     public boolean transferMoney(String srcPassport,
-                                  String srcRequisite,
+                                  int srcRequisite,
                                   String destPassport,
-                                  String dstRequisite,
+                                  int dstRequisite,
                                   double amount) {
         BankTransfers transfers = new BankTransfers();
         Account sender = transfers.findByPassAndReq(srcPassport, srcRequisite);

@@ -27,6 +27,14 @@ public class Account {
         this.requisites = requisites;
     }
 
+    public Account() {
+    }
+
+    public Account(double value, int requisites) {
+        this.value = value;
+        this.requisites = requisites;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
