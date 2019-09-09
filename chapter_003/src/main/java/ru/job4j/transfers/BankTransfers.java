@@ -9,14 +9,9 @@ import java.util.*;
  */
 @SuppressWarnings("JavaDoc")
 public class BankTransfers {
-    final TreeMap<User, List<Account>> clients = new TreeMap<>(new Comparator<>() {
-        @Override
-        public int compare(User user, User t1) {
-            return 0;
-        }
-    });
+    final Map<User, List<Account>> clients = new HashMap<>();
 
-    public TreeMap<User, List<Account>> getClients() {
+    public Map<User, List<Account>> getClients() {
         return clients;
     }
 
@@ -44,16 +39,16 @@ public class BankTransfers {
      * @return
      */
     public Account findByPassAndReq(String passport, int requisite) {
-        if (clients.containsKey(new User("name", passport))) {
-           List<Account> accounts = clients.get(new User("name", passport));
+        for (User el : clients.keySet()) {
+            List<Account> accounts = clients.get(new User("name", passport));
             for (Account account : accounts) {
                 if (account.getRequisites() == requisite) {
                     return account;
                 }
             }
-           return new Account();
+            return new Account();
         }
-        return new Account();
+        return null;
     }
     /**
      * добавить счёт пользователю

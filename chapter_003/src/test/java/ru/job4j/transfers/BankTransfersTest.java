@@ -20,8 +20,8 @@ public class BankTransfersTest {
         BankTransfers bankTransfers = new BankTransfers();
         User user = new User("Man", "123");
         bankTransfers.addUser(user);
-        User result = bankTransfers.getClients().firstKey();
-        assertThat(result, is(new User("Man", "123")));
+        int result = bankTransfers.getClients().size();
+        assertThat(result, is(1));
     }
 
     @Test
