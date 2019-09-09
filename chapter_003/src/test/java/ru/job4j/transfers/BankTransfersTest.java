@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 
@@ -94,6 +93,6 @@ public class BankTransfersTest {
         Account account2 = new Account(0, 444);
         bankTransfers.addAccountToUser("222", account2);
         boolean result = bankTransfers.transferMoney("123", 111, "222", 444, 50);
-        assertThat(result, is (true));
+        assertThat(result, is(true));
     }
 }

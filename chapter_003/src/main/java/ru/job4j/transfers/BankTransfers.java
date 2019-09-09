@@ -9,7 +9,7 @@ import java.util.*;
  */
 @SuppressWarnings("JavaDoc")
 public class BankTransfers {
-    final TreeMap<User, List<Account>> clients = new TreeMap<>(new Comparator<User>() {
+    final TreeMap<User, List<Account>> clients = new TreeMap<>(new Comparator<>() {
         @Override
         public int compare(User user, User t1) {
             return 0;
@@ -110,9 +110,8 @@ public class BankTransfers {
                                   String destPassport,
                                   int dstRequisite,
                                   double amount) {
-        BankTransfers transfers = new BankTransfers();
-        Account sender = transfers.findByPassAndReq(srcPassport, srcRequisite);
-        Account recipient = transfers.findByPassAndReq(destPassport, dstRequisite);
+        Account sender = this.findByPassAndReq(srcPassport, srcRequisite);
+        Account recipient = this.findByPassAndReq(destPassport, dstRequisite);
         if (sender != null  && recipient != null && sender.getValue() > 0) {
             recipient.setValue(amount);
             sender.setValue(sender.getValue() - amount);
