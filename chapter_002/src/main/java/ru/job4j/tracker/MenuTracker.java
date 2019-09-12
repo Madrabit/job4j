@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author madrabit on 01.08.2019
@@ -24,14 +25,15 @@ public class MenuTracker {
 
     /**
      * Конструктор.
-     *
-     * @param input   объект типа Input
+     *  @param input   объект типа Input
      * @param tracker объект типа Tracker
+     * @param output
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
     }
+
 
     /**
      * Метод для получения массива меню.
@@ -81,9 +83,11 @@ public class MenuTracker {
         public AddItem(int key, String name) {
             super(key, name);
         }
+        private final Consumer<String> output = s -> System.out.println(s);
+
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Adding new item --------------");
+            output.accept("------------ Adding new item --------------");
             String name = input.ask("Please, provide item name:");
             String desc = input.ask("Please, provide item description:");
             Item item = new Item(name, desc, System.currentTimeMillis());
