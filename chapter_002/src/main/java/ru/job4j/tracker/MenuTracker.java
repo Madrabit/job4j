@@ -48,7 +48,7 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        actions.add(new AddItem(0, "Add new Item."));
+        actions.add(new AddItem(0, "Add new Item.", System.out::println));
         actions.add(new ShowItems(1, "Show All Items."));
         actions.add(new UpdateItem(2, "Update Item"));
         actions.add(new DeleteItem(3, "Delete Item"));
@@ -80,10 +80,9 @@ public class MenuTracker {
      * Класс реализует добавленяи новый заявки в хранилище.
      */
     private static class AddItem extends BaseAction {
-        public AddItem(int key, String name) {
-            super(key, name);
+        public AddItem(int key, String name, Consumer<String> output) {
+            super(key, name, output);
         }
-        private final Consumer<String> output = s -> System.out.println(s);
 
         @Override
         public void execute(Input input, Tracker tracker) {
