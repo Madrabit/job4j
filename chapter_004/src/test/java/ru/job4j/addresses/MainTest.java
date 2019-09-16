@@ -23,8 +23,8 @@ public class MainTest {
         Main main =  new Main();
         List<Address> addresses = main.collect(list);
         assertThat(addresses.toString(),
-                is("[Address{city='Spb', street='Nevskiy', home=5, apartment=2}, " +
-                        "Address{city='Moscow', street='Nevskiy', home=5, apartment=2}]"));
+                is("[Address{city='Spb', street='Nevskiy', home=5, apartment=2}, "
+                        + "Address{city='Moscow', street='Nevskiy', home=5, apartment=2}]"));
     }
     @Test
     public void whenCollectThenReturnSortedUniqueAddresses() {
