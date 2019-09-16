@@ -1,5 +1,7 @@
 package ru.job4j.addresses;
 
+import java.util.Objects;
+
 /**
  * Tourist's place of residence
  * @author madrabit on 16.09.2019
@@ -39,5 +41,25 @@ public class Address {
                 + ", home=" + home
                 + ", apartment=" + apartment
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Address address = (Address) o;
+        return home == address.home
+                && apartment == address.apartment
+                && Objects.equals(city, address.city)
+                && Objects.equals(street, address.street);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, home, apartment);
     }
 }

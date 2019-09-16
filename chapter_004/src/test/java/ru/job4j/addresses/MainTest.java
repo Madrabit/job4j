@@ -1,8 +1,8 @@
 package ru.job4j.addresses;
 
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +20,11 @@ public class MainTest {
         List<Profile> list = new ArrayList<>();
         list.add(profile1);
         list.add(profile2);
+        List<Address> expected = new ArrayList<>();
+        expected.add(new Address("Moscow", "Lubyanka", 3, 33));
+        expected.add(new Address("Spb", "Nevskiy", 5, 2));
         Main main =  new Main();
         List<Address> addresses = main.collect(list);
-        assertThat("[Address{city='Moscow', street='Lubyanka', home=3, apartment=33}, Address{city='Spb', street='Nevskiy', home=5, apartment=2}]",
-                is(addresses.toString()));
+        assertEquals(expected, addresses);
     }
 }
