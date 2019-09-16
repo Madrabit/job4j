@@ -1,7 +1,6 @@
 package ru.job4j;
 
 import org.junit.Test;
-import ru.job4j.chess.Logic;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
 import ru.job4j.chess.firuges.white.*;

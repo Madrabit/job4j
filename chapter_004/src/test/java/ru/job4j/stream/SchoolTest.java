@@ -1,8 +1,9 @@
 package ru.job4j.stream;
 
-import org.testng.annotations.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,7 @@ public class SchoolTest {
             new Student(10),
             new Student(50),
             new Student(70),
-            new Student( 90)
+            new Student(90)
     );
 
     @Test
@@ -28,7 +29,7 @@ public class SchoolTest {
         ).collect(Collectors.toList());
         List<Student> expected = List.of(
                 new Student(70),
-                new Student( 90)
+                new Student(90)
         );
         assertThat(result, is(expected));
     }

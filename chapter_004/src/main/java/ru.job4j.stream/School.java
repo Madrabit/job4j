@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class School {
     /**
      * Students filter
-     * @param students
-     * @param predict
-     * @return
+     * @param students List of students.
+     * @param predict Predocate. Need for filtering.
+     * @return Returnы a list of students matching the condition.
      */
     List<Student> collect(List<Student> students, Predicate<Student> predict) {
         return students.stream().filter(predict).collect(Collectors.toList());
