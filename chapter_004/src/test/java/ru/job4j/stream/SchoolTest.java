@@ -24,9 +24,6 @@ public class SchoolTest {
 
     @Test
     public void whenA10Then70to100() {
-//        List<Student> result = students.stream().filter(
-//                student -> student.getScore() < 100 && student.getScore() >= 70
-//        ).collect(Collectors.toList());
         List<Student> expected = List.of(
                 new Student(70),
                 new Student(90)
@@ -39,9 +36,10 @@ public class SchoolTest {
 
     @Test
     public void whenB10Then50to70() {
-        List<Student> result = students.stream().filter(
+        School school = new School();
+        List<Student> result = school.collect(students,
                 student -> student.getScore() < 70 && student.getScore() >= 50
-        ).collect(Collectors.toList());
+        );
         List<Student> expected = List.of(
                 new Student(50)
         );
@@ -50,9 +48,10 @@ public class SchoolTest {
 
     @Test
     public void whenC10Then0to50() {
-        List<Student> result = students.stream().filter(
+        School school = new School();
+        List<Student> result = school.collect(students,
                 student -> student.getScore() < 50 && student.getScore() >= 0
-        ).collect(Collectors.toList());
+        );
         List<Student> expected = List.of(
                 new Student(10)
         );

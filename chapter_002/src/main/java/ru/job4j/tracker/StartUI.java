@@ -69,7 +69,7 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init()  {
-        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        MenuTracker menu = new MenuTracker(this.input, this.tracker, System.out::println);
         List<Integer> range = new ArrayList<>();
         menu.fillActions();
         for (int i = 0; i < menu.getActionsLength(); i++) {
