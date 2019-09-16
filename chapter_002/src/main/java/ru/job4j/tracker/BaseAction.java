@@ -11,12 +11,10 @@ public abstract class BaseAction implements UserAction {
 
     private final int key;
     private final String name;
-    public final Consumer<String> output;
 
-    protected BaseAction(final int key, final String name, Consumer<String> output) {
+    protected BaseAction(final int key, final String name) {
         this.key = key;
         this.name =  name;
-        this.output =  output;
     }
 
     @Override
