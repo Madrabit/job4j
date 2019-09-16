@@ -24,14 +24,17 @@ public class SchoolTest {
 
     @Test
     public void whenA10Then70to100() {
-        List<Student> result = students.stream().filter(
-                student -> student.getScore() < 100 && student.getScore() >= 70
-        ).collect(Collectors.toList());
+//        List<Student> result = students.stream().filter(
+//                student -> student.getScore() < 100 && student.getScore() >= 70
+//        ).collect(Collectors.toList());
         List<Student> expected = List.of(
                 new Student(70),
                 new Student(90)
         );
-        assertThat(result, is(expected));
+       School school = new School();
+        List<Student> result = school.collect(students,
+                student -> student.getScore() < 100 && student.getScore() >= 70);
+       assertThat(result, is(expected));
     }
 
     @Test
