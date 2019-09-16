@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author madrabit on 01.08.2019
@@ -27,11 +28,13 @@ public class MenuTracker {
      *
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
+     * @param output
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
     }
+
 
     /**
      * Метод для получения массива меню.
@@ -46,7 +49,7 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        actions.add(new AddItem(0, "Add new Item."));
+        actions.add(new AddItem(0, "Add new Item.", System.out::println));
         actions.add(new ShowItems(1, "Show All Items."));
         actions.add(new UpdateItem(2, "Update Item"));
         actions.add(new DeleteItem(3, "Delete Item"));
@@ -78,12 +81,15 @@ public class MenuTracker {
      * Класс реализует добавленяи новый заявки в хранилище.
      */
     private static class AddItem extends BaseAction {
-        public AddItem(int key, String name) {
+        private final Consumer<String> output;
+        public AddItem(int key, String name, Consumer<String> output) {
             super(key, name);
+            this.output = output;
         }
+
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Adding new item --------------");
+            output.accept("------------ Adding new item --------------");
             String name = input.ask("Please, provide item name:");
             String desc = input.ask("Please, provide item description:");
             Item item = new Item(name, desc, System.currentTimeMillis());

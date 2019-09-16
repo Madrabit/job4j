@@ -11,5 +11,6 @@
 
     <artifactId>chapter_004</artifactId>
 
-
+    <groupId>ru.job4j</groupId>
+    <version>2.0</version>
 </project>
