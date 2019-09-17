@@ -27,8 +27,8 @@ public class Main {
      * @return Unique addresses Sorted by City.
      */
     public List<Address> collectUnique(List<Profile> profiles) {
-        return profiles.stream().map(Profile::getAddress).distinct().sorted(
+        return profiles.stream().map(Profile::getAddress).sorted(
                 Comparator.comparing(Address::getCity)
-        ).collect(Collectors.toList());
+        ).distinct().collect(Collectors.toList());
     }
 }
