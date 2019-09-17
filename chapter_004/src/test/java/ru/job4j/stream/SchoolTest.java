@@ -5,10 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author madrabit on 12.09.2019
@@ -16,11 +13,13 @@ import java.util.Map;
  * @since 0.1
  */
 public class SchoolTest {
-    final List<Student> students = Arrays.asList(
-            new Student(10, "A"),
-            new Student(50, "B"),
-            new Student(70, "C"),
-            new Student(90, "D")
+    public List<Student> students = new ArrayList<>(
+            Arrays.asList(
+                    new Student(10, "A"),
+                    new Student(50, "B"),
+                    new Student(70, "C"),
+                    new Student(90, "D")
+            )
     );
 
     @Test
@@ -61,6 +60,18 @@ public class SchoolTest {
 
     @Test
     public void whenA10Then70to100AsMap() {
+        Map<String, Student> expected = new HashMap<>();
+        expected.put("C", new Student(70, "C"));
+        expected.put("D", new Student(90, "D"));
+        School school = new School();
+        Map<String, Student> result = school.collectAsMap(students,
+                student -> student.getScore() < 100 && student.getScore() >= 70);
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenDuplicateThenMap() {
+        students.add(new Student(70, "C"));
         Map<String, Student> expected = new HashMap<>();
         expected.put("C", new Student(70, "C"));
         expected.put("D", new Student(90, "D"));

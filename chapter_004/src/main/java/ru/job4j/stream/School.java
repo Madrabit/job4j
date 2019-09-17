@@ -24,12 +24,12 @@ public class School {
 
     /**
      *
-     * @param students List of students.
+     * @param students List of studen ts.
      * @param predict Predicate. Need for filtering.
      * @return Return a map of students matching the condition.
      */
     public Map<String, Student> collectAsMap(List<Student> students, Predicate<Student> predict) {
         return students.stream().filter(predict).collect(Collectors.toMap(Student::getSurname,
-                e -> e));
+                e -> e, (oldKey, newKey) -> newKey));
     }
 }
