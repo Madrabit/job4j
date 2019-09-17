@@ -6,8 +6,9 @@ import static org.hamcrest.core.Is.is;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 /**
  * @author madrabit on 12.09.2019
@@ -16,17 +17,17 @@ import java.util.stream.Collectors;
  */
 public class SchoolTest {
     final List<Student> students = Arrays.asList(
-            new Student(10),
-            new Student(50),
-            new Student(70),
-            new Student(90)
+            new Student(10, "A"),
+            new Student(50, "B"),
+            new Student(70, "C"),
+            new Student(90, "D")
     );
 
     @Test
     public void whenA10Then70to100() {
         List<Student> expected = List.of(
-                new Student(70),
-                new Student(90)
+                new Student(70, "C"),
+                new Student(90, "D")
         );
        School school = new School();
         List<Student> result = school.collect(students,
@@ -41,7 +42,7 @@ public class SchoolTest {
                 student -> student.getScore() < 70 && student.getScore() >= 50
         );
         List<Student> expected = List.of(
-                new Student(50)
+                new Student(50, "B")
         );
         assertThat(result, is(expected));
     }
@@ -53,8 +54,19 @@ public class SchoolTest {
                 student -> student.getScore() < 50 && student.getScore() >= 0
         );
         List<Student> expected = List.of(
-                new Student(10)
+                new Student(10, "A")
         );
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenA10Then70to100AsMap() {
+        Map<String, Student> expected = new HashMap<>();
+        expected.put("C", new Student(70, "C"));
+        expected.put("D", new Student(90, "D"));
+        School school = new School();
+        Map<String, Student> result = school.collectAsMap(students,
+                student -> student.getScore() < 100 && student.getScore() >= 70);
         assertThat(result, is(expected));
     }
 
