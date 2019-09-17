@@ -1,5 +1,6 @@
 package ru.job4j.addresses;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,5 +18,17 @@ public class Main {
      */
     public List<Address> collect(List<Profile> profiles) {
         return profiles.stream().map(Profile::getAddress).collect(Collectors.toList());
+    }
+
+    /**
+     * The method returns unique addresses.
+     * Sorted by City.
+     * @param profiles List of profiles.
+     * @return Unique addresses Sorted by City.
+     */
+    public List<Address> collectUnique(List<Profile> profiles) {
+        return profiles.stream().map(Profile::getAddress).sorted(
+                Comparator.comparing(Address::getCity)
+        ).distinct().collect(Collectors.toList());
     }
 }
