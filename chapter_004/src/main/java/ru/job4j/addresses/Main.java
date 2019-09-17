@@ -28,7 +28,7 @@ public class Main {
      */
     public List<Address> collectUnique(List<Profile> profiles) {
         return profiles.stream().map(Profile::getAddress).distinct().sorted(
-                (address, t1) -> address.getCity().compareTo(t1.getCity())
+                Comparator.comparing(Address::getCity)
         ).collect(Collectors.toList());
     }
 }
