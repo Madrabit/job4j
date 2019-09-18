@@ -39,16 +39,9 @@ public class BankTransfers {
      * @return
      */
     public Account findByPassAndReq(String passport, int requisite) {
-        for (User el : clients.keySet()) {
-            List<Account> accounts = clients.get(new User("name", passport));
-            for (Account account : accounts) {
-                if (account.getRequisites() == requisite) {
-                    return account;
-                }
-            }
-            return new Account();
-        }
-        return null;
+        List<Account> accounts = clients.get(new User("name", passport));
+        return accounts.stream().
+                filter(account -> account.getRequisites() == requisite).findAny().orElse(null);
     }
     /**
      * добавить счёт пользователю

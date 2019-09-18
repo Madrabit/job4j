@@ -2,6 +2,7 @@ package ru.job4j.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Converting Integer Matrix to List of Integers
@@ -15,8 +16,7 @@ public class MatrixToInteger {
      * @param matrix
      * @return List of Integers
      */
-    public List<Integer> convertMatrixToInt(List<List<Integer>> matrix) {
-        return matrix.stream().flatMap(e -> e.stream()).collect(Collectors.toList());
+    public List<Integer> convertMatrixToInt(Integer[][] matrix) {
+        return Stream.of(matrix).flatMap(integers -> Stream.of(integers)).collect(Collectors.toList());
     }
-
 }
