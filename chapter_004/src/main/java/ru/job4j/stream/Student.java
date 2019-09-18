@@ -1,5 +1,6 @@
 package ru.job4j.stream;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @version 1$
  * @since 0.1
  */
-public class Student {
+public class Student implements Comparator<Student> {
     private final int score;
     private final String surname;
 
@@ -41,5 +42,15 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(score, surname);
+    }
+
+    @Override
+    public int compare(Student student, Student t1) {
+        if (student.getScore() > t1.getScore()) {
+            return 1;
+        } else if (student.getScore() < t1.getScore()) {
+            return -1;
+        }
+        return 0;
     }
 }

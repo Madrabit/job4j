@@ -1,7 +1,7 @@
 package ru.job4j.stream;
 
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.Is.is;
 import org.junit.Test;
 
@@ -78,6 +78,17 @@ public class SchoolTest {
         School school = new School();
         Map<String, Student> result = school.collectAsMap(students,
                 student -> student.getScore() < 100 && student.getScore() >= 70);
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenBound40ThenHighScoreStudents() {
+        List<Student> expected = List.of(
+                new Student(10, "A"),
+                new Student(50, "B")
+        );
+        School school = new School();
+        List<Student> result = school.levelOf(students, 70);
         assertThat(result, is(expected));
     }
 
