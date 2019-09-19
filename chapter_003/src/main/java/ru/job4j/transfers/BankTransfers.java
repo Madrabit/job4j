@@ -41,10 +41,15 @@ public class BankTransfers {
      * @return
      */
     public Account findByPassAndReq(String passport, int requisite) {
-        List<Account> accounts = clients.get(new User("name", passport));
-        return accounts.stream().
-                filter(account -> account.getRequisites() == requisite).
-                findAny().orElse(null);
+        return clients.keySet()
+                .stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get)
+                .flatMap(accounts -> accounts.stream()
+                        .filter(account -> account.getRequisites() == requisite)
+                        .findFirst())
+                .orElse(null);
     }
     /**
      * добавить счёт пользователю
@@ -52,9 +57,11 @@ public class BankTransfers {
      * @param account
      */
     public void addAccountToUser(String passport, Account account) {
-            if (clients.containsKey(new User("name", passport))) {
-                clients.get(new User("name", passport)).add(account);
-            }
+      User user = clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst().orElse(null);
+      clients.get(user).add(account);
     }
 
     /**
