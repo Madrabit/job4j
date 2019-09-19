@@ -16,9 +16,10 @@ import static org.hamcrest.core.Is.is;
 public class UserConvertTest {
     @Test
     public void whenUserListThenHashMap() {
-        List<User> list = new ArrayList<>();
-        list.add(new User(1, "Вася", "Урюпинск"));
-        list.add(new User(2, "Коля", "Питер"));
+        List<User> list = new ArrayList<>(List.of(
+                new User(1, "Вася", "Урюпинск"),
+                new User(2, "Коля", "Питер")
+        ));
         UserConvert userConvert = new UserConvert();
         HashMap map =  userConvert.process(list);
         User item = (User) map.get(1);

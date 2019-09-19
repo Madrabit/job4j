@@ -16,7 +16,7 @@ public class SortUserTest {
     @Test
     public void when213then123() {
         SortUser sortUser = new SortUser();
-        Set<SortUser.User> users = sortUser.sort(Arrays.asList(
+        Set<SortUser.User> users = sortUser.sort(List.of(
                 new SortUser.User("Ivan", 2),
                 new SortUser.User("Petr", 1),
                 new SortUser.User("Andrew", 3)
