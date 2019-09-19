@@ -57,12 +57,13 @@ public class BankTransfers {
      * @param account
      */
     public void addAccountToUser(String passport, Account account) {
-      User user = clients.keySet()
+      clients.keySet()
                 .stream()
                 .filter(e -> e.getPassport().equals(passport))
-                .findFirst().orElse(null);
-      clients.get(user).add(account);
-    }
+                .findFirst()
+                .map(clients::get)
+                  .map(accounts -> accounts.add(account));
+        }
 
     /**
      * удалить один счёт пользователя
@@ -70,8 +71,12 @@ public class BankTransfers {
      * @param account
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        List<Account> accounts = clients.get(new User("name", passport));
-        accounts.remove(account);
+        clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get)
+                .map(accounts -> accounts.remove(account));
     }
 
     /**
@@ -80,7 +85,11 @@ public class BankTransfers {
      * @return
      */
     public List<Account> getUserAccounts(String passport) {
-        return clients.get(new User("name", passport));
+        return  clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get).stream().findFirst().orElse(null);
     }
 
     /**
