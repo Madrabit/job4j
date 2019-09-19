@@ -23,7 +23,7 @@ public class PriorityQueue {
             tasks.add(task);
         } else {
             ListIterator<Task> iterator = tasks.listIterator();
-            int count = 0;
+            var count = 0;
             while (iterator.hasNext()) {
                 if (task.getPriority() <= iterator.next().getPriority()) {
                     iterator.previous();
@@ -42,7 +42,7 @@ public class PriorityQueue {
      * @return Элемент с самым высоким значением приоритетности
      */
     public Task take() {
-        for (Task task : tasks) {
+        for (var task : tasks) {
             System.out.println(task.getPriority());
         }
         return this.tasks.poll();
