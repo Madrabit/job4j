@@ -1,6 +1,8 @@
 package ru.job4j.transfers;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author madrabit on 04.09.2019
@@ -39,9 +41,15 @@ public class BankTransfers {
      * @return
      */
     public Account findByPassAndReq(String passport, int requisite) {
-        List<Account> accounts = clients.get(new User("name", passport));
-        return accounts.stream().
-                filter(account -> account.getRequisites() == requisite).findAny().orElse(null);
+        return clients.keySet()
+                .stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get)
+                .flatMap(accounts -> accounts.stream()
+                        .filter(account -> account.getRequisites() == requisite)
+                        .findFirst())
+                .orElse(null);
     }
     /**
      * добавить счёт пользователю
@@ -49,10 +57,13 @@ public class BankTransfers {
      * @param account
      */
     public void addAccountToUser(String passport, Account account) {
-            if (clients.containsKey(new User("name", passport))) {
-                clients.get(new User("name", passport)).add(account);
-            }
-    }
+      clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get)
+                  .map(accounts -> accounts.add(account));
+        }
 
     /**
      * удалить один счёт пользователя
@@ -60,11 +71,12 @@ public class BankTransfers {
      * @param account
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User el : clients.keySet()) {
-            if (el.getPassport().equals(passport)) {
-                clients.get(el).remove(account);
-            }
-        }
+        clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get)
+                .map(accounts -> accounts.remove(account));
     }
 
     /**
@@ -73,15 +85,11 @@ public class BankTransfers {
      * @return
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> list = new ArrayList<>();
-        for (User el : clients.keySet()) {
-            if (el.getPassport().equals(passport)) {
-                return clients.get(el);
-            } else {
-                return list;
-            }
-        }
-        return list;
+        return  clients.keySet()
+                .stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findFirst()
+                .map(clients::get).stream().findFirst().orElse(null);
     }
 
     /**
