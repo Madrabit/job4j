@@ -5,6 +5,7 @@ package ru.job4j.oop;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("EmptyMethod")
 public class Wolf {
     public void tryEat(Ball ball) {
 

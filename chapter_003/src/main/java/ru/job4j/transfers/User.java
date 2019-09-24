@@ -7,6 +7,7 @@ import java.util.Objects;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("ConstantConditions")
 public class User {
     private String name;
     private String passport;

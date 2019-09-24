@@ -6,6 +6,7 @@ package ru.job4j.loop;
  * @version $Id$
  * @since 1
  */
+@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public class Mortgage {
     /**
      *  Метод должен вычислять количество лет необходимых для погашения кредита.
