@@ -1,6 +1,7 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * MatrixIterator
@@ -77,6 +78,9 @@ public class MatrixIterator implements Iterator {
      * @return Current value
      */
     private Object innerNext() {
+        if (!hasNextInside()) {
+          throw new NoSuchElementException();
+        }
         return values[outer][index++];
     }
 }
