@@ -32,8 +32,8 @@ public class EvenIterator implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        while (values.length > index + 1) {
-            if (values[index + 1] % 2 == 0) {
+        while (values.length > index) {
+            if (values[index] % 2 == 0) {
                 return true;
             }
             index++;
@@ -51,6 +51,6 @@ public class EvenIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return values[++index];
+        return values[index++];
     }
 }
