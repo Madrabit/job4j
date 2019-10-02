@@ -8,6 +8,7 @@ import java.util.Iterator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@SuppressWarnings("unchecked")
 public class JaggedArrayIteratorTest {
 
     private Iterator<Integer> it;
