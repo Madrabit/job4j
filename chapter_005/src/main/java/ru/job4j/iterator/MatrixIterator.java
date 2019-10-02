@@ -5,12 +5,16 @@ import java.util.NoSuchElementException;
 
 /**
  * MatrixIterator
+ *
  * @author madrabit on 01.10.2019
  * @version 1$
  * @since 0.1
  */
 public class MatrixIterator implements Iterator {
 
+    /**
+     * Matrix - 2D Array
+     */
     private final int[][] values;
     /**
      * Index of first stage array
@@ -27,27 +31,25 @@ public class MatrixIterator implements Iterator {
 
     /**
      * Check first lvl array has next element or not
+     *
      * @return array is finished or not
      */
     @Override
     public boolean hasNext() {
-        if (values.length > outer) {
-            if (hasNextInside()) {
-                return true;
-            } else {
-                outer++;
-                if (values.length == outer) {
-                    return false;
-                }
-                return hasNextInside();
-            }
+        if (hasNextInside()) {
+            return true;
         } else {
-            return false;
+            outer++;
+            if (values.length == outer) {
+                return false;
+            }
+            return hasNextInside();
         }
     }
 
     /**
      * Check second lvl array has next element or not
+     *
      * @return array is finished or not
      */
     private boolean hasNextInside() {
@@ -61,25 +63,13 @@ public class MatrixIterator implements Iterator {
 
     /**
      * Moves cursor forward
+     *
      * @return Current value
      */
     @Override
     public Object next() {
-        if (hasNext()) {
-            return innerNext();
-        } else {
-            outer++;
-            return innerNext();
-        }
-    }
-
-    /**
-     *  Moves cursor forward in second array
-     * @return Current value
-     */
-    private Object innerNext() {
-        if (!hasNextInside()) {
-          throw new NoSuchElementException();
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
         return values[outer][index++];
     }
