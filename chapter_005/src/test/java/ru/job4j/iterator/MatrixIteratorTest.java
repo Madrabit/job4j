@@ -21,6 +21,7 @@ public class MatrixIteratorTest {
         it = new MatrixIterator(new int[][]{{1}, {3, 4}, {7}});
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     public void hasNext() {
         it.hasNext();
