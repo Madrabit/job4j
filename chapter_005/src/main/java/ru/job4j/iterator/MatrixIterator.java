@@ -30,35 +30,21 @@ public class MatrixIterator implements Iterator {
     }
 
     /**
-     * Check first lvl array has next element or not
+     * Check first array has next element or not
      *
      * @return array is finished or not
      */
     @Override
     public boolean hasNext() {
-        if (hasNextInside()) {
-            return true;
-        } else {
-            outer++;
-            if (values.length == outer) {
-                return false;
+        while (values.length > outer) {
+            if (values.length != 0 && values[outer].length > index) {
+                return true;
+            } else {
+                outer++;
+                this.index = 0;
             }
-            return hasNextInside();
         }
-    }
-
-    /**
-     * Check second lvl array has next element or not
-     *
-     * @return array is finished or not
-     */
-    private boolean hasNextInside() {
-        if (values[outer].length > index) {
-            return true;
-        } else {
-            this.index = 0;
-            return false;
-        }
+        return false;
     }
 
     /**
