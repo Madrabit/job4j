@@ -10,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 
+@SuppressWarnings("unchecked")
 public class EvenIteratorTest {
 
     private Iterator<Integer> it;
