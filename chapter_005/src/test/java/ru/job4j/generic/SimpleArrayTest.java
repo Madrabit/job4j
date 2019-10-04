@@ -38,20 +38,4 @@ public class SimpleArrayTest {
         int result = integerSimpleArray.get(0);
         assertThat(2, is(result));
     }
-
-    @Test
-    public void hasNext() {
-        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>(Integer.class, 10);
-        integerSimpleArray.add(1);
-        boolean result = integerSimpleArray.hasNext();
-        assertThat(true, is(result));
-    }
-
-    @Test
-    public void next() {
-        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>(Integer.class, 10);
-        integerSimpleArray.add(1);
-        int result = integerSimpleArray.next();
-        assertThat(1, is(result));
-    }
 }

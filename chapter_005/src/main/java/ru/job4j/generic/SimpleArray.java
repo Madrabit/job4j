@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  * @since 0.1
  */
 @SuppressWarnings({"unchecked", "TypeParameterHidesVisibleType"})
-public class SimpleArray<T> implements Iterator<T> {
+public class SimpleArray<T> implements Iterable<T> {
     /**
      * Current array.
      */
@@ -52,14 +52,7 @@ public class SimpleArray<T> implements Iterator<T> {
      */
     public void remove(int index) {
         T[] temp = Arrays.copyOf(array, size - 1);
-        for (int i = 0, j = 0; i < size; i++, j++) {
-            if (i == index) {
-                j--;
-                continue;
-            }
-            temp[j] = array[i];
-        }
-        size--;
+        System.arraycopy(array, index + 1, temp, index, --size);
         array = temp;
     }
 
@@ -74,6 +67,9 @@ public class SimpleArray<T> implements Iterator<T> {
         if (size == 0) {
             throw new NullPointerException();
         }
+        if (position == 0 && index + 1 > position) {
+            throw new NoSuchElementException();
+        }
         return (T) array[index];
     }
 
@@ -84,29 +80,40 @@ public class SimpleArray<T> implements Iterator<T> {
      * @param model New value for index.
      */
     public void set(int index, T model) {
+        if (size == 0) {
+            throw new NullPointerException();
+        }
+        if (position == 0 && index + 1 > position) {
+            throw new NoSuchElementException();
+        }
         array[index] = model;
     }
 
-    /**
-     * Check if item exists.
-     *
-     * @return Exists or not.
-     */
     @Override
-    public boolean hasNext() {
-        return array.length > position;
-    }
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+            /**
+             * Check if item exists.
+             *
+             * @return Exists or not.
+             */
+            @Override
+            public boolean hasNext() {
+                return array.length > position;
+            }
 
-    /**
-     * Move cursor froward and return item.
-     *
-     * @return Return item.
-     */
-    @Override
-    public T next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-        return array[index++];
+            /**
+             * Move cursor froward and return item.
+             *
+             * @return Return item.
+             */
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return array[index++];
+            }
+        };
     }
 }
