@@ -11,6 +11,7 @@ public class RoleStore<Role> extends AbstractStore {
     final SimpleArray<Role> store;
 
     public RoleStore(SimpleArray<Role> store) {
+        super(store);
         this.store = store;
     }
 
