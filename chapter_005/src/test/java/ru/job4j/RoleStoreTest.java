@@ -18,8 +18,12 @@ public class RoleStoreTest {
     public void whenRoleAddThenFindByIdSameRole() {
         RoleStore<Role> roleStore = new RoleStore<>(new SimpleArray(Role.class, 3));
         Role role = new Role("aaa");
+        Role role2 = new Role("bbb");
+        Role role3 = new Role("ссс");
         roleStore.add(role);
-        assertThat(roleStore.findById("aaa"), is(role));
+        roleStore.add(role2);
+        roleStore.add(role3);
+        assertThat(roleStore.findById("ссс"), is(role3));
     }
 
     @Test
@@ -27,8 +31,10 @@ public class RoleStoreTest {
         RoleStore<Role> roleStore = new RoleStore<>(new SimpleArray(Role.class, 3));
         Role role = new Role("aaa");
         Role role2 = new Role("bbb");
+        Role role3 = new Role("ссс");
         roleStore.add(role);
         roleStore.add(role2);
+        roleStore.add(role3);
         boolean result = roleStore.delete("bbb");
         assertThat(result, is(true));
     }

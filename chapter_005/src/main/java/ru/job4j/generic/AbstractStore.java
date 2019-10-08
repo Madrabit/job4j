@@ -1,7 +1,6 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * @author madrabit on 07.10.2019
@@ -59,10 +58,11 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      */
     @Override
     public E findById(String id) {
-        E result = null;
-        for (E e : store) {
-            if (e.getId().equals(id)) {
-                return e;
+        Iterator it =  store.iterator();
+        while (it.hasNext()) {
+            E result = (E) it.next();
+            if (result.getId().equals(id)) {
+                return result;
             }
         }
         return null;
@@ -75,19 +75,14 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      */
     @Override
     public int findIndexById(String id) {
-        Base target = findById(id);
-        if (target == null) {
-            return -1;
-        } else {
             Iterator it = store.iterator();
-            int pos = 0;
-            while (it.hasNext()) {
-                pos++;
-                if (target.equals(it.next())) {
-                    break;
+            int index = 0;
+            for (E e : store) {
+                if (e.getId().equals(id)) {
+                    return index;
                 }
+                index++;
             }
-            return pos;
-        }
+            return -1;
     }
 }
