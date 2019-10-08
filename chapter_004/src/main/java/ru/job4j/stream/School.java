@@ -13,6 +13,7 @@ import java.util.stream.Stream;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("SameParameterValue")
 public class School {
     /**
      * Students filter
