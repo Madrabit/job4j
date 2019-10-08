@@ -25,7 +25,7 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Index for iterator.
      */
-    int index = 0;
+    int index;
     /**
      * Array length.
      */
@@ -34,6 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public SimpleArray(Class<T> arr, int size) {
         this.array = (T[]) Array.newInstance(arr, size);
         this.size = size;
+        this.index = 0;
     }
 
     /**

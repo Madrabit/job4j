@@ -1,65 +1,64 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author madrabit on 07.10.2019
  * @version 1$
  * @since 0.1
  */
-public abstract class AbstractStore<E extends Base> implements Store {
+public abstract class AbstractStore<E extends Base> implements Store<E> {
+    /**
+     * Structure for store elements.
+     */
     final SimpleArray<E> store;
 
     protected AbstractStore(SimpleArray<E> store) {
         this.store = store;
     }
 
+    /**
+     * Add element to store.
+     * @param model Element.
+     */
     @Override
     public void add(Base model) {
         store.add((E) model);
     }
 
+    /**
+     * Replace element by ID.
+     * @param id Target id.
+     * @param model New Element.
+     * @return Result of replacing.
+     */
     @Override
     public boolean replace(String id, Base model) {
-        Base target = findById(id);
-        if (target == null) {
-            return false;
-        } else {
-            Iterator it = store.iterator();
-            int index = 0;
-            while (it.hasNext()) {
-                index++;
-                if (target.equals(it.next())) {
-                    break;
-                }
-            }
-            store.set(index, (E) model);
-            return true;
-        }
+        int index = findIndexById(id);
+        store.set(index, (E) model);
+        return index > 0 ? true : false;
     }
 
+    /**
+     * Delete element by id.
+     * @param id Target id.
+     * @return Deleting result.
+     */
     @Override
     public boolean delete(String id) {
-        Base target = findById(id);
-        if (target == null) {
-            return false;
-        } else {
-            Iterator it = store.iterator();
-            int index = 0;
-            while (it.hasNext()) {
-                index++;
-                if (target.equals(it.next())) {
-                    break;
-                }
-            }
-            store.remove(index);
-            return true;
-        }
-
+        int index = findIndexById(id);
+        store.remove(index);
+        return index > 0 ? true : false;
     }
 
+    /**a
+     * Find element by ID.
+     * @param id ID.
+     * @return Returning desired id.
+     */
     @Override
-    public Base findById(String id) {
+    public E findById(String id) {
         E result = null;
         for (E e : store) {
             if (e.getId().equals(id)) {
@@ -67,5 +66,28 @@ public abstract class AbstractStore<E extends Base> implements Store {
             }
         }
         return null;
+    }
+
+    /**
+     * Find Index of Element by ID.
+     * @param id ID.
+     * @return Index.
+     */
+    @Override
+    public int findIndexById(String id) {
+        Base target = findById(id);
+        if (target == null) {
+            return -1;
+        } else {
+            Iterator it = store.iterator();
+            int pos = 0;
+            while (it.hasNext()) {
+                pos++;
+                if (target.equals(it.next())) {
+                    break;
+                }
+            }
+            return pos;
+        }
     }
 }

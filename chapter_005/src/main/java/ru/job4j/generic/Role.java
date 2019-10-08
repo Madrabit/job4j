@@ -7,7 +7,7 @@ package ru.job4j.generic;
  */
 @SuppressWarnings("EmptyMethod")
 public class Role extends Base {
-    protected Role(String id) {
+    public Role(String id) {
         super(id);
     }
 
@@ -15,4 +15,5 @@ public class Role extends Base {
     public String getId() {
         return super.getId();
     }
+
 }
