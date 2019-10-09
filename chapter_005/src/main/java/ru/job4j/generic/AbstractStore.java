@@ -7,20 +7,22 @@ import java.util.Iterator;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractStore<E extends Base> implements Store<E> {
     /**
      * Structure for store elements.
      */
     final SimpleArray<E> store;
 
-    protected AbstractStore(SimpleArray<E> store) {
-        this.store = store;
+    protected AbstractStore(int size) {
+        store  = new SimpleArray<>(size);
     }
 
     /**
      * Add element to store.
      * @param model Element.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void add(Base model) {
         store.add((E) model);
@@ -36,7 +38,7 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     public boolean replace(String id, Base model) {
         int index = findIndexById(id);
         store.set(index, (E) model);
-        return index > 0 ? true : false;
+        return index > 0;
     }
 
     /**
@@ -48,7 +50,7 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     public boolean delete(String id) {
         int index = findIndexById(id);
         store.remove(index);
-        return index > 0 ? true : false;
+        return index > 0;
     }
 
     /**a
@@ -58,9 +60,7 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      */
     @Override
     public E findById(String id) {
-        Iterator it =  store.iterator();
-        while (it.hasNext()) {
-            E result = (E) it.next();
+        for (E result : store) {
             if (result.getId().equals(id)) {
                 return result;
             }

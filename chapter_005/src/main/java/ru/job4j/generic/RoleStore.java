@@ -8,10 +8,7 @@ package ru.job4j.generic;
 @SuppressWarnings("EmptyMethod")
 public class RoleStore<Role> extends AbstractStore {
 
-    final SimpleArray<Role> store;
-
-    public RoleStore(SimpleArray store) {
-        super(store);
-        this.store = store;
+    public RoleStore(int size) {
+        super(size);
     }
 }

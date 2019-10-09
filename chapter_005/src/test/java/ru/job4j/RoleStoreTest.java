@@ -3,7 +3,6 @@ package ru.job4j;
 import org.junit.Test;
 import ru.job4j.generic.Role;
 import ru.job4j.generic.RoleStore;
-import ru.job4j.generic.SimpleArray;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -16,7 +15,7 @@ import static org.hamcrest.core.Is.is;
 public class RoleStoreTest {
     @Test
     public void whenRoleAddThenFindByIdSameRole() {
-        RoleStore<Role> roleStore = new RoleStore<>(new SimpleArray(Role.class, 3));
+        RoleStore<Role> roleStore = new RoleStore<>(3);
         Role role = new Role("aaa");
         Role role2 = new Role("bbb");
         Role role3 = new Role("ссс");
@@ -28,7 +27,7 @@ public class RoleStoreTest {
 
     @Test
     public void whenRoleDeleteThenTrue() {
-        RoleStore<Role> roleStore = new RoleStore<>(new SimpleArray(Role.class, 3));
+        RoleStore<Role> roleStore = new RoleStore<>(3);
         Role role = new Role("aaa");
         Role role2 = new Role("bbb");
         Role role3 = new Role("ссс");
