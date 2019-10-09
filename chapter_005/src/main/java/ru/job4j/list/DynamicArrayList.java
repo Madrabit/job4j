@@ -16,12 +16,10 @@ public class DynamicArrayList<T> implements Iterable<T> {
     private int size;
     private int position = 0;
     private int modCount = 0;
-    private int index;
 
     public DynamicArrayList(int size) {
         this.array = (T[]) new Object[size];
         this.size = size;
-        this.index = 0;
     }
 
     public int getSize() {
@@ -37,6 +35,7 @@ public class DynamicArrayList<T> implements Iterable<T> {
         if (size == position) {
             increaseArray();
         }
+        modCount++;
         array[position++] = model;
     }
 
@@ -46,7 +45,6 @@ public class DynamicArrayList<T> implements Iterable<T> {
     public void increaseArray() {
         size = size + (size >> 1);
         array = Arrays.copyOf(array, size);
-        modCount++;
     }
     /**
      * Return object by index.
