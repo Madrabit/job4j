@@ -14,12 +14,14 @@ import java.util.NoSuchElementException;
 public class DynamicArrayList<T> implements Iterable<T> {
     private T[] array;
     private int size;
-    int position = 0;
-    int modCount = 0;
+    private int position = 0;
+    private int modCount = 0;
+    private int index;
 
     public DynamicArrayList(int size) {
         this.array = (T[]) new Object[size];
         this.size = size;
+        this.index = 0;
     }
 
     public int getSize() {
@@ -33,13 +35,19 @@ public class DynamicArrayList<T> implements Iterable<T> {
      */
     public void add(T model) {
         if (size == position) {
-            size = size + (size >> 1);
-            array = Arrays.copyOf(array, size);
-            modCount++;
+            increaseArray();
         }
         array[position++] = model;
     }
 
+    /**
+     * Increase Array 1.5
+     */
+    public void increaseArray() {
+        size = size + (size >> 1);
+        array = Arrays.copyOf(array, size);
+        modCount++;
+    }
     /**
      * Return object by index.
      *
@@ -51,7 +59,7 @@ public class DynamicArrayList<T> implements Iterable<T> {
         if (size == 0) {
             throw new NullPointerException();
         }
-        if (position == 0 && index + 1 > position) {
+        if (position == 0 || index + 1 > position) {
             throw new NoSuchElementException();
         }
         return (T) array[index];
@@ -73,7 +81,7 @@ public class DynamicArrayList<T> implements Iterable<T> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return array.length > position;
+                return index < position;
             }
 
             /**

@@ -12,9 +12,9 @@ import static org.hamcrest.core.Is.is;
  */
 public class DynamicArrayListTest {
     @Test
-    public void whenAddOutOfBoundThenSize15() {
+    public void whenAddOutOfBoundThenSize3() {
         DynamicArrayList<Integer> dynamicArrayList = new DynamicArrayList<>(2);
-        for (Integer integer : dynamicArrayList) {
+        for (int i = 0; i < dynamicArrayList.getSize(); i++) {
             dynamicArrayList.add(1);
         }
         dynamicArrayList.add(2);
