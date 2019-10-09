@@ -1,5 +1,8 @@
 package ru.job4j.list;
 
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -7,30 +10,42 @@ import java.util.NoSuchElementException;
  * @version 1$
  * @since 0.1
  */
-public class DynamicArrayList<T> {
-    /**
-     * Current array.
-     */
-    private T[] container;
+@SuppressWarnings({"unchecked", "TypeParameterHidesVisibleType"})
+public class DynamicArrayList<T> implements Iterable<T> {
+    private T[] array;
     private int size;
-    int position;
+    private int position = 0;
+    private int modCount = 0;
 
     public DynamicArrayList(int size) {
-        this.container = (T[]) new Object[size];
+        this.array = (T[]) new Object[size];
         this.size = size;
     }
+
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Add element
      *
      * @param model Element for adding.
      */
     public void add(T model) {
-        if (size == position + 1) {
-            size = size + (size >> 1);
+        if (size == position) {
+            increaseArray();
         }
-        container[position++] = model;
+        modCount++;
+        array[position++] = model;
     }
 
+    /**
+     * Increase Array 1.5
+     */
+    public void increaseArray() {
+        size = size + (size >> 1);
+        array = Arrays.copyOf(array, size);
+    }
     /**
      * Return object by index.
      *
@@ -42,9 +57,43 @@ public class DynamicArrayList<T> {
         if (size == 0) {
             throw new NullPointerException();
         }
-        if (position == 0 && index + 1 > position) {
+        if (position == 0 || index + 1 > position) {
             throw new NoSuchElementException();
         }
-        return (T) container[index];
+        return (T) array[index];
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        int expectedModCount = modCount;
+        return new Iterator<>() {
+            int index;
+
+            /**
+             * Check if item exists.
+             *
+             * @return Exists or not.
+             */
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return index < position;
+            }
+
+            /**
+             * Move cursor froward and return item.
+             *
+             * @return Return item.
+             */
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return array[index++];
+            }
+        };
     }
 }
