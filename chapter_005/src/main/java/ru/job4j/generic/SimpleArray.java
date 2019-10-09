@@ -1,7 +1,5 @@
 package ru.job4j.generic;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -17,7 +15,7 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Current array.
      */
-    private T[] array;
+    private final T[] array;
     /**
      * Not null arrays index.
      */
@@ -25,15 +23,16 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Index for iterator.
      */
-    int index = 0;
+    final int index;
     /**
      * Array length.
      */
     int size;
 
-    public SimpleArray(Class<T> arr, int size) {
-        this.array = (T[]) Array.newInstance(arr, size);
+    public SimpleArray(int size) {
+        this.array = (T[]) new Object[size];
         this.size = size;
+        this.index = 0;
     }
 
     /**
@@ -51,9 +50,9 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index Index of deleted object.
      */
     public void remove(int index) {
-        T[] temp = Arrays.copyOf(array, size - 1);
-        System.arraycopy(array, index + 1, temp, index, --size);
-        array = temp;
+        System.arraycopy(array, index + 1, array, index, size - index - 1);
+        array[size - 1] = null;
+        size--;
     }
 
     /**
@@ -92,6 +91,8 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
+            int index;
+
             /**
              * Check if item exists.
              *
@@ -99,7 +100,7 @@ public class SimpleArray<T> implements Iterable<T> {
              */
             @Override
             public boolean hasNext() {
-                return array.length > position;
+                return index < position;
             }
 
             /**
