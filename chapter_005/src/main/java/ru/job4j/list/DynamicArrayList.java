@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  */
 @SuppressWarnings({"unchecked", "TypeParameterHidesVisibleType"})
 public class DynamicArrayList<T> implements Iterable<T> {
-    private final T[] array;
+    private T[] array;
     private int size;
     int position = 0;
     int modCount = 0;
@@ -21,14 +22,19 @@ public class DynamicArrayList<T> implements Iterable<T> {
         this.size = size;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Add element
      *
      * @param model Element for adding.
      */
     public void add(T model) {
-        if (size == position + 1) {
+        if (size == position) {
             size = size + (size >> 1);
+            array = Arrays.copyOf(array, size);
             modCount++;
         }
         array[position++] = model;
@@ -64,7 +70,7 @@ public class DynamicArrayList<T> implements Iterable<T> {
              */
             @Override
             public boolean hasNext() {
-                if (expectedModCount == modCount) {
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return array.length > position;
