@@ -11,13 +11,13 @@ import java.util.NoSuchElementException;
  * @since 0.1
  */
 @SuppressWarnings({"unchecked", "TypeParameterHidesVisibleType"})
-public class DynamicArrayList<T> implements Iterable<T> {
+public class DynamicArray<T> implements Iterable<T> {
     private T[] array;
     private int size;
     private int position = 0;
     private int modCount = 0;
 
-    public DynamicArrayList(int size) {
+    public DynamicArray(int size) {
         this.array = (T[]) new Object[size];
         this.size = size;
     }
