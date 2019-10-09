@@ -37,12 +37,13 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      */
     @Override
     public boolean replace(String id, Base model) {
+        boolean result = false;
         int index = findIndexById(id);
         if (index != -1) {
             store.set(index, (E) model);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     /**
@@ -52,12 +53,13 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      */
     @Override
     public boolean delete(String id) {
+        boolean result = false;
         int index = findIndexById(id);
         if (index != -1) {
             store.remove(index);
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     /**a
