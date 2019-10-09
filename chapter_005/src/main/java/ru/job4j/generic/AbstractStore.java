@@ -1,6 +1,7 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author madrabit on 07.10.2019
@@ -37,6 +38,9 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     @Override
     public boolean replace(String id, Base model) {
         int index = findIndexById(id);
+        if (index == -1) {
+            return false;
+        }
         store.set(index, (E) model);
         return index > 0;
     }
@@ -49,8 +53,11 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     @Override
     public boolean delete(String id) {
         int index = findIndexById(id);
+        if (index == -1) {
+            return false;
+        }
         store.remove(index);
-        return index > 0;
+        return true;
     }
 
     /**a
