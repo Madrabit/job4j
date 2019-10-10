@@ -1,7 +1,6 @@
 package ru.job4j.list;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * @author madrabit on 09.10.2019
@@ -20,17 +19,21 @@ public class DynamicArrayList<E> implements Iterable<E> {
     public void add(E data) {
         DynamicArrayList.Node<E> newLink = new DynamicArrayList.Node<>(data);
         newLink.next = this.head;
-        newLink.next.prev = this.tail;
+        if (newLink.next != null) {
+            newLink.prev = this.tail;
+        }
+        this.tail = newLink.next;
         this.head = newLink;
         this.size++;
         modCount++;
     }
-
+    LinkedList
     /**
      * Метод получения элемента по индексу.
      */
     public E get(int index) {
         DynamicArrayList.Node<E> result = this.head;
+
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
@@ -45,22 +48,66 @@ public class DynamicArrayList<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
+    public ListIterator<E> iterator() {
+        return new ListIterator<E>() {
             int expectedModCount = modCount;
-
+            int index = 0;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return size > 0;
+                return size > index;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return index > 0;
+            }
+
+            @Override
+            public E previous() {
+                if (!hasPrevious()) {
+                    throw new NoSuchElementException();
+                }
+                index--;
+                return this.previous();
+            }
+
+            @Override
+            public int nextIndex() {
+                return 0;
+            }
+
+            @Override
+            public int previousIndex() {
+                return 0;
+            }
+
+            @Override
+            public void remove() {
+
+            }
+
+            @Override
+            public void set(E e) {
+
+            }
+
+            @Override
+            public void add(E e) {
+
             }
 
             @Override
             public E next() {
+                index++;
                 return this.next();
             }
+
         };
     }
 

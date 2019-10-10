@@ -4,6 +4,9 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.ListIterator;
+
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 /**
@@ -25,6 +28,13 @@ public class DynamicArrayListTest {
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
         assertThat(list.get(1), Matchers.is(2));
+    }
+
+    @Test
+    public void checkIterator() {
+        ListIterator<Integer> it = list.iterator();
+        it.previous();
+        assertThat();
     }
 
 }
