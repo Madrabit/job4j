@@ -33,8 +33,11 @@ public class DynamicArrayListTest {
     @Test
     public void checkIterator() {
         ListIterator<Integer> it = list.iterator();
-        it.previous();
-        assertThat();
+        for (int i = 0; i < list.getSize(); i++) {
+            list.add(1);
+        }
+        list.add(2);
+        assertThat(list.getSize(), is(3));
     }
 
 }

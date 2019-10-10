@@ -27,7 +27,6 @@ public class DynamicArrayList<E> implements Iterable<E> {
         this.size++;
         modCount++;
     }
-    LinkedList
     /**
      * Метод получения элемента по индексу.
      */
@@ -106,6 +105,9 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
             @Override
             public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 index++;
                 result = result.next;
                 return (E) result.next;
