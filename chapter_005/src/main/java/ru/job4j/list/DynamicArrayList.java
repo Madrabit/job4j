@@ -52,6 +52,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
         return new ListIterator<E>() {
             int expectedModCount = modCount;
             int index = 0;
+            DynamicArrayList.Node<E> result = head;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
@@ -74,7 +75,8 @@ public class DynamicArrayList<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 index--;
-                return this.previous();
+                result = result.prev;
+                return (E) result;
             }
 
             @Override
@@ -105,7 +107,8 @@ public class DynamicArrayList<E> implements Iterable<E> {
             @Override
             public E next() {
                 index++;
-                return this.next();
+                result = result.next;
+                return (E) result.next;
             }
 
         };
