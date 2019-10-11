@@ -7,7 +7,6 @@ import java.util.*;
  * @version 1$
  * @since 0.1
  */
-@SuppressWarnings("unchecked")
 public class DynamicArrayList<E> implements Iterable<E> {
     private int size;
     private DynamicArrayList.Node<E> head;
@@ -49,8 +48,8 @@ public class DynamicArrayList<E> implements Iterable<E> {
     }
 
     @Override
-    public ListIterator<E> iterator() {
-        return new ListIterator<>() {
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
             final int expectedModCount = modCount;
             int index = 0;
             DynamicArrayList.Node<E> currentNode = head;
@@ -61,49 +60,6 @@ public class DynamicArrayList<E> implements Iterable<E> {
                     throw new ConcurrentModificationException();
                 }
                 return size > index;
-            }
-
-            @Override
-            public boolean hasPrevious() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                return index > 0;
-            }
-
-            @Override
-            public E previous() {
-                if (!hasPrevious()) {
-                    throw new NoSuchElementException();
-                }
-                index--;
-                currentNode = currentNode.prev;
-                return (E) currentNode;
-            }
-
-            @Override
-            public int nextIndex() {
-                return 0;
-            }
-
-            @Override
-            public int previousIndex() {
-                return 0;
-            }
-
-            @Override
-            public void remove() {
-
-            }
-
-            @Override
-            public void set(E e) {
-
-            }
-
-            @Override
-            public void add(E e) {
-
             }
 
             @Override

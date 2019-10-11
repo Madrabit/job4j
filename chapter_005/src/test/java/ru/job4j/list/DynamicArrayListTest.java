@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.Iterator;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -33,7 +33,7 @@ public class DynamicArrayListTest {
 
     @Test
     public void checkIterator() {
-        ListIterator<Integer> it = list.iterator();
+        Iterator<Integer> it = list.iterator();
         ArrayList<Integer> testList = new ArrayList<>();
         while (it.hasNext()) {
             testList.add(it.next());
