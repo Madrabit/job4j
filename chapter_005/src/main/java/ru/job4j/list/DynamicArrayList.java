@@ -7,6 +7,7 @@ import java.util.*;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("unchecked")
 public class DynamicArrayList<E> implements Iterable<E> {
     private int size;
     private DynamicArrayList.Node<E> head;
@@ -27,6 +28,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
         this.size++;
         modCount++;
     }
+
     /**
      * Метод получения элемента по индексу.
      */
@@ -48,10 +50,11 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
     @Override
     public ListIterator<E> iterator() {
-        return new ListIterator<E>() {
-            int expectedModCount = modCount;
+        return new ListIterator<>() {
+            final int expectedModCount = modCount;
             int index = 0;
-            DynamicArrayList.Node<E> result = head;
+            DynamicArrayList.Node<E> currentNode = head;
+
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
@@ -74,8 +77,8 @@ public class DynamicArrayList<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 index--;
-                result = result.prev;
-                return (E) result;
+                currentNode = currentNode.prev;
+                return (E) currentNode;
             }
 
             @Override
@@ -109,8 +112,11 @@ public class DynamicArrayList<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 index++;
-                result = result.next;
-                return (E) result.next;
+                E result;
+                if (currentNode.next != null) {
+                    currentNode = currentNode.next;
+                }
+                return currentNode.data;
             }
 
         };

@@ -4,11 +4,12 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
+
 /**
  * @author madrabit on 09.10.2019
  * @version $
@@ -33,11 +34,12 @@ public class DynamicArrayListTest {
     @Test
     public void checkIterator() {
         ListIterator<Integer> it = list.iterator();
-        for (int i = 0; i < list.getSize(); i++) {
-            list.add(1);
+        ArrayList<Integer> testList = new ArrayList<>();
+        while (it.hasNext()) {
+            testList.add(it.next());
         }
-        list.add(2);
-        assertThat(list.getSize(), is(3));
+
+        assertThat(testList.size(), is(3));
     }
 
 }
