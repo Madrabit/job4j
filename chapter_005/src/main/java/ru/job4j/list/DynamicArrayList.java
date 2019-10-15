@@ -18,12 +18,14 @@ public class DynamicArrayList<E> implements Iterable<E> {
      */
     public void add(E data) {
         DynamicArrayList.Node<E> newLink = new DynamicArrayList.Node<>(data);
-        newLink.next = this.head;
-        if (newLink.next != null) {
-            newLink.prev = this.tail;
+        if (head == null) {
+            head = newLink;
+            tail = newLink;
+        } else {
+            Node<E> oldLink = tail;
+            oldLink.prev = newLink;
+            tail = newLink;
         }
-        this.tail = newLink.next;
-        this.head = newLink;
         this.size++;
         modCount++;
     }
@@ -35,7 +37,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
         DynamicArrayList.Node<E> result = this.head;
 
         for (int i = 0; i < index; i++) {
-            result = result.next;
+            result = result.prev;
         }
         return result.data;
     }
