@@ -1,7 +1,6 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * @author madrabit on 07.10.2019

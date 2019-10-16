@@ -5,5 +5,5 @@ package ru.job4j.set;
  * @version 1$
  * @since 0.1
  */
-public class SimpleSetTest {
+public class SimpleSet {
 }

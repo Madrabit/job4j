@@ -22,6 +22,8 @@ public class DynamicArray<T> implements Iterable<T> {
         this.size = size;
     }
 
+
+
     public int getSize() {
         return size;
     }
