@@ -48,4 +48,10 @@ public class DynamicArrayListTest {
         assertThat(list.getSize(), is(2));
     }
 
+    @Test
+    public void whenDeleteFirstThen1() {
+        int result = list.delete();
+        assertThat(result, is(1));
+    }
+
 }

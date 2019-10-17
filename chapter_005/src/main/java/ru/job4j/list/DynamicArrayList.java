@@ -33,11 +33,12 @@ public class DynamicArrayList<E> implements Iterable<E> {
     /**
      * Метод удаления последнего элемент в списке.
      */
-    public void delete() {
+    public E delete() {
         Node<E> result = this.tail;
         E deletedData = this.head.data;
         this.tail = result.prev;
         size--;
+        return deletedData;
     }
 
     /**
