@@ -14,7 +14,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
     private int modCount;
 
     /**
-     * Метод вставляет в начало списка данные.
+     * Метод вставляет в конец списка данные.
      */
     public void add(E data) {
         DynamicArrayList.Node<E> newLink = new DynamicArrayList.Node<>(data);
@@ -28,6 +28,16 @@ public class DynamicArrayList<E> implements Iterable<E> {
         }
         this.size++;
         modCount++;
+    }
+
+    /**
+     * Метод удаления последнего элемент в списке.
+     */
+    public void delete() {
+        Node<E> result = this.tail;
+        E deletedData = this.head.data;
+        this.tail = result.prev;
+        size--;
     }
 
     /**

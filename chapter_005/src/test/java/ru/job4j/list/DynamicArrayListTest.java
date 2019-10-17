@@ -42,4 +42,10 @@ public class DynamicArrayListTest {
         assertThat(testList.size(), is(3));
     }
 
+    @Test
+    public void whenDeleteThenSize2() {
+        list.delete();
+        assertThat(list.getSize(), is(2));
+    }
+
 }
