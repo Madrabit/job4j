@@ -37,4 +37,5 @@ public class SimpleArrayListTest {
         list.delete();
         assertThat(list.delete(), is(2));
     }
+
 }
