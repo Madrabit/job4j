@@ -2,6 +2,8 @@ package ru.job4j.set;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -11,13 +13,16 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class SimpleSetTest {
+    private final SimpleSet<Integer> set = new SimpleSet<>(3);
+
     @Test
-    public void whenAdd121ThenLastElementNull() {
-        SimpleSet<Integer> set = new SimpleSet<>(3);
+    public void whenAddDuplicateShouldReturnFalse() {
         set.add(1);
         set.add(2);
         set.add(1);
-
-        assertThat(set.get(3), is(0));
+        Iterator<Integer> it = set.iterator();
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(false));
     }
 }

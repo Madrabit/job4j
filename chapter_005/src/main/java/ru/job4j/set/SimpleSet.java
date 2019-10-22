@@ -2,16 +2,19 @@ package ru.job4j.set;
 
 import ru.job4j.generic.SimpleArray;
 
+import java.util.Iterator;
+
 /**
  * @author madrabit on 15.10.2019
  * @version 1$
  * @since 0.1
  */
-public class SimpleSet<T> {
+public class SimpleSet<T> implements Iterable<T> {
     /**
      * Container based on Simple Array List.
      */
     private final SimpleArray<T> container;
+
 
     public SimpleSet(int size) {
         container = new SimpleArray<>(size);
@@ -23,7 +26,7 @@ public class SimpleSet<T> {
      * @param e Element for adding.
      */
     public void add(T e) {
-        if (checkHas(e)) {
+        if (!checkHas(e)) {
             container.add(e);
         }
     }
@@ -46,12 +49,12 @@ public class SimpleSet<T> {
     }
 
     /**
-     * Get element by index.
+     * Iterator.
      *
-     * @param index Input index.
-     * @return Returning element.
+     * @return Return new Iterator based on SimpleArray Iterator.
      */
-    public T get(int index) {
-        return container.get(index);
+    @Override
+    public Iterator<T> iterator() {
+        return container.iterator();
     }
 }

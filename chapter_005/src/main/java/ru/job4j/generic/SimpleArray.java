@@ -29,6 +29,10 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     int size;
 
+    public int getPosition() {
+        return position;
+    }
+
     public SimpleArray(int size) {
         this.array = (T[]) new Object[size];
         this.size = size;
