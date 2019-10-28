@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.generic.SimpleArray;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * @author madrabit on 15.10.2019
@@ -40,7 +41,7 @@ public class SimpleSet<T> implements Iterable<T> {
     private boolean checkHas(T e) {
         boolean result = false;
         for (T t : container) {
-            if (t.equals(e)) {
+            if (t == e) {
                 result = true;
                 break;
             }
