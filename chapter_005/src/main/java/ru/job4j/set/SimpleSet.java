@@ -16,6 +16,7 @@ public class SimpleSet<T> implements Iterable<T> {
      */
     private final SimpleArray<T> container;
 
+    boolean isNullAdded;
 
     public SimpleSet(int size) {
         container = new SimpleArray<>(size);
@@ -41,6 +42,9 @@ public class SimpleSet<T> implements Iterable<T> {
     private boolean checkHas(T e) {
         boolean result = false;
         for (T t : container) {
+            if (t == null) {
+                continue;
+            }
             if (t.equals(e)) {
                 result = true;
                 break;
