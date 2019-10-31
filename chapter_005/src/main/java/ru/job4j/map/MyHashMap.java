@@ -1,5 +1,9 @@
 package ru.job4j.map;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * My own HashMap realisation.
  *
@@ -8,7 +12,7 @@ package ru.job4j.map;
  * @since 0.1
  */
 @SuppressWarnings("UnusedReturnValue")
-public class MyHashMap<K, V> {
+public class MyHashMap<K, V> implements Iterable<K> {
     /**
      * Hashtable.
      */
@@ -21,6 +25,16 @@ public class MyHashMap<K, V> {
      * HashTable size.
      */
     private int size;
+
+    /**
+     * Modification for checking collection was not changed while iterate
+     */
+    private int modCount;
+
+    /**
+     * Head for starting iterate.
+     */
+    private MyHashMap.Entry<K, V> head;
 
     /**
      * Insert new object into HashMap.
@@ -37,18 +51,23 @@ public class MyHashMap<K, V> {
         if (current == null) {
             table[bucket] = entry;
             checkSize();
+            entry.next = this.head;
+            this.head = entry;
             size++;
             isHas = true;
         } else {
             while (current != null) {
                 if (current.key.equals(key)) {
                     current.value = value;
+                    current.next = this.head;
+                    this.head = current;
                     isHas = true;
                     break;
                 }
                 current = current.next;
             }
         }
+        modCount++;
         return isHas;
     }
 
@@ -102,12 +121,40 @@ public class MyHashMap<K, V> {
 
     @SuppressWarnings("unchecked")
     public MyHashMap() {
-        /**
-         * Start capacity for HashMap.
-         */
-        int DEFAULT_CAPACITY = 16;
+        final int DEFAULT_CAPACITY = 16;
         table = new Entry[DEFAULT_CAPACITY];
         capacity = DEFAULT_CAPACITY;
+    }
+
+    @Override
+    public Iterator<K> iterator() {
+        return new Iterator<>() {
+            MyHashMap.Entry<K, V> current = head;
+
+            final int expectedModCount = modCount;
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return index < size;
+            }
+
+            @Override
+            public K next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                index++;
+                K result;
+                if (current.next != null) {
+                    current = current.next;
+                }
+                return current.key;
+            }
+        };
     }
 
     /**
@@ -120,7 +167,7 @@ public class MyHashMap<K, V> {
         final K key;
         private Entry<K, V> prev;
         V value;
-        final MyHashMap.Entry<K, V> next;
+        MyHashMap.Entry<K, V> next;
 
         Entry(K key, V value) {
             this.key = key;

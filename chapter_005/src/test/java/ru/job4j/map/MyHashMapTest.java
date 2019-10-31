@@ -2,6 +2,8 @@ package ru.job4j.map;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -46,4 +48,16 @@ public class MyHashMapTest {
         map.insert("Key13", "Value13");
         assertThat(map.getSize(), is(13));
     }
+
+    @Test
+    public void whenGetNextThen1() {
+        MyHashMap<String, String> map = new MyHashMap<>();
+        map.insert("Key1", "Value1");
+        map.insert("Key2", "Value2");
+        Iterator<String> it = map.iterator();
+        assertThat(it.hasNext(), is(true));
+        assertEquals(it.next(), "Key1");
+    }
+
+
 }
