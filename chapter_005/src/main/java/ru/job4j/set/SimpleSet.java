@@ -41,7 +41,7 @@ public class SimpleSet<T> implements Iterable<T> {
     private boolean checkHas(T e) {
         boolean result = false;
         for (T t : container) {
-            if (t == e) {
+            if (t.equals(e)) {
                 result = true;
                 break;
             }
