@@ -2,7 +2,6 @@ package ru.job4j.set;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Iterator;
 
 import static org.hamcrest.core.Is.is;
@@ -15,7 +14,7 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class SimpleSetTest {
-    private final SimpleSet<Integer> set = new SimpleSet<>(3);
+    private final SimpleSet<Integer> set = new SimpleSet<>();
 
     @Test
     public void whenAddDuplicateShouldReturnFalse() {

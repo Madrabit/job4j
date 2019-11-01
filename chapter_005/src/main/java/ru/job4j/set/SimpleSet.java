@@ -3,7 +3,6 @@ package ru.job4j.set;
 import ru.job4j.generic.SimpleArray;
 
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
  * @author madrabit on 15.10.2019
@@ -14,13 +13,9 @@ public class SimpleSet<T> implements Iterable<T> {
     /**
      * Container based on Simple Array List.
      */
-    private final SimpleArray<T> container;
+    private final SimpleArray<T> container = new SimpleArray<>();
 
     boolean isNullAdded;
-
-    public SimpleSet(int size) {
-        container = new SimpleArray<>(size);
-    }
 
     /**
      * Add unique element to container.
