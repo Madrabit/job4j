@@ -14,7 +14,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAdd1ThenGet1() {
-        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>(10);
+        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>();
         integerSimpleArray.add(1);
         int result = integerSimpleArray.get(0);
         assertThat(1, is(result));
@@ -22,7 +22,7 @@ public class SimpleArrayTest {
 
     @Test
     public void remove() {
-        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>(10);
+        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>();
         integerSimpleArray.add(1);
         integerSimpleArray.add(2);
         integerSimpleArray.remove(0);
@@ -32,7 +32,7 @@ public class SimpleArrayTest {
 
     @Test
     public void set() {
-        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>(10);
+        SimpleArray<Integer> integerSimpleArray = new SimpleArray<>();
         integerSimpleArray.add(1);
         integerSimpleArray.set(0, 2);
         int result = integerSimpleArray.get(0);

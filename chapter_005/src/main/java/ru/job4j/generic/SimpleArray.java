@@ -13,30 +13,28 @@ import java.util.NoSuchElementException;
 @SuppressWarnings({"unchecked", "TypeParameterHidesVisibleType"})
 public class SimpleArray<T> implements Iterable<T> {
     /**
+     * Array length.
+     */
+    int size = 3;
+    /**
      * Current array.
      */
-    private final T[] array;
+    private final T[] array = (T[]) new Object[size];
     /**
      * Not null arrays index.
      */
     int position = 0;
-    /**
-     * Index for iterator.
-     */
-    final int index;
-    /**
-     * Array length.
-     */
-    int size;
+
+    public SimpleArray() {
+
+    }
 
     public int getPosition() {
         return position;
     }
 
     public SimpleArray(int size) {
-        this.array = (T[]) new Object[size];
         this.size = size;
-        this.index = 0;
     }
 
     /**
@@ -95,7 +93,7 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
-            int index;
+            int index = 0;
 
             /**
              * Check if item exists.

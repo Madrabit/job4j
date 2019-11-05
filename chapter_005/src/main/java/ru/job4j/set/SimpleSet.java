@@ -13,12 +13,9 @@ public class SimpleSet<T> implements Iterable<T> {
     /**
      * Container based on Simple Array List.
      */
-    private final SimpleArray<T> container;
+    private final SimpleArray<T> container = new SimpleArray<>();
 
-
-    public SimpleSet(int size) {
-        container = new SimpleArray<>(size);
-    }
+    boolean isNullAdded;
 
     /**
      * Add unique element to container.
@@ -40,6 +37,9 @@ public class SimpleSet<T> implements Iterable<T> {
     private boolean checkHas(T e) {
         boolean result = false;
         for (T t : container) {
+            if (t == null) {
+                continue;
+            }
             if (t.equals(e)) {
                 result = true;
                 break;
