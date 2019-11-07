@@ -1,9 +1,6 @@
 package ru.job4j.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author madrabit on 06.11.2019
@@ -12,12 +9,26 @@ import java.util.Queue;
  */
 @SuppressWarnings({"unchecked", "ConstantConditions"})
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
+    /**
+     * Tree root.
+     */
     private final Node<E> root;
+    /**
+     * Modification for checking collection was not changed while iterate
+     */
+    private int modCount;
 
     public Tree(int rootValue) {
         root = (Node<E>) new Node<>(rootValue);
     }
 
+    /**
+     * Adding a new item to the tree.
+     *
+     * @param parent parent. Parent where will be add.
+     * @param child  child. Item for adding.
+     * @return Result of adding.
+     */
     @Override
     public boolean add(E parent, E child) {
         Optional<Node<E>> root = findBy(parent);
@@ -29,6 +40,12 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
+    /**
+     * Finding element into the tree.
+     *
+     * @param value Searchable item.
+     * @return Return item as Optional.
+     */
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
@@ -49,6 +66,30 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(root);
+        return new Iterator<>() {
+            final int expectedModCount = modCount;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return !data.isEmpty();
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Node<E> el = data.poll();
+                for (Node<E> child : el.leaves()) {
+                    data.offer(child);
+                }
+                return el.getValue();
+            }
+        };
     }
 }
