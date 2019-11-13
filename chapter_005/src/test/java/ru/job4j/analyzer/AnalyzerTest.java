@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class AnalyzerTest {
+
     @Test
     public void whenAdd1ShouldReturn1() {
         List<Analyzer.User> previous = new ArrayList<>(List.of(
@@ -23,11 +24,13 @@ public class AnalyzerTest {
         List<Analyzer.User> current = new ArrayList<>(List.of(
                 new Analyzer.User(1, "Ivan"),
                 new Analyzer.User(2, "Petr"),
-                new Analyzer.User(3, "Alex")
+                new Analyzer.User(3, "Alex"),
+                new Analyzer.User(4, "Petr123"),
+                new Analyzer.User(5, "Alexasdasd")
         ));
         Analyzer analyzer = new Analyzer();
         Analyzer.Info result = analyzer.diff(previous, current);
-        assertThat(result.getAdded(), is(1));
+        assertThat(result.getAdded(), is(3));
     }
 
     @Test
@@ -60,5 +63,23 @@ public class AnalyzerTest {
         Analyzer analyzer = new Analyzer();
         Analyzer.Info result = analyzer.diff(previous, current);
         assertThat(result.getChanged(), is(2));
+    }
+
+    @Test
+    public void whenAdd1ThenDelete1ShouldReturn1() {
+        List<Analyzer.User> previous = new ArrayList<>(List.of(
+                new Analyzer.User(1, "Ivan"),
+                new Analyzer.User(2, "Petr"),
+                new Analyzer.User(3, "Alex")
+        ));
+        List<Analyzer.User> current = new ArrayList<>(List.of(
+                new Analyzer.User(1, "Ivan"),
+                new Analyzer.User(4, "Alex1234")
+        ));
+        Analyzer analyzer = new Analyzer();
+        Analyzer.Info result = analyzer.diff(previous, current);
+        assertThat(result.getDeleted(), is(2));
+        assertThat(result.getAdded(), is(1));
+
     }
 }
