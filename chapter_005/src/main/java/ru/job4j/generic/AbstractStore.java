@@ -13,7 +13,6 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
      * Structure for store elements.
      */
     final SimpleArray<E> store;
-
     protected AbstractStore(int size) {
         store  = new SimpleArray<>(size);
     }

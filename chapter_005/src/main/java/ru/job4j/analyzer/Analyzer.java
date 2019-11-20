@@ -53,8 +53,8 @@ public class Analyzer {
                 .collect(Collectors.toMap(User::getId, User::getName));
         int dif = 0;
         for (Map.Entry<Integer, String> entry : curMap.entrySet()) {
-            if (prevMap.containsKey(entry.getKey()) &&
-                    !prevMap.get(entry.getKey()).equals(entry.getValue())) {
+            if (prevMap.containsKey(entry.getKey())
+                    && !prevMap.get(entry.getKey()).equals(entry.getValue())) {
                 dif++;
             }
         }
