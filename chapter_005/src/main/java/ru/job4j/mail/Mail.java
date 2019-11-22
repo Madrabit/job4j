@@ -1,18 +1,27 @@
 package ru.job4j.mail;
 
-import java.util.Collections;
+import java.util.*;
 
 /**
  * @author madrabit on 20.11.2019
  * @version 1$
  * @since 0.1
  */
-public class Mail<E> {
-    public User<E> merge(User<E> first, User<E> second) {
-        boolean result = false;
-        if (!Collections.disjoint(first.getMails(), second.getMails())) {
-            first.getMails().addAll(second.getMails());
+public class Mail {
+    public static List<User> join(List<User> users) {
+        Map<String, User> map = new HashMap<>();
+        HashSet<User> userSet = new HashSet<>();
+        for (User user : users) {
+            for (String mail : user.getMails()) {
+                if (map.containsKey(mail)) {
+                    user.getMails().removeAll(map.get(mail).getMails());
+                    map.get(mail).addMail(user.getMails());
+                } else {
+                    map.put(mail, user);
+                    userSet.add(user);
+                }
+            }
         }
-        return first;
+        return new ArrayList<>(userSet);
     }
 }
