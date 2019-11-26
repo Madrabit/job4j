@@ -50,19 +50,14 @@ public class StartUI {
     private final Tracker tracker;
 
     /**
-     * Consumer
-     */
-    private final Consumer<String> output;
-    /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
-     * @param output
+     * @param output Consumer.
      */
     public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
-        this.output = output;
     }
 
     /**

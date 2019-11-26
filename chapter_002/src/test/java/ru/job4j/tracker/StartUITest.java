@@ -33,12 +33,7 @@ public class StartUITest {
             .append(System.lineSeparator());
     final ByteArrayOutputStream out = new ByteArrayOutputStream();
     final PrintStream stdout = new PrintStream(out);
-    private final Consumer<String> output = new Consumer<String>() {
-        @Override
-        public void accept(String s) {
-            stdout.println(s);
-        }
-    };
+    private final Consumer<String> output = stdout::println;
 
     @Before
     public void loadOutput() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
+    @SuppressWarnings("ConstantConditions")
     public static void main(String[] args) {
         //put your code here
         Scanner scn = new Scanner(System.in);
