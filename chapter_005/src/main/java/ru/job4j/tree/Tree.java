@@ -39,13 +39,13 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         }
         return result;
     }
-
     /**
      * Finding element into the tree.
      *
      * @param value Searchable item.
      * @return Return item as Optional.
      */
+
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
