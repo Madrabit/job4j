@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * @author madrabit on 25.11.2019
@@ -16,35 +14,43 @@ import java.util.StringJoiner;
 public class Analise {
 
     /**
-     * Write to file period when server was unreachable.
+     * Write to List periods when server was unreachable.
      *
      * @param source Log file.
      * @param target File with results.
      */
-    public void unavailable(String source, String target) {
+    public List<String> unavailable(String source, String target) {
+        List<String> times = new LinkedList<>();
         ReaderLog readerLog = new ReaderLog(source);
         readerLog.load();
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            boolean flag = false;
-            for (Map.Entry<Integer, String> entry : readerLog.values.entrySet()) {
-                if (entry.getKey() >= 400 && !flag) {
-                    out.println(entry.getValue());
-                    flag = true;
-                } else if (entry.getKey() < 400) {
-                    out.println(entry.getValue());
-                    flag = false;
-                }
+        boolean flag = false;
+        StringBuilder record = new StringBuilder();
+        for (Map.Entry<Integer, String> entry : readerLog.values.entrySet()) {
+            if (entry.getKey() >= 400 && !flag) {
+                record = new StringBuilder(String.format("%s;", entry.getValue()));
+                flag = true;
+            } else if (entry.getKey() < 400) {
+                record.append(String.format("%s;", entry.getValue()));
+                times.add(record.toString());
+                record = new StringBuilder();
+                flag = false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
+        return times;
     }
 
-    public static void main(String[] args) {
-        try (PrintWriter out = new PrintWriter(new FileOutputStream("unavailable.csv"))) {
-            out.println("15:01:30;15:02:32");
-            out.println("15:10:30;23:12:32");
+    /**
+     * Write to file periods when server was unreachable.
+     *
+     * @param source Log file.
+     * @param target File with results.
+     */
+    public void writeLog(String source, String target) {
+        List<String> log = this.unavailable(source, target);
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+            for (String s : log) {
+                out.println(s);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
