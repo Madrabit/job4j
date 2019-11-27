@@ -1,8 +1,6 @@
 package ru.job4j.transfers;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author madrabit on 04.09.2019

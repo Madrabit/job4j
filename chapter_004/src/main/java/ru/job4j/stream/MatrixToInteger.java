@@ -13,10 +13,10 @@ import java.util.stream.Stream;
 public class MatrixToInteger {
     /**
      * Converting Integer Matrix to List of Integers with using flatMap
-     * @param matrix
+     * @param matrix Input matrix.
      * @return List of Integers
      */
     public List<Integer> convertMatrixToInt(Integer[][] matrix) {
-        return Stream.of(matrix).flatMap(integers -> Stream.of(integers)).collect(Collectors.toList());
+        return Stream.of(matrix).flatMap(Stream::of).collect(Collectors.toList());
     }
 }

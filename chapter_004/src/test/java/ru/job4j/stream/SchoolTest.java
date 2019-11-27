@@ -13,7 +13,7 @@ import java.util.*;
  * @since 0.1
  */
 public class SchoolTest {
-    public List<Student> students = new ArrayList<>(
+    public final List<Student> students = new ArrayList<>(
             Arrays.asList(
                     new Student(10, "A"),
                     new Student(50, "B"),
