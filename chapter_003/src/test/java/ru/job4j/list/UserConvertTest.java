@@ -13,6 +13,7 @@ import static org.hamcrest.core.Is.is;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("rawtypes")
 public class UserConvertTest {
     @Test
     public void whenUserListThenHashMap() {

@@ -7,6 +7,7 @@ package ru.job4j.list;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("rawtypes")
 public class Node<T> {
     private int size;
     private Node<T> head;

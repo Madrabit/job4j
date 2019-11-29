@@ -5,6 +5,7 @@ package ru.job4j.generic;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("rawtypes")
 public class UserStore<User> extends AbstractStore {
 
     public UserStore(int size) {

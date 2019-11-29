@@ -7,7 +7,7 @@ import java.util.Iterator;
  * @version 1$
  * @since 0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class AbstractStore<E extends Base> implements Store<E> {
     /**
      * Structure for store elements.

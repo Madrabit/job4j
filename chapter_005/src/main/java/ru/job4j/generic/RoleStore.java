@@ -5,7 +5,7 @@ package ru.job4j.generic;
  * @version 1$
  * @since 0.1
  */
-@SuppressWarnings("EmptyMethod")
+@SuppressWarnings({"EmptyMethod", "rawtypes"})
 public class RoleStore<Role> extends AbstractStore {
 
     public RoleStore(int size) {
