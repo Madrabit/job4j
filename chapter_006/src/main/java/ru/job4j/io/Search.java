@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Find and return List of files with a specific extension.
@@ -29,18 +30,8 @@ public class Search {
                 for (File listFile : Objects.requireNonNull(el.listFiles())) {
                     data.offer(listFile);
                 }
-            } else {
-                String extension = "";
-
-                int i = el.getName().lastIndexOf('.');
-                if (i > 0) {
-                    extension = el.getName().substring(i + 1);
-                }
-                for (String ext : exts) {
-                    if (ext.equals(extension)) {
-                        list.add(el);
-                    }
-                }
+            } else if (exts.stream().anyMatch(el.getName()::endsWith)) {
+                list.add(el);
             }
         }
         return list;

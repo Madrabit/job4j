@@ -25,7 +25,7 @@ public class SearchTest {
         List result = search.files(path, ext);
         assertEquals(
                 result.toString(),
-                "[./data/unavailable.csv, ./data/server.log]"
+                "[./data/unavailable.csv, ./data/chat.log, ./data/server.log]"
         );
     }
 }
