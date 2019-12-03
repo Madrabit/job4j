@@ -1,8 +1,6 @@
 package ru.job4j.io;
 
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -13,21 +11,20 @@ import java.util.Scanner;
 @SuppressWarnings("ConstantConditions")
 public class Chat {
     public static class Bot {
-        private final String path;
+        private RandomAccessFile file;
 
         public Bot(String path) {
-            this.path = path;
-        }
-
-        public String load() {
-            try (RandomAccessFile file = new RandomAccessFile(path, "r")) {
-                int pos = (int) (Math.random() * file.length());
-                file.seek(pos);
-                return file.readLine();
-            } catch (Exception e) {
+            try {
+                file = new RandomAccessFile(path, "r");
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            return "";
+        }
+
+        public String load() throws IOException {
+            int pos = (int) (Math.random() * file.length());
+            file.seek(pos);
+            return file.readLine();
         }
     }
 
