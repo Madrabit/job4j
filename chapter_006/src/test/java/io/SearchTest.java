@@ -31,13 +31,13 @@ public class SearchTest {
     }
 
     @Test
-    public void whenSearchingCsvShouldReturnIt() {
+    public void whenSearchingLogShouldReturnIt() {
         String path = "./data/";
         Search search = new Search();
-        List<File> result = search.filesByOneExtension(path, "csv");
+        List<File> result = search.filesExcludeOne(path, ".*log.*");
         assertEquals(
                 result.toString(),
-                "[./data/unavailable.csv]"
+                "[./data/unavailable.csv, ./data/pair_without_comment.properties]"
         );
     }
 }

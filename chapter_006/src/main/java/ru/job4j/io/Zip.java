@@ -1,9 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -22,7 +20,7 @@ public class Zip {
      */
     List<File> seekBy(String root, String ext) {
         Search search = new Search();
-        return search.filesByOneExtension(root, ext);
+        return search.filesExcludeOne(root, ext);
     }
 
     /**
@@ -44,9 +42,31 @@ public class Zip {
         }
     }
 
-    @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
+    public static class Args {
+        private final Map<String, String> command = new HashMap<>();
+
+        public Args(String[] args) {
+            for (int i = 0; i < args.length; i += 2) {
+                command.put(args[i], args[i + 1]);
+            }
+        }
+
+        public String getDirectory() {
+            return command.get("-d");
+        }
+
+        public String getExclude() {
+            return command.get("-e");
+        }
+
+        public String getOutput() {
+            return command.get("-o");
+        }
+    }
+
     public static void main(String[] args) {
-        List<File> files = new ArrayList<>(Arrays.asList(new File("./chapter_005/pom.xml")));
-        new Zip().pack(files, new File("./chapter_005/pom.zip"));
+        Zip.Args input = new Zip.Args(args);
+        Zip zip = new Zip();
+        zip.pack(zip.seekBy(input.getDirectory(), input.getExclude()), new File(input.getOutput()));
     }
 }
