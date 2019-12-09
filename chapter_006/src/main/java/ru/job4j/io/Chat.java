@@ -40,6 +40,8 @@ public class Chat {
                 System.out.println(text);
                 out.println(text);
                 if (text.equals("exit")) {
+                    bot.file.close();
+                    out.close();
                     break;
                 }
                 //noinspection ConstantConditions
