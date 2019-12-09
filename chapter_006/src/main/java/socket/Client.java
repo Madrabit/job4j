@@ -29,21 +29,19 @@ public class Client {
      * @throws IOException
      */
 
-    @SuppressWarnings({"LoopStatementThatDoesntLoop", "InfiniteLoopStatement"})
     public void start() throws IOException {
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         Scanner console = new Scanner(System.in);
-        String answer;
+        String answer = "";
+        //noinspection ConstantConditions
         do {
             out.println(console.nextLine());
-            String str;
-            while (true) {
-
+            String str = "";
+            //noinspection ConstantConditions
+            while (!str.isEmpty()) {
                 str = in.readLine();
-                if (str != null && !str.isEmpty()) {
-                    System.out.println(str);
-                }
+                System.out.println(str);
             }
         } while (!("exit".equals(answer)));
     }

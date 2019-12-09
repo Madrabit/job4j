@@ -44,7 +44,6 @@ public class ServerTest {
                 "exit"),
                 Joiner.on(LS).join(
                         "Hello, dear friend, I'm a oracle.",
-                        "",
                         "")
         );
     }
@@ -56,7 +55,6 @@ public class ServerTest {
                 "exit"),
                 Joiner.on(LS).join(
                         new SimpleDateFormat("HH.mm").format(new Date()),
-                        "",
                         "")
         );
     }
@@ -68,7 +66,6 @@ public class ServerTest {
                 "exit"),
                 Joiner.on(LS).join(
                         "I don't understand",
-                        "",
                         "")
         );
     }
