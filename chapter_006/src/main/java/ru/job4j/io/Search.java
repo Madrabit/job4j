@@ -51,12 +51,8 @@ public class Search {
                     data.offer(listFile);
                 }
             }
-            if (el.isFile()) {
-                Pattern pattern = Pattern.compile(ext);
-                Matcher exc = pattern.matcher(el.getName());
-                if (!exc.matches()) {
-                    list.add(el);
-                }
+            if (el.isFile() && !el.getName().endsWith(ext)) {
+                list.add(el);
             }
         }
         return list;

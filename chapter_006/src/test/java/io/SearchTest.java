@@ -34,7 +34,7 @@ public class SearchTest {
     public void whenSearchingLogShouldReturnIt() {
         String path = "./data/";
         Search search = new Search();
-        List<File> result = search.filesExcludeOne(path, ".*log.*");
+        List<File> result = search.filesExcludeOne(path, ".log");
         assertEquals(
                 result.toString(),
                 "[./data/unavailable.csv, ./data/pair_without_comment.properties]"
