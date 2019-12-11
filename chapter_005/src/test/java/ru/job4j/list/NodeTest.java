@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
  * @version 1$
  * @since 0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class NodeTest {
     @Test
     public void whenLastNodeReferToLastNodeThenCycle() {

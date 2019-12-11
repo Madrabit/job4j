@@ -3,6 +3,7 @@ package io;
 import org.junit.Test;
 import ru.job4j.io.Search;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,13 +17,13 @@ import static org.junit.Assert.*;
  */
 public class SearchTest {
     @Test
-    public void whenPairWithoutComment() {
+    public void when2log1csvThenReturnIt() {
 //        String path = System.getProperty("java.io.tmpdir") + File.separator;
         String path = "./data/";
 
         List<String> ext = new LinkedList<>(Arrays.asList("log", "csv"));
         Search search = new Search();
-        List result = search.files(path, ext);
+        List<File> result = search.files(path, ext);
         assertEquals(
                 result.toString(),
                 "[./data/unavailable.csv, ./data/chat.log, ./data/server.log]"

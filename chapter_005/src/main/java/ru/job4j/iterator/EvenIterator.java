@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("rawtypes")
 public class EvenIterator implements Iterator {
 
     /**

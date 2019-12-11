@@ -20,12 +20,11 @@ public class DynamicArrayList<E> implements Iterable<E> {
         DynamicArrayList.Node<E> newLink = new DynamicArrayList.Node<>(data);
         if (head == null) {
             head = newLink;
-            tail = newLink;
         } else {
             Node<E> oldLink = tail;
             oldLink.prev = newLink;
-            tail = newLink;
         }
+        tail = newLink;
         this.size++;
         modCount++;
     }

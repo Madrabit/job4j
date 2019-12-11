@@ -40,13 +40,10 @@ public class Server {
             System.out.println(ask);
             if ("hello".equals(ask)) {
                 out.println("Hello, dear friend, I'm a oracle.");
-                out.println();
             } else if ("what time is it?".equalsIgnoreCase(ask)) {
                 out.println(new SimpleDateFormat("HH.mm").format(new Date()));
-                out.println();
             } else if ("unsupported ask".equalsIgnoreCase(ask)) {
                 out.println("I don't understand");
-                out.println();
             }
         } while (!("exit".equals(ask)));
     }
