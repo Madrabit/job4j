@@ -39,17 +39,16 @@ public class Chat {
                 text = in.nextLine();
                 System.out.println(text);
                 out.println(text);
-                if (text.equals("exit")) {
-                    bot.file.close();
-                    out.close();
-                    break;
-                }
-                //noinspection ConstantConditions
                 if (!text.equals("stop") || text.equals("continue")) {
                     String answer = bot.load();
                     System.out.println(answer);
                     out.println(answer);
                 }
+            }
+            try  {
+                bot.file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
