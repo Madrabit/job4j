@@ -43,15 +43,16 @@ public class Search {
         List<File> list = new ArrayList<>();
         File file = new File(parent);
         data.offer(file);
+        String cutExt = ext.replace("*", "");
         while (!data.isEmpty()) {
             File el = data.poll();
-
             if (el.isDirectory()) {
                 for (File listFile : Objects.requireNonNull(el.listFiles())) {
                     data.offer(listFile);
                 }
             }
-            if (el.isFile() && !el.getName().endsWith(ext)) {
+
+            if (el.isFile() && !el.getName().endsWith(cutExt)) {
                 list.add(el);
             }
         }
