@@ -2,7 +2,8 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Find and return List of files with a specific extension.
@@ -37,27 +38,22 @@ public class Search {
         return list;
     }
 
-    public List<File> filesByOneExtension(String parent, String ext) {
+    public List<File> filesExcludeOne(String parent, String ext) {
         Queue<File> data = new LinkedList<>();
         List<File> list = new ArrayList<>();
         File file = new File(parent);
         data.offer(file);
+        String cutExt = ext.replace("*", "");
         while (!data.isEmpty()) {
             File el = data.poll();
             if (el.isDirectory()) {
                 for (File listFile : Objects.requireNonNull(el.listFiles())) {
                     data.offer(listFile);
                 }
-            } else {
-                String extension = "";
-                int i = el.getName().lastIndexOf('.');
-                if (i > 0) {
-                    extension = el.getName().substring(i + 1);
-                }
-                if (ext.equals(extension)) {
-                    list.add(el);
-                    break;
-                }
+            }
+
+            if (el.isFile() && !el.getName().endsWith(cutExt)) {
+                list.add(el);
             }
         }
         return list;

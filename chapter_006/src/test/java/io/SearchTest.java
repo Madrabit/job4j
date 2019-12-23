@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class SearchTest {
     @Test
-    public void when2log1csvThenReturnIt() {
+    public void whenSearchingLogAndCsvShouldReturn3ofThem() {
 //        String path = System.getProperty("java.io.tmpdir") + File.separator;
         String path = "./data/";
 
@@ -27,6 +27,17 @@ public class SearchTest {
         assertEquals(
                 result.toString(),
                 "[./data/unavailable.csv, ./data/chat.log, ./data/server.log]"
+        );
+    }
+
+    @Test
+    public void whenSearchingLogShouldReturnIt() {
+        String path = "./data/";
+        Search search = new Search();
+        List<File> result = search.filesExcludeOne(path, "*.log");
+        assertEquals(
+                result.toString(),
+                "[./data/unavailable.csv, ./data/pair_without_comment.properties]"
         );
     }
 }
