@@ -14,15 +14,13 @@ import java.util.stream.Collectors;
 public class Chat {
     public static class Bot {
         private List<String> botText;
-        private final String pathToFile;
 
         public Bot(String path) {
-            pathToFile = path;
-            getBotText();
+            getBotText(path);
         }
 
-        private void getBotText() {
-            try (BufferedReader reader = new BufferedReader(new FileReader(pathToFile))) {
+        private void getBotText(String path) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
                 botText = reader.lines().collect(Collectors.toList());
             } catch (Exception e) {
                 e.printStackTrace();
