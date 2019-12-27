@@ -1,7 +1,9 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * @author madrabit on 28.11.2019
@@ -11,40 +13,39 @@ import java.util.Scanner;
 @SuppressWarnings("ConstantConditions")
 public class Chat {
     public static class Bot {
-        private RandomAccessFile file;
+        private List<String> botText;
 
         public Bot(String path) {
-            try {
-                file = new RandomAccessFile(path, "r");
-            } catch (FileNotFoundException e) {
+            getBotText(path);
+        }
+
+        private void getBotText(String path) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+                botText = reader.lines().collect(Collectors.toList());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        public String load() throws IOException {
-            int pos = (int) (Math.random() * file.length());
-            file.seek(pos);
-            return file.readLine();
+        public String getPhrase() {
+            int pos = (int) (Math.random() * botText.size());
+            return botText.get(pos);
         }
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String text = "";
-        String path = System.getProperty("user.dir") + "/chapter_006/data/pair_without_comment.properties";
+        String path = System.getProperty("user.dir") + "/chapter_006/data/server.log";
         String target = System.getProperty("user.dir") + "/chapter_006/data/chat.log";
         Chat.Bot bot = new Chat.Bot(path);
         try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            while (!text.equals("exit")) {
+            while (!"exit".equals(text)) {
                 text = in.nextLine();
                 System.out.println(text);
                 out.println(text);
-                if (text.equals("exit")) {
-                    break;
-                }
-                //noinspection ConstantConditions
-                if (!text.equals("stop") || text.equals("continue")) {
-                    String answer = bot.load();
+                if (!"stop".equals(text) || "continue".equals(text)) {
+                    String answer = bot.getPhrase();
                     System.out.println(answer);
                     out.println(answer);
                 }
