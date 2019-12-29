@@ -3,6 +3,7 @@ package io;
 import org.junit.Test;
 import ru.job4j.io.Analise;
 
+import java.io.File;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class AnaliseTest {
     @Test
     public void whenUnavailableShouldReturn1058to1102() {
-        String source = "./data/server.log";
+        String source = String.format(".%sdata%sserver.log", File.separator, File.separator);
         String target = "./data/unavailable.csv";
 
         Analise analise = new Analise();
@@ -30,7 +31,7 @@ public class AnaliseTest {
 
     @Test
     public void whenWriteLogShouldFeelFile() {
-        String source = "./data/server.log";
+        String source = String.format(".%sdata%sserver.log", File.separator, File.separator);
         String target = "./data/unavailable.csv";
         Analise analise = new Analise();
         analise.writeLog(source, target);
