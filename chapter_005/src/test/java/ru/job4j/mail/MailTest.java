@@ -32,7 +32,7 @@ public class MailTest {
                 user1, user2, user3
         ));
         assertThat(Mail.join(users).toString(),
-                is("[[123123@gmail.com, aaaa@pisem.net]," +
-                        " [xxx@ya.ru, foo@gmail.com, lol@mail.ru, ups@pisem.net]]"));
+                is("[[xxx@ya.ru, foo@gmail.com, lol@mail.ru, ups@pisem.net]," + " [123123@gmail.com, aaaa@pisem.net]]"
+                ));
     }
 }

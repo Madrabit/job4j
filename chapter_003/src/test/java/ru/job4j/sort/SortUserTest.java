@@ -30,7 +30,7 @@ public class SortUserTest {
     }
 
     @Test
-    public void whenPetrYanAndrewthenYanPetrAndrew() {
+    public void whenPetrYanAndrewThenYanPetrAndrew() {
         SortUser sortUser = new SortUser();
         List<SortUser.User> users = sortUser.sortNameLength(Arrays.asList(
                 new SortUser.User("Petr", 2),
