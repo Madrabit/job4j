@@ -1,4 +1,4 @@
-package socket;
+package ru.job4j.socket;
 
 import com.google.common.base.Joiner;
 import org.junit.Test;

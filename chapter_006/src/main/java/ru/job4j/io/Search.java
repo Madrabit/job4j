@@ -2,8 +2,6 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Find and return List of files with a specific extension.
