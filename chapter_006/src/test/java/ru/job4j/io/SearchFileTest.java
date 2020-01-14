@@ -16,17 +16,21 @@ public class SearchFileTest {
     public void whenSearchingByMaskShouldChatLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        File result = search.searchByMask(path, "*.log");
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-m", "-o", "null"});
+        SearchFile searchFile = new SearchFile();
+        File result = search.searchBy(path, "*.log", params);
         assertEquals(
                 result.toString(),
                 "./data/chat.log"
         );
     }
+
     @Test
     public void whenSearchByNameShouldServerLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        File result = search.searchByName(path, "server.log");
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-f", "-o", "null"});
+        File result = search.searchBy(path, "server.log", params);
         assertEquals(
                 result.toString(),
                 "./data/server.log"
@@ -37,7 +41,8 @@ public class SearchFileTest {
     public void whenSearchByRegexpShouldChatLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        File result = search.searchByRegexp(path, ".*log.*");
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-r", "-o", "null"});
+        File result = search.searchBy(path, ".*log.*", params);
         assertEquals(
                 result.toString(),
                 "./data/chat.log"
