@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,15 +15,17 @@ public class Shell {
     /**
      * Current directory
      */
-    Path current = Paths.get("");
+    Path current;
     /**
      * List of sub folders.
      */
     List<Path> subFolders;
 
-    public Shell() {
+    public Shell(Path path) {
+        current = path;
+
         try {
-            this.subFolders = Files.walk(current, 1)
+            this.subFolders = Files.walk(current, 2)
                     .filter(Files::isDirectory)
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -63,8 +64,12 @@ public class Shell {
         for (String folder : folders) {
             if ("..".equals(folder)) {
                 setCurrent(current.toAbsolutePath().getParent());
-            } else if (subFolders.contains(Paths.get(folder))) {
-                setCurrent(current.toAbsolutePath().resolve(folder));
+            } else {
+                for (Path subFolder : subFolders) {
+                    if (subFolder.endsWith(folder)) {
+                        setCurrent(current.toAbsolutePath().resolve(folder));
+                    }
+                }
             }
         }
     }
