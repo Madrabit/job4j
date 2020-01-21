@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
@@ -16,11 +16,10 @@ import java.util.regex.Pattern;
 public class SearchFile {
     File target = null;
 
-    public File searchBy(String parent, String ext, Args params) {
+    public void searchBy(String parent, Predicate<File> predicate) {
         Queue<File> data = new LinkedList<>();
         File file = new File(parent);
         data.offer(file);
-        String cutExt = ext.replace("*", "");
         while (!data.isEmpty()) {
             File el = data.poll();
             if (el.isDirectory()) {
@@ -28,41 +27,35 @@ public class SearchFile {
                     data.offer(listFile);
                 }
             }
-
             if (el.isFile()) {
-                searchByCriteria(el, ext, params);
+                if (predicate.test(el)) {
+                    target = el;
+                }
+
                 if (target != null) {
                     break;
                 }
             }
         }
-        return target;
     }
 
-    public void searchByCriteria(File el, String ext, Args params) {
-        String f = params.getByName();
-        String m = params.getByMask();
-        String r = params.getByRegexp();
+    public File search(String parent, String ext, Args params) {
+        Predicate<File> f = i -> params.getByName() != null && ext.equals(i.getName());
+        Predicate<File> m = i -> params.getByMask() != null && i.getName().endsWith(ext.replace("*", ""));
+        Predicate<File> r = i -> params.getByRegexp() != null
+                && Pattern.compile(ext).matcher(i.getName()).matches();
 
-        String cutExt = ext.replace("*", "");
-        if (f != null && ext.equals(el.getName())) {
-            target = el;
-        } else if (m != null && el.getName().endsWith(cutExt)) {
-            target = el;
-        } else if (r != null) {
-            Pattern pattern = Pattern.compile(ext);
-            Matcher exc = pattern.matcher(el.getName());
-            if (exc.matches()) {
-                target = el;
-            }
-        }
+        searchBy(parent, f);
+        searchBy(parent, m);
+        searchBy(parent, r);
+        return target;
     }
 
     public static class Args {
         private final Map<String, String> command = new HashMap<>();
 
         public Args(String[] args) {
-            for (int i = 0; i < args.length;) {
+            for (int i = 0; i < args.length; ) {
                 if ("-m".equals(args[i])
                         || "-f".equals(args[i])
                         || "-r".equals(args[i])) {
@@ -114,6 +107,6 @@ public class SearchFile {
     public static void main(String[] args) {
         SearchFile.Args input = new SearchFile.Args(args);
         SearchFile searchFile = new SearchFile();
-        searchFile.writeResult(searchFile.searchBy(input.getDirectory(), input.getName(), new SearchFile.Args(args)), input.getOutput());
+        searchFile.writeResult(searchFile.search(input.getDirectory(), input.getName(), new SearchFile.Args(args)), input.getOutput());
     }
 }

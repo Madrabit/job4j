@@ -1,8 +1,11 @@
 package ru.job4j.io;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,14 +14,29 @@ import static org.junit.Assert.assertEquals;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class SearchFileTest {
+    private File root;
+
+    @Before
+    public void createFilesStructure() throws FileNotFoundException {
+        File tmp = new File(System.getProperty("java.io.tmpdir"));
+        root = new File(tmp, "root");
+        File dir = new File(root, "dir");
+        root.mkdir();
+        dir.mkdirs();
+        new FileOutputStream(dir.getPath() + "/chat.log");
+        new FileOutputStream(dir.getPath() + "/test.csv");
+        new FileOutputStream(dir.getPath() + "/server.log");
+    }
+
     @Test
     public void whenSearchingByMaskShouldChatLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-m", "-o", "null"});
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-m", "-o", "null"});
         SearchFile searchFile = new SearchFile();
-        File result = search.searchBy(path, "*.log", params);
+        File result = search.search(path, "*.log", params);
         assertEquals(
                 result.toString(),
                 "./data/chat.log"
@@ -29,8 +47,8 @@ public class SearchFileTest {
     public void whenSearchByNameShouldServerLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-f", "-o", "null"});
-        File result = search.searchBy(path, "server.log", params);
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-f", "-o", "null"});
+        File result = search.search(path, "server.log", params);
         assertEquals(
                 result.toString(),
                 "./data/server.log"
@@ -41,8 +59,8 @@ public class SearchFileTest {
     public void whenSearchByRegexpShouldChatLog() {
         String path = "./data/";
         SearchFile search = new SearchFile();
-        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", "/home/madrabit/Documents/projects/job4j", "-n", "*.log", "-r", "-o", "null"});
-        File result = search.searchBy(path, ".*log.*", params);
+        SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-r", "-o", "null"});
+        File result = search.search(path, ".*log.*", params);
         assertEquals(
                 result.toString(),
                 "./data/chat.log"
