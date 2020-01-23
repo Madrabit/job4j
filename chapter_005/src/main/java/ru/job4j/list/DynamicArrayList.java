@@ -59,6 +59,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
         return this.size;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {

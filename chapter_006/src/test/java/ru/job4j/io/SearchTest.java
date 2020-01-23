@@ -15,18 +15,19 @@ import static org.junit.Assert.*;
  * @version 1$
  * @since 0.1
  */
+@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 public class SearchTest {
     @Test
     public void whenSearchingLogAndCsvShouldReturn3ofThem() {
 //        String path = System.getProperty("java.io.tmpdir") + File.separator;
-        String path = "./data/";
-
-        List<String> ext = new LinkedList<>(Arrays.asList("log", "csv"));
+        String path = String.format(".%sdata%s", File.separator, File.separator);
+        List<String> ext = new LinkedList<>(Arrays.asList("csv"));
         Search search = new Search();
         List<File> result = search.files(path, ext);
         assertEquals(
                 result.toString(),
-                "[./data/unavailable.csv, ./data/chat.log, ./data/server.log]"
+                String.format("[.%sdata%sunavailable.csv]",
+                        File.separator, File.separator)
         );
     }
 
@@ -36,8 +37,8 @@ public class SearchTest {
         Search search = new Search();
         List<File> result = search.filesExcludeOne(path, "*.log");
         assertEquals(
-                result.toString(),
-                "[./data/unavailable.csv, ./data/pair_without_comment.properties]"
+                result.size(),
+                2
         );
     }
 }

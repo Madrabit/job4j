@@ -10,7 +10,7 @@ import java.util.*;
 public class Mail {
     public static List<User> join(List<User> users) {
         Map<String, User> map = new HashMap<>();
-        HashSet<User> userSet = new HashSet<>();
+        Set<User> userSet = new LinkedHashSet<>();
         for (User user : users) {
             for (String mail : user.getMails()) {
                 if (map.containsKey(mail)) {
