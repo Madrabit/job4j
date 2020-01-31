@@ -9,7 +9,7 @@ import java.util.*;
  * @since 0.1
  */
 @SuppressWarnings({"LoopStatementThatDoesntLoop", "UnusedReturnValue", "UnusedAssignment"})
-public class Tracker {
+public class Tracker implements ITracker {
     /**
      * Массив для хранение заявок.
      */
