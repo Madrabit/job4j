@@ -12,15 +12,15 @@ public class Item {
     private String decs;
     private long time;
 
+    public Item(String name, String decs) {
+        this.name = name;
+        this.decs = decs;
+    }
+
     public Item(String name, String decs, long time) {
         this.name = name;
         this.decs = decs;
         this.time = time;
-    }
-
-    public Item(String name, String decs) {
-        this.name = name;
-        this.decs = decs;
     }
 
     public String getId() {
