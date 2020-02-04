@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 /**
  * @author madrabit on 26.07.2019
@@ -16,11 +17,6 @@ public class Item {
         this.name = name;
         this.decs = decs;
         this.time = time;
-    }
-
-    public Item(String name, String decs) {
-        this.name = name;
-        this.decs = decs;
     }
 
     public String getId() {

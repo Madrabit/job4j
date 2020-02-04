@@ -40,9 +40,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                     config.getProperty("password")
             );
             Statement st = connection.createStatement();
-            if (!st.execute("SELECT 'task'::regclass")) {
-                st.executeUpdate("CREATE TABLE task (id serial PRIMARY KEY, task_name VARCHAR(50), description VARCHAR(50), date TIMESTAMP)");
-            }
+            st.executeUpdate("DROP TABLE IF EXISTS task;"
+                    + "CREATE TABLE task (id serial PRIMARY KEY, task_name VARCHAR(50), description VARCHAR(50), date TIMESTAMP without time zone)");
+//           st.executeUpdate("CREATE TABLE task (id serial PRIMARY KEY, task_name VARCHAR(50), description VARCHAR(50), date TIMESTAMP)");
             st.close();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -61,12 +61,12 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement st = connection.prepareStatement("INSERT INTO task(task_name, description, date) VALUES (?, ?, ?)")) {
             st.setString(1, item.getName());
             st.setString(2, item.getDesc());
-            st.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            st.setTimestamp(3, new Timestamp(item.getTime()));
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return item;
     }
 
     /**
@@ -127,7 +127,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement st = connection.prepareStatement("SELECT * FROM task")) {
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                items.add(new Item(result.getString("task_name"), result.getString("description")));
+                items.add(new Item(result.getString("task_name"), result.getString("description"), System.currentTimeMillis()));
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -144,12 +144,12 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new LinkedList<>();
-        Item item = new Item("", "");
+//        Item item = new Item("", "", 0L);
         try (PreparedStatement st = connection.prepareStatement("SELECT * FROM task WHERE task_name =  ?")) {
             st.setString(1, key);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                items.add(new Item(result.getString("task_name"), result.getString("description")));
+                items.add(new Item(result.getString("task_name"), result.getString("description"), result.getTimestamp("date").getTime()));
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -165,7 +165,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      */
     @Override
     public Item findById(String id) {
-        Item item = new Item("", "");
+        Item item = new Item("", "", 0);
         try (PreparedStatement st = connection.prepareStatement("SELECT * FROM task WHERE id =  ?")) {
             st.setInt(1, Integer.parseInt(id));
             ResultSet result = st.executeQuery();

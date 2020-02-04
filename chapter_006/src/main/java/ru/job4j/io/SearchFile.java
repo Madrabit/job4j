@@ -55,7 +55,7 @@ public class SearchFile {
         private final Map<String, String> command = new HashMap<>();
 
         public Args(String[] args) {
-            for (int i = 0; i < args.length; ) {
+            for (int i = 0; i < args.length;) {
                 if ("-m".equals(args[i])
                         || "-f".equals(args[i])
                         || "-r".equals(args[i])) {
