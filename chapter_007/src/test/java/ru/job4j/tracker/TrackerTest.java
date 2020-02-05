@@ -62,8 +62,9 @@ public class TrackerTest {
 
     @Test
     public void replace() {
-        Item item = new Item("Edited task", "Edited description", System.currentTimeMillis());
         sql.init();
+        sql.add(new Item("1 task", "Some description", System.currentTimeMillis()));
+        Item item = new Item("Edited task", "Edited description", System.currentTimeMillis());
         sql.replace("1", item);
     }
 }

@@ -56,16 +56,20 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      * @param item Some task.
      * @return ???
      */
-    @Override
     public Item add(Item item) {
-        try (PreparedStatement st = connection.prepareStatement("INSERT INTO task(task_name, description, date) VALUES (?, ?, ?)")) {
+        try (PreparedStatement st = connection.prepareStatement("INSERT INTO task(task_name, description, date) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.setString(2, item.getDesc());
             st.setTimestamp(3, new Timestamp(item.getTime()));
             st.executeUpdate();
+            ResultSet key = st.getGeneratedKeys();
+            if (key.next()) {
+                item.setId(key.getString(1));
+            }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
+
         return item;
     }
 
@@ -78,21 +82,18 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      */
     @Override
     public boolean replace(String id, Item item) {
-        boolean res = true;
-        Item state = findById(id);
-        try (PreparedStatement st = connection.prepareStatement("UPDATE task SET task_name = ?, description = ? WHERE id =  ?")) {
+        int result = 0;
+        try (PreparedStatement st = connection.prepareStatement("UPDATE task SET task_name = ?, description = ?, date = ? WHERE id =  ?")) {
             st.setString(1, item.getName());
             st.setString(2, item.getDesc());
-            st.setInt(3, Integer.parseInt(id));
-            st.executeUpdate();
+            st.setTimestamp(3, new Timestamp(item.getTime()));
+            st.setInt(4, Integer.parseInt(id));
+            result = st.executeUpdate();
+            System.out.println(result);
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
-        Item newState = findById(id);
-        if (state.equals(newState)) {
-            res = false;
-        }
-        return res;
+        return result >= 1;
     }
 
     /**
@@ -103,17 +104,15 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      */
     @Override
     public boolean delete(String id) {
-        boolean res = false;
+        int result = 0;
         try (PreparedStatement st = connection.prepareStatement("DELETE FROM task WHERE id =  ?")) {
             st.setInt(1, Integer.parseInt(id));
-            st.executeUpdate();
+            result = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
-        if (findById(id).getId() == null) {
-            res = true;
-        }
-        return res;
+        return result >= 1;
+
     }
 
     /**
