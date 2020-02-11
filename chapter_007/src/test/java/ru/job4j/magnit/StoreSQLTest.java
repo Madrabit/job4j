@@ -45,7 +45,7 @@ public class StoreSQLTest {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(
-                    new XmlUsage.Entries(result),  xml);
+                    new XmlUsage.Entries(result), xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -55,16 +55,15 @@ public class StoreSQLTest {
     @Test
     public void xmlToXsltThenSaxReturns1783293664() throws IOException, SAXException {
         ConvertXSQT convertXSQT = new ConvertXSQT();
-        File source =  new File(Objects.requireNonNull(StoreSQLTest.class.getClassLoader().getResource("1.xml")).getFile());
-        File dest =  new File(Objects.requireNonNull(StoreSQLTest.class.getClassLoader().getResource("2.xml")).getFile());
+        File source = new File(Objects.requireNonNull(StoreSQLTest.class.getClassLoader().getResource("1.xml")).getFile());
+        File dest = new File(Objects.requireNonNull(StoreSQLTest.class.getClassLoader().getResource("2.xml")).getFile());
         File scheme = new File(Objects.requireNonNull(StoreSQLTest.class.getClassLoader().getResource("template.xml")).getFile());
 
         convertXSQT.convert(source, dest, scheme);
         Counter parser = new Counter();
         Counter.XMLHandler handler = new Counter.XMLHandler();
         parser.getParser().parse(dest, handler);
-        System.out.println(parser.getSum());
-        assertThat(parser.getSum(), is(1783293664));
+        System.out.println(Counter.XMLHandler.getSum());
+        assertThat(Counter.XMLHandler.getSum(), is(1783293664));
     }
-
 }

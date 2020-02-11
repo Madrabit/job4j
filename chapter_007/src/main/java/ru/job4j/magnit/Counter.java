@@ -13,22 +13,12 @@ import javax.xml.parsers.SAXParserFactory;
  * Using SAX count amount of fields.
  */
 public class Counter {
-    /**
-     * Sum of fields.
-     */
-    private static int sum = 0;
+
     /**
      * SAX object.
      */
     private SAXParser parser;
 
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        Counter.sum = sum;
-    }
 
     public Counter() {
         try {
@@ -43,11 +33,15 @@ public class Counter {
         return parser;
     }
 
+
     /**
      * Handler with counter
      */
     public static class XMLHandler extends DefaultHandler {
-
+        /**
+         * Sum of fields.
+         */
+        private static int sum = 0;
         /**
          * Counter
          *
@@ -62,6 +56,10 @@ public class Counter {
                 String field = attributes.getValue("field");
                 sum += Integer.parseInt(field);
             }
+        }
+
+        public static int getSum() {
+            return sum;
         }
     }
 

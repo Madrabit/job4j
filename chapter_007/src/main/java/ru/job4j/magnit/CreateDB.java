@@ -1,5 +1,8 @@
 package ru.job4j.magnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -10,6 +13,10 @@ import java.sql.SQLException;
  * Creating Data Base.
  */
 public class CreateDB {
+    /**
+     * Logger
+     */
+    private static final Logger LOG = LogManager.getLogger(StoreSQL.class.getName());
 
     /**
      * Connect to a sample database
@@ -28,7 +35,7 @@ public class CreateDB {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+          LOG.error(e.getMessage());
         }
     }
 }
