@@ -37,16 +37,12 @@ public class TrackerTest {
             throw new IllegalStateException(e);
         }
     }
-//    public void initBase() {
-//        sql = new TrackerSQL();
-//        sql.init();
-//    }
 
     @Test
     public void createItem() {
         try (TrackerSQL sql = new TrackerSQL(ConnectionRollback.create(this.init()))) {
             sql.add(new Item("name", "desc", System.currentTimeMillis()));
-            assertThat(sql.findByName("name").size(), is(2));
+            assertThat(sql.findByName("name").size(), is(1));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -56,8 +52,8 @@ public class TrackerTest {
     @Test
     public void findByIDReturnFirstItem() {
         try (TrackerSQL sql = new TrackerSQL(ConnectionRollback.create(this.init()))) {
-            sql.add(new Item("name", "desc", System.currentTimeMillis()));
-            Item newItem = sql.findById("1");
+            Item item = sql.add(new Item("name", "desc", System.currentTimeMillis()));
+            Item newItem = sql.findById(item.getId());
             assertThat(newItem.getName(), is("name"));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -84,7 +80,7 @@ public class TrackerTest {
             sql.add(new Item("1 task", "Some description", System.currentTimeMillis()));
             sql.add(new Item("2 task", "Any description", System.currentTimeMillis()));
             List<Item> items = sql.findAll();
-            assertThat(items.size(), is(3));
+            assertThat(items.size(), is(2));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -93,8 +89,8 @@ public class TrackerTest {
     @Test
     public void deleteReturnsTrue() {
         try (TrackerSQL sql = new TrackerSQL(ConnectionRollback.create(this.init()))) {
-            sql.add(new Item("1 task", "Some description", System.currentTimeMillis()));
-            boolean result = sql.delete("1");
+            Item item = sql.add(new Item("1 task", "Some description", System.currentTimeMillis()));
+            boolean result = sql.delete(item.getId());
             assertThat(result, is(true));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -104,8 +100,9 @@ public class TrackerTest {
     @Test
     public void replace() {
         try (TrackerSQL sql = new TrackerSQL(ConnectionRollback.create(this.init()))) {
-            Item item = new Item("Edited task", "Edited description", System.currentTimeMillis());
-            boolean result = sql.replace("1", item);
+            Item item = sql.add(new Item("1 task", "Some description", System.currentTimeMillis()));
+            Item newItem = new Item("Edited task", "Edited description", System.currentTimeMillis());
+            boolean result = sql.replace(item.getId(), newItem);
             assertThat(result, is(true));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);

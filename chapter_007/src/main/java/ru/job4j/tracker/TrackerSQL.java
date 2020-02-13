@@ -147,7 +147,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new LinkedList<>();
-//        Item item = new Item("", "", 0L);
         try (PreparedStatement st = connection.prepareStatement("SELECT * FROM task WHERE task_name =  ?")) {
             st.setString(1, key);
             ResultSet result = st.executeQuery();
