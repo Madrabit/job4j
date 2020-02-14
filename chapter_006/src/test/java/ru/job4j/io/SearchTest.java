@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 public class SearchTest {
     @Test
     public void whenSearchingLogAndCsvShouldReturn3ofThem() {
-//        String path = System.getProperty("java.io.tmpdir") + File.separator;
         String path = String.format(".%sdata%s", File.separator, File.separator);
         List<String> ext = new LinkedList<>(Arrays.asList("csv"));
         Search search = new Search();
