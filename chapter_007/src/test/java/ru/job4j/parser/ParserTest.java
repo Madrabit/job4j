@@ -12,16 +12,16 @@ import static org.junit.Assert.assertThat;
 public class ParserTest {
     private DataBase base;
 
-    @Before
-    public void initBase() {
-        base = new DataBase();
-        base.init();
-    }
-
-    @Test
-    public void checkConnection() {
-        assertThat(base.init(), is(true));
-    }
+//    @Before
+//    public void initBase() {
+//        base = new DataBase();
+//        base.init();
+//    }
+//
+//    @Test
+//    public void checkConnection() {
+//        assertThat(base.init(), is(true));
+//    }
 
 //    @Test
 //    public void parser() {
