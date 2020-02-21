@@ -32,38 +32,35 @@ public class SearchFileTest {
 
     @Test
     public void whenSearchingByMaskShouldChatLog() {
-        String path = "./data/";
         SearchFile search = new SearchFile();
         SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-m", "-o", "null"});
         SearchFile searchFile = new SearchFile();
-        File result = search.search(path, "*.log", params);
+        File result = search.search(root.getAbsolutePath(), "*.log", params);
         assertEquals(
                 result.toString(),
-                "./data/chat.log"
+                "/tmp/root/dir/chat.log"
         );
     }
 
     @Test
     public void whenSearchByNameShouldServerLog() {
-        String path = "./data/";
         SearchFile search = new SearchFile();
         SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-f", "-o", "null"});
-        File result = search.search(path, "server.log", params);
+        File result = search.search(root.getAbsolutePath(), "server.log", params);
         assertEquals(
                 result.toString(),
-                "./data/server.log"
+                "/tmp/root/dir/server.log"
         );
     }
 
     @Test
     public void whenSearchByRegexpShouldChatLog() {
-        String path = "./data/";
         SearchFile search = new SearchFile();
         SearchFile.Args params = new SearchFile.Args(new String[]{"-d", root.getAbsolutePath(), "-n", "*.log", "-r", "-o", "null"});
-        File result = search.search(path, ".*log.*", params);
+        File result = search.search(root.getAbsolutePath(), ".*log.*", params);
         assertEquals(
                 result.toString(),
-                "./data/chat.log"
+                "/tmp/root/dir/chat.log"
         );
     }
 }
