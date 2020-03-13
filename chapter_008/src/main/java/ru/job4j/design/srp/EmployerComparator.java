@@ -1,4 +1,4 @@
-package ru.job4j.design.srp.design.srp;
+package ru.job4j.design.srp;
 
 import java.util.Comparator;
 import java.util.List;
