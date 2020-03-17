@@ -16,23 +16,22 @@ public class MailTest {
     @Test
     public void whenTwoSetsMergedShouldReturnTrue() {
 
-        User user1 = new User(new ArrayList<>(List.of(
+        User user1 = new User(new LinkedList<>(List.of(
                 "xxx@ya.ru", "foo@gmail.com", "lol@mail.ru")),
                 "user1"
         );
-        User user2 = new User(new ArrayList<>(List.of(
+        User user2 = new User(new LinkedList<>(List.of(
                 "foo@gmail.com", "ups@pisem.net")),
                 "user2"
         );
-        User user3 = new User(new ArrayList<>(List.of(
+        User user3 = new User(new LinkedList<>(List.of(
                 "123123@gmail.com", "aaaa@pisem.net")),
                 "user3"
         );
-        List<User> users = new ArrayList<>(List.of(
+        List<User> users = new LinkedList<>(List.of(
                 user1, user2, user3
         ));
         assertThat(Mail.join(users).toString(),
-                is("[[xxx@ya.ru, foo@gmail.com, lol@mail.ru, ups@pisem.net]," + " [123123@gmail.com, aaaa@pisem.net]]"
-                ));
+                is("[[xxx@ya.ru, foo@gmail.com, lol@mail.ru, ups@pisem.net], [123123@gmail.com, aaaa@pisem.net]]"));
     }
 }
