@@ -67,14 +67,18 @@ public abstract class Food {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Food food = (Food) o;
-        return price == food.price &&
-                discount == food.discount &&
-                Objects.equals(name, food.name) &&
-                Objects.equals(expiryDate, food.expiryDate) &&
-                Objects.equals(createDate, food.createDate);
+        return price == food.price
+                && discount == food.discount
+                && Objects.equals(name, food.name)
+                && Objects.equals(expiryDate, food.expiryDate)
+                && Objects.equals(createDate, food.createDate);
     }
 
     @Override
@@ -84,12 +88,12 @@ public abstract class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
-                "name='" + name + '\'' +
-                ", expiryDate=" + expiryDate +
-                ", createDate=" + createDate +
-                ", price=" + price +
-                ", discount=" + discount +
-                '}';
+        return "Food{"
+                + "name='" + name + '\''
+                + ", expiryDate=" + expiryDate
+                + ", createDate=" + createDate
+                + ", price=" + price
+                + ", discount=" + discount
+                + '}';
     }
 }
