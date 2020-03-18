@@ -1,17 +1,18 @@
-package ru.job4j.design.srp.design.srp;
+package ru.job4j.design.srp;
 
 import java.util.function.Predicate;
 
 /**
  * @author madrabit
  */
-public class ReportForIt implements Report {
-    private final Store store;
+public class ReportForIt extends Report {
+
 
     public ReportForIt(Store store) {
-        this.store = store;
+        super(store);
     }
 
+    @Override
     public String generate(Predicate<Employer> filter) {
         StringBuilder text = new StringBuilder();
         text.append("<html>"
@@ -30,7 +31,7 @@ public class ReportForIt implements Report {
                 + "</thead>"
                 + "<tbody>"
         );
-        for (Employer employer : store.findBy(filter)) {
+        for (Employer employer : getStore().findBy(filter)) {
             text.append("<tr>");
             text.append("<td>").append(employer.getName()).append("</td>");
             text.append("<td>").append(employer.getSalary()).append("руб.</td>");

@@ -1,7 +1,7 @@
-package ru.job4j.design.srp.design.srp;
+package ru.job4j.design.srp;
 
 import java.util.function.Predicate;
 
-public interface Report {
+public interface IReport {
     String generate(Predicate<Employer> filter);
 }
