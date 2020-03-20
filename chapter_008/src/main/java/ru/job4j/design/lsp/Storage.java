@@ -28,9 +28,7 @@ public abstract class Storage implements IStorage {
 
     @Override
     public void add(Food f) {
-        if (accept(f)) {
             storage.add(f);
-        }
     }
 
 
