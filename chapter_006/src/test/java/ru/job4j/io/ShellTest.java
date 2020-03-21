@@ -1,33 +1,36 @@
 package ru.job4j.io;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import ru.job4j.io.minicmd.Shell;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author madrabit
  */
 public class ShellTest {
-    private Path root;
-
-    @Before
-    public void createFilesStructure() throws IOException {
-        root = Files.createTempDirectory(System.getProperty("tmpdir"));
-        Path target = Files.createDirectory(Paths.get(root + "/target"));
-    }
 
     @Test
     public void whenCdTargetUpTargetCurrentDirectoryTarget() {
-        Shell shell = new Shell(root);
-        shell.cd("target/../target");
-        System.out.println(shell.getCurrent());
-        assertThat(shell.getCurrent().endsWith("target"), is(true));
+        final Shell shell = new Shell();
+        assert shell.path().equals("/");
+
+        shell.cd("/");
+        assert shell.path().equals("/");
+
+        shell.cd("usr/..");
+        assertEquals("/",  shell.path());
+
+        shell.cd("usr").cd("local");
+        shell.cd("../local").cd("./");
+        assertEquals("/usr/local", shell.path());
+
+        shell.cd("..");
+        assert shell.path().equals("/usr");
+
+        shell.cd("//lib///");
+        assertEquals("/lib", shell.path());
     }
 }
