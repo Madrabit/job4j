@@ -5,17 +5,17 @@ import java.util.function.Predicate;
 /**
  * @author madrabit
  */
-public class ReportForAccountant {
-    private final Store store;
+public class ReportForAccountant extends Report {
 
     public ReportForAccountant(Store store) {
-        this.store = store;
+        super(store);
     }
 
+    @Override
     public String generate(Predicate<Employer> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;");
-        for (Employer employer : store.findBy(filter)) {
+        for (Employer employer : getStore().findBy(filter)) {
             text.append(employer.getName()).append(";")
                     .append(employer.getHired()).append(";")
                     .append(employer.getFired()).append(";")
