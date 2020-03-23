@@ -6,7 +6,7 @@ import java.util.List;
  * @author madrabit
  */
 public class VehicleRouter {
-    List<Parking> parkings;
+    final List<Parking> parkings;
 
     public VehicleRouter(List<Parking> parkings) {
         this.parkings = parkings;
@@ -18,5 +18,9 @@ public class VehicleRouter {
                 parking.add(vehicle);
             }
         }
+    }
+
+    public List<Parking> getParkings() {
+        return parkings;
     }
 }

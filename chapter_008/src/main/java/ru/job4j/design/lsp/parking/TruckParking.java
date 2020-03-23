@@ -1,23 +1,20 @@
 package ru.job4j.design.lsp.parking;
 
-import com.sun.javafx.scene.control.SizeLimitedList;
-
-import java.util.List;
-
 /**
  * @author madrabit
  */
-public class TruckParking extends AbstractParking{
+public class TruckParking extends AbstractParking {
+    int modsize;
+
     public TruckParking(int size) {
         super(size);
     }
 
     public boolean checkVehicle(Vehicle vehicle) {
         boolean result = false;
-        if (size > 1) {
+        if (modsize < size && vehicle.getSize() == 2) {
+            modsize += 2;
             result = true;
-        } else {
-
         }
         return result;
     }

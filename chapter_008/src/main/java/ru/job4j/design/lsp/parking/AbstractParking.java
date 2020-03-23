@@ -1,17 +1,19 @@
 package ru.job4j.design.lsp.parking;
 
-import com.sun.javafx.scene.control.SizeLimitedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author madrabit
  */
 public abstract class AbstractParking implements Parking {
-    SizeLimitedList<Vehicle> vehicleList;
+    private final List<Vehicle> vehicleList;
 
-    int size;
+    final int size;
 
     public AbstractParking(int size) {
-        this.vehicleList = new SizeLimitedList<>(size);
+        this.vehicleList = new ArrayList<>(size);
+        this.size = size;
     }
 
     @Override
@@ -19,5 +21,7 @@ public abstract class AbstractParking implements Parking {
         vehicleList.add(vehicle);
     }
 
-
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
 }

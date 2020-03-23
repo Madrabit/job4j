@@ -67,6 +67,7 @@ public class Menu<E extends Comparable<E>> implements IMenu<E>, ShowMenu<E> {
         return rsl;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Iterator<E> iterator() {
         Queue<Item<E>> data = new LinkedList<>();
