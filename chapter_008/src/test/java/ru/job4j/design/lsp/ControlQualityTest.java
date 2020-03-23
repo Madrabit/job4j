@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -25,8 +26,9 @@ public class ControlQualityTest {
                 200,
                 10
         );
-        ControlQuality controlQuality = new ControlQuality(shop, warehouse, trash);
+        List<Storage> storage = new ArrayList<>(List.of(shop, warehouse, trash));
+        ControlQuality controlQuality = new ControlQuality(storage);
         controlQuality.distribute(oldFish);
-        assertThat(180, is(shop.getStorage().get(0).getPrice()));
+        assertThat(180, is(storage.get(0).getStorage().get(0).getPrice()));
     }
 }

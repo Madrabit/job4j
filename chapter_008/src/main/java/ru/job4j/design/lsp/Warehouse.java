@@ -11,4 +11,14 @@ public class Warehouse extends Storage {
         super(storage);
     }
 
+    @Override
+    public boolean accept(Food food) {
+        double percent = this.calcPercents(food);
+        boolean result = false;
+        if (percent < 25) {
+            result = true;
+        }
+        return result;
+    }
+
 }
