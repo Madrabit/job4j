@@ -1,3 +1,4 @@
+
 package ru.job4j.design.lsp;
 
 import java.time.LocalDate;

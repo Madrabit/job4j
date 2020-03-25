@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.storage;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -86,4 +86,14 @@ public abstract class Food {
         return Objects.hash(name, expiryDate, createDate, price, discount);
     }
 
+    @Override
+    public String toString() {
+        return "Food{"
+                + "name='" + name + '\''
+                + ", expiryDate=" + expiryDate
+                + ", createDate=" + createDate
+                + ", price=" + price
+                + ", discount=" + discount
+                + '}';
+    }
 }
