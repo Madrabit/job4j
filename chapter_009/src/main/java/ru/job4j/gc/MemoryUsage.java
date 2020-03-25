@@ -40,8 +40,8 @@ public class MemoryUsage {
         System.out.println("start");
         info();
         for (int i = 0; i < 25; i++) {
-//            SoftReference user = new SoftReference<>(new User("test"));
-            SoftReference<UserNoFields> user = new SoftReference<> (new UserNoFields());
+            SoftReference user = new SoftReference<>(new User("test"));
+//            SoftReference<UserNoFields> user = new SoftReference<> (new UserNoFields());
             user = null;
 
         }
@@ -56,7 +56,7 @@ public class MemoryUsage {
         Runtime runtime = Runtime.getRuntime();
 
         System.out.println("Used Memory:"
-                + ((runtime.totalMemory() - runtime.freeMemory()) / mb));
+                + ((runtime.totalMemory() - runtime.freeMemory()) / mb ));
 
         System.out.println("Free Memory:"
                 + runtime.freeMemory() / mb);
@@ -66,6 +66,9 @@ public class MemoryUsage {
 
         System.out.println("Max Memory:"
                 + runtime.maxMemory() / mb);
+
+        System.out.println("One object size:"
+                + ((runtime.totalMemory() - runtime.freeMemory()) / 25 ));
 
     }
 }
