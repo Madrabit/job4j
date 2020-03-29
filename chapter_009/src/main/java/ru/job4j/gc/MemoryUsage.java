@@ -1,6 +1,5 @@
 package ru.job4j.gc;
 
-import java.lang.instrument.Instrumentation;
 import java.lang.ref.SoftReference;
 
 /**
@@ -10,12 +9,14 @@ public class MemoryUsage {
 
 
     public static class User {
-        public String name;
+        public final String name;
 
+        @SuppressWarnings("unused")
         public User(String name) {
             this.name = name;
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         protected void finalize() throws Throwable {
             super.finalize();
@@ -28,6 +29,7 @@ public class MemoryUsage {
         public UserNoFields() {
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         protected void finalize() throws Throwable {
             super.finalize();
@@ -36,12 +38,14 @@ public class MemoryUsage {
     }
 
 
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         System.out.println("start");
         info();
         for (int i = 0; i < 2500000; i++) {
 //            SoftReference user = new SoftReference<>(new User("test"));
-            SoftReference<UserNoFields> user = new SoftReference<> (new UserNoFields());
+            SoftReference<UserNoFields> user = new SoftReference<>(new UserNoFields());
+            //noinspection UnusedAssignment
             user = null;
 
         }
