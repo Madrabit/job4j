@@ -23,11 +23,10 @@ public class CacheTxt implements Cache {
         if (map.containsKey(key)) {
             File file = map.get(key).get();
             return readFile(file);
-        } else {
-            File file = new File(Objects.requireNonNull(CacheTxt.class.getClassLoader().getResource(key)).getFile());
-            add(key, file);
-            return readFile(file);
         }
+        File file = new File(Objects.requireNonNull(CacheTxt.class.getClassLoader().getResource(key)).getFile());
+        add(key, file);
+        return readFile(file);
     }
 
     private String readFile(File fileName) {
