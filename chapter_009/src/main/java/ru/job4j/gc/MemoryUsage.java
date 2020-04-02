@@ -56,7 +56,7 @@ public class MemoryUsage {
         Runtime runtime = Runtime.getRuntime();
 
         System.out.println("Used Memory:"
-                + ((runtime.totalMemory() - runtime.freeMemory()) / mb ));
+                + ((runtime.totalMemory() - runtime.freeMemory()) / mb));
 
         System.out.println("Free Memory:"
                 + runtime.freeMemory() / mb);
@@ -68,7 +68,7 @@ public class MemoryUsage {
                 + runtime.maxMemory() / mb);
 
         System.out.println("One object size:"
-                + ((runtime.totalMemory() - runtime.freeMemory()) / 25 ));
+                + ((runtime.totalMemory() - runtime.freeMemory()) / 25));
 
     }
 }
