@@ -1,66 +1,38 @@
 package ru.job4j.design.lsp.storage;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 /**
  * @author madrabit
- * Food distribution.
  */
 public class ControlQuality {
-    /**
-     * Storages.
-     */
-    final List<Storage> storageList;
+    final Storage shop;
+    final Storage warehouse;
+    final Storage trash;
 
-    /**
-     * Storage for clone.
-     */
-    List<Food> newStorage;
-
-    /**
-     * Current date.
-     */
     //        LocalDate current = LocalDate.now();
     final LocalDate current = LocalDate.of(2020, 3, 13);
 
-    public ControlQuality(List<Storage> storageList) {
-        this.storageList = storageList;
+    public ControlQuality(Storage shop, Storage warehouse, Storage trash) {
+        this.shop = shop;
+        this.warehouse = warehouse;
+        this.trash = trash;
     }
 
-    /**
-     * Food distribution.
-     * @param food Input food.
-     */
     public void distribute(Food food) {
-        for (Storage storage : storageList) {
-            storage.add(food);
-        }
-    }
-
-    public List<Storage> getStorageList() {
-        return storageList;
-    }
-
-    /**
-     * Clear storage before resort.
-     */
-    private void clear() {
-//        newStorage.addAll(getStorageList());
-        newStorage = new ArrayList<>();
-        for (Storage storage : storageList) {
-            newStorage.addAll(storage.getStorage());
-        }
-    }
-
-    /**
-     * Clear and resort all food.
-     */
-    public void resort() {
-        clear();
-        for (Food food : newStorage) {
-            distribute(food);
+        double all = ChronoUnit.DAYS.between(food.getExpiryDate(), food.getCreateDate());
+        double passed = ChronoUnit.DAYS.between(current, food.getCreateDate());
+        double percent = passed / all * 100;
+        if (percent < 25) {
+            warehouse.getStorage().add(food);
+        } else if (percent >= 25 && percent < 75) {
+            shop.getStorage().add(food);
+        } else if (percent >= 75 && percent < 100) {
+            food.discount();
+            shop.getStorage().add(food);
+        } else {
+            trash.getStorage().add(food);
         }
     }
 }

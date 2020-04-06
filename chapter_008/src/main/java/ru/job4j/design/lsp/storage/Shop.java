@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  * @author madrabit
- * Storage SHOP.
- * Takes food wich freshness == percent >= 25 && percent < 75
  */
 public class Shop extends Storage {
 
@@ -13,16 +11,4 @@ public class Shop extends Storage {
         super(storage);
     }
 
-    @Override
-    public boolean accept(Food food) {
-        double percent = this.calcPercents(food);
-        boolean result = false;
-        if (percent >= 25 && percent < 75) {
-            result = true;
-        } else if (percent >= 75 && percent < 100) {
-            food.discount();
-            result = true;
-        }
-        return result;
-    }
 }
