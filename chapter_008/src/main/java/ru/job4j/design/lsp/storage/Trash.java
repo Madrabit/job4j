@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * @author madrabit
+ *  Storage Trash.
+ *  Takes food wich freshness == percent >= 100
  */
 public class Trash extends Storage {
 

@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * Report for HR.
+ * Revers Sorted by salary.
  */
 public class ReportForHr extends Report {
     private final MemStore store;

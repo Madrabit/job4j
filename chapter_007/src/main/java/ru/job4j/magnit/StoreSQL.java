@@ -21,7 +21,7 @@ public class StoreSQL implements AutoCloseable {
     private Connection connect;
 
     public StoreSQL(Config config) {
-        CreateDB.createNewDatabase("magnit");
+        CreateDB.createNewDatabase("memory:");
         try {
             Class.forName(config.get("driver-class-name"));
         } catch (ClassNotFoundException e) {

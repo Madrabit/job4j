@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * 3D Cinema example.
  */
 public class Cinema3D implements Cinema {
     List<Session> sessions = null;

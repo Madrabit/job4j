@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * Abstart report for all reports.
  */
 @SuppressWarnings("StringBufferReplaceableByString")
 public abstract class Report implements IReport {
@@ -17,6 +18,11 @@ public abstract class Report implements IReport {
         this.store = store;
     }
 
+    /**
+     * Generate report.
+     * @param filter Filter employee.
+     * @return report.
+     */
     @Override
     public String generate(Predicate<Employer> filter) {
         //noinspection MismatchedQueryAndUpdateOfStringBuilder

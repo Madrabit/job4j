@@ -19,6 +19,11 @@ public abstract class Storage implements IStorage {
         this.storage = storage;
     }
 
+    /**
+     * Calculate freshness.
+     * @param food Food.
+     * @return Precents.
+     */
     protected double calcPercents(Food food) {
         final LocalDate current = LocalDate.of(2020, 3, 13);
         double all = ChronoUnit.DAYS.between(food.getExpiryDate(), food.getCreateDate());

@@ -25,7 +25,7 @@ public class CreateDB {
      */
     public static void createNewDatabase(String fileName) {
 
-        String url = "jdbc:sqlite::memory:" + fileName;
+        String url = "jdbc:sqlite::" + fileName;
 
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {

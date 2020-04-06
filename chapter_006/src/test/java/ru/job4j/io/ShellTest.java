@@ -3,9 +3,7 @@ package ru.job4j.io;
 import org.junit.Test;
 import ru.job4j.io.minicmd.Shell;
 
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author madrabit

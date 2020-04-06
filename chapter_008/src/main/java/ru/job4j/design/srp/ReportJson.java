@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * Json report.
  */
 public class ReportJson extends Report {
     public ReportJson(Store store) {

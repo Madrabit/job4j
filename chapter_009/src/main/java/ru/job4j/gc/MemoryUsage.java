@@ -1,14 +1,18 @@
 package ru.job4j.gc;
 
-import java.lang.instrument.Instrumentation;
 import java.lang.ref.SoftReference;
 
 /**
  * @author madrabit
+ * Demonstration of work with GC
  */
 public class MemoryUsage {
 
 
+    /**
+     * Class with fields.
+     */
+    @SuppressWarnings("deprecation")
     public static class User {
         public String name;
 
@@ -23,6 +27,9 @@ public class MemoryUsage {
         }
     }
 
+    /**
+     * Class without fields.
+     */
     public static class UserNoFields {
 
         public UserNoFields() {
@@ -50,13 +57,17 @@ public class MemoryUsage {
         info();
     }
 
+    /**
+     * Memory information.
+     * Used, Free, Total and Max memory.
+     */
     public static void info() {
         int mb = 1024 * 1024;
 
         Runtime runtime = Runtime.getRuntime();
 
         System.out.println("Used Memory:"
-                + ((runtime.totalMemory() - runtime.freeMemory()) / mb ));
+                + ((runtime.totalMemory() - runtime.freeMemory()) / mb));
 
         System.out.println("Free Memory:"
                 + runtime.freeMemory() / mb);
@@ -68,7 +79,7 @@ public class MemoryUsage {
                 + runtime.maxMemory() / mb);
 
         System.out.println("One object size:"
-                + ((runtime.totalMemory() - runtime.freeMemory()) / 25 ));
+                + ((runtime.totalMemory() - runtime.freeMemory()) / 25));
 
     }
 }

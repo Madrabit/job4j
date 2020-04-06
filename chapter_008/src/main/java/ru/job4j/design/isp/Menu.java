@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * @author madrabit
+ * Console menu works on recurtion.
  */
 public class Menu<E extends Comparable<E>> implements IMenu<E>, ShowMenu<E> {
     /**

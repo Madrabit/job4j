@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * XML report.
  */
 public class ReportXML extends Report {
     public ReportXML(Store store) {

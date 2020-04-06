@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * @author madrabit
+ * Simulate interpolation.
  */
 public class SimpleGenerator implements Generator {
     @Override

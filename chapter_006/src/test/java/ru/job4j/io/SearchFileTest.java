@@ -38,7 +38,7 @@ public class SearchFileTest {
         File result = search.search(root.getAbsolutePath(), "*.log", params);
         assertEquals(
                 result.toString(),
-                "/tmp/root/dir/chat.log"
+                root.getAbsolutePath() + File.separator + "dir" + File.separator + "chat.log"
         );
     }
 
@@ -49,7 +49,7 @@ public class SearchFileTest {
         File result = search.search(root.getAbsolutePath(), "server.log", params);
         assertEquals(
                 result.toString(),
-                "/tmp/root/dir/server.log"
+                root.getAbsolutePath() + File.separator + "dir" + File.separator + "server.log"
         );
     }
 
@@ -60,7 +60,7 @@ public class SearchFileTest {
         File result = search.search(root.getAbsolutePath(), ".*log.*", params);
         assertEquals(
                 result.toString(),
-                "/tmp/root/dir/chat.log"
+                root.getAbsolutePath() + File.separator + "dir" + File.separator + "chat.log"
         );
     }
 }

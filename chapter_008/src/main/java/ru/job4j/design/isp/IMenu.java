@@ -4,6 +4,7 @@ import java.util.Optional;
 
 /**
  * @author madrabit
+ * Creation menu Interface.
  */
 public interface IMenu<E extends Comparable<E>> extends Iterable<E>   {
     /**

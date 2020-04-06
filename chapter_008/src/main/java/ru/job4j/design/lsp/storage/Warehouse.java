@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * @author madrabit
+ *  Storage Warehouse.
+ *  Takes food wich freshness == percent < 25
  */
 public class Warehouse extends Storage {
 

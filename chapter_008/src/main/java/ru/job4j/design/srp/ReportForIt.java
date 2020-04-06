@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * Report for It.
+ * HTML template.
  */
 public class ReportForIt extends Report {
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 /**
  * @author madrabit
+ * Food example FISH
  */
 public class Fish extends Food {
     public Fish(String name, LocalDate createDate, LocalDate expiryDate, int price, int discount) {

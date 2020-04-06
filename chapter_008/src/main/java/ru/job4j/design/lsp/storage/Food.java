@@ -5,12 +5,28 @@ import java.util.Objects;
 
 /**
  * @author madrabit
+ * Food class.
  */
 public abstract class Food {
+    /**
+     * Name
+     */
     private String name;
+    /**
+     * Expiry Date
+     */
     private LocalDate expiryDate;
+    /**
+     * Creation Date.
+     */
     private LocalDate createDate;
+    /**
+     * Price.
+     */
     private int price;
+    /**
+     * Discount.
+     */
     private int discount;
 
     public Food(String name, LocalDate createDate, LocalDate expiryDate, int price, int discount) {
@@ -21,6 +37,9 @@ public abstract class Food {
         this.discount = discount;
     }
 
+    /**
+     * Discount calculation.
+     */
     public void discount() {
         this.price -= price * discount / 100;
     }

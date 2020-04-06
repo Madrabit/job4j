@@ -18,6 +18,7 @@ import ru.job4j.puzzle.firuges.Cell;
 import ru.job4j.puzzle.firuges.Checker;
 import ru.job4j.puzzle.firuges.Figure;
 
+import java.util.Objects;
 import java.util.Random;
 
 @SuppressWarnings({"SameParameterValue"})
@@ -43,7 +44,7 @@ public class Puzzle extends Application {
         rect.setY(y);
         rect.setHeight(size);
         rect.setWidth(size);
-        Image img = new Image(this.getClass().getClassLoader().getResource(image).toString());
+        Image img = new Image(Objects.requireNonNull(this.getClass().getClassLoader().getResource(image)).toString());
         rect.setFill(new ImagePattern(img));
         final Rectangle momento = new Rectangle(x, y);
         rect.setOnDragDetected(

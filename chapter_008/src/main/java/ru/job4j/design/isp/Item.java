@@ -5,9 +5,16 @@ import java.util.List;
 
 /**
  * @author madrabit
+ * Menu Item.
  */
 public class Item<E extends Comparable<E>> implements ShowMenu<E> {
+    /**
+     * Childrens of node.
+     */
     private final List<Item<E>> children = new ArrayList<>();
+    /**
+     * Value.
+     */
     private final E value;
 
     public Item(final E value) {
@@ -30,6 +37,10 @@ public class Item<E extends Comparable<E>> implements ShowMenu<E> {
         return value;
     }
 
+    /**
+     * Show leaves.
+     * @param value Value.
+     */
     @Override
     public void show(E value) {
         for (Item<E> leaf : children) {

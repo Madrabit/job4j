@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 /**
  * @author madrabit
+ * Report for accountant.
+ * Salary in rub.
  */
 public class ReportForAccountant extends Report {
 

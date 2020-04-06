@@ -6,11 +6,22 @@ import java.util.List;
 
 /**
  * @author madrabit
+ * Food distribution.
  */
 public class ControlQuality {
+    /**
+     * Storages.
+     */
     final List<Storage> storageList;
+
+    /**
+     * Storage for clone.
+     */
     List<Food> newStorage;
 
+    /**
+     * Current date.
+     */
     //        LocalDate current = LocalDate.now();
     final LocalDate current = LocalDate.of(2020, 3, 13);
 
@@ -18,6 +29,10 @@ public class ControlQuality {
         this.storageList = storageList;
     }
 
+    /**
+     * Food distribution.
+     * @param food Input food.
+     */
     public void distribute(Food food) {
         for (Storage storage : storageList) {
             storage.add(food);
@@ -28,6 +43,9 @@ public class ControlQuality {
         return storageList;
     }
 
+    /**
+     * Clear storage before resort.
+     */
     private void clear() {
 //        newStorage.addAll(getStorageList());
         newStorage = new ArrayList<>();
@@ -36,6 +54,9 @@ public class ControlQuality {
         }
     }
 
+    /**
+     * Clear and resort all food.
+     */
     public void resort() {
         clear();
         for (Food food : newStorage) {

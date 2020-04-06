@@ -1,15 +1,5 @@
 package ru.job4j.design.tdd;
 
-import org.junit.Test;
-import ru.job4j.design.tdd.cinema.*;
-
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 /**
  * @author madrabit
  */

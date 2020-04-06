@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * @author madrabit
+ * Employer
  */
 public class Employer {
     private String name;
