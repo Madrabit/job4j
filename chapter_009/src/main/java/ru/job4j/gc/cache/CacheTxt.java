@@ -20,12 +20,13 @@ public class CacheTxt implements Cache {
 
     @Override
     public String get(String key) {
-        if (map.containsKey(key)) {
-            File file = map.get(key).get();
-            return readFile(file);
+        File file = null;
+        if (map.containsKey(key) && map.get(key) != null) {
+            file = map.get(key).get();
+        } else {
+            file = new File(Objects.requireNonNull(CacheTxt.class.getClassLoader().getResource(key)).getFile());
+            add(key, file);
         }
-        File file = new File(Objects.requireNonNull(CacheTxt.class.getClassLoader().getResource(key)).getFile());
-        add(key, file);
         return readFile(file);
     }
 
