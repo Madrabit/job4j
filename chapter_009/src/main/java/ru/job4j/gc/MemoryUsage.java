@@ -11,12 +11,10 @@ public class MemoryUsage {
     public static class User {
         public final String name;
 
-        @SuppressWarnings("unused")
         public User(String name) {
             this.name = name;
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         protected void finalize() throws Throwable {
             super.finalize();

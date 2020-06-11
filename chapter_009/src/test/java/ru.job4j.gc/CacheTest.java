@@ -12,18 +12,19 @@ import static org.junit.Assert.assertEquals;
 public class CacheTest {
     @Test
     public void whenAddTxtThenReturnText() {
-        Cache cache = new CacheTxt();
-        File file = new File(Objects.requireNonNull(CacheTest.class.getClassLoader().getResource("test.txt")).getFile());
-        cache.add("test.txt", file);
-        String result = cache.get("test.txt");
+        File file = new File(Objects.requireNonNull(CacheTest.class.getClassLoader().getResource("test.txt").getPath()));
+        Cache cache = new CacheTxt(file);
+        String result = cache.get(file);
         assertEquals(result, "Hello World!\n");
 
     }
 
     @Test
     public void whenNoFileInCacheAddEndReturnIt() {
-        CacheTxt cache = new CacheTxt();
-        String result = cache.get("some.txt");
+        File file = new File(Objects.requireNonNull(CacheTest.class.getClassLoader().getResource("test.txt")).getPath());
+        File someText = new File(Objects.requireNonNull(CacheTest.class.getClassLoader().getResource("some.txt")).getPath());
+        Cache cache = new CacheTxt(file);
+        String result = cache.get(someText);
         assertEquals(result, "get some\n");
 
     }

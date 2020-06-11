@@ -8,26 +8,31 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class CacheTxt implements Cache {
-    final Map<String, SoftReference<File>> map = new HashMap<>();
 
-    @Override
-    public void add(String key, File file) {
-        // noinspection unchecked
-        map.put(key, new SoftReference(file));
+    final Map<String, SoftReference<String>> map = new HashMap<>();
+
+    private final File path;
+
+    public CacheTxt(File path) {
+        this.path = path;
     }
 
     @Override
-    public String get(String key) {
-        File file = null;
-        if (map.containsKey(key) && map.get(key) != null) {
-            file = map.get(key).get();
-        } else {
-            file = new File(Objects.requireNonNull(CacheTxt.class.getClassLoader().getResource(key)).getFile());
-            add(key, file);
+    public String get(File key) {
+        if (!map.containsKey(key.getName())) {
+            putInMap(key);
         }
-        return readFile(file);
+        String result = map.get(key.getName()).get();
+        return result;
+    }
+
+    private void putInMap(File fileName) {
+        String text = readFile(fileName);
+        map.put(fileName.getName(), new SoftReference<>(text));
+
     }
 
     private String readFile(File fileName) {
