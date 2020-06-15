@@ -25,8 +25,10 @@ public class CacheTxt implements Cache {
         if (!map.containsKey(key.getName())) {
             putInMap(key);
         }
-        String result = map.get(key.getName()).get();
-        return result;
+        if (map.get(key.getName()).get() == null) {
+            putInMap(key);
+        }
+        return map.get(key.getName()).get();
     }
 
     private void putInMap(File fileName) {
