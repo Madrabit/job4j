@@ -28,10 +28,10 @@ public class Logic3T {
                 || this.fillBy(predicate, 0, 1, 1, 0)
                 || this.fillBy(predicate, 0, 2, 1, 0)
                 || this.fillBy(predicate, 0, 0, 0, 1)
-                ||  this.fillBy(predicate, 0, 0, 0, 1)
-                ||  this.fillBy(predicate, 1, 0, 0, 1)
-                ||  this.fillBy(predicate, 2, 0, 0, 1)
-                ||  this.fillBy(predicate, 0, 0, 1, 1)
+                || this.fillBy(predicate, 0, 0, 0, 1)
+                || this.fillBy(predicate, 1, 0, 0, 1)
+                || this.fillBy(predicate, 2, 0, 0, 1)
+                || this.fillBy(predicate, 0, 0, 1, 1)
                 || this.fillBy(predicate, this.table.length - 1, 0, -1, 1);
     }
 
