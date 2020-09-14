@@ -9,6 +9,10 @@ public class StartUI {
     private Store store;
     ConsoleInput input;
 
+//    public StartUI(Store store) {
+//        this.store = store;
+//    }
+
     public StartUI(Store store, ConsoleInput input) {
         this.store = store;
         this.input =  input;
