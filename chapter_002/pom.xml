@@ -11,5 +11,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter_002</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.17.Final</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
