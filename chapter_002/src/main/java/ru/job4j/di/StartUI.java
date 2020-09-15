@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartUI {
 
-    @Autowired
+//    @Autowired
     private Store store;
 
     private ConsoleInput input;
@@ -20,13 +20,13 @@ public class StartUI {
 //        this.store = store;
 //    }
 
-//    public StartUI(Store store, ConsoleInput input) {
-//        this.store = store;
-//        this.input =  input;
-//    }
+    public StartUI(Store store, ConsoleInput input) {
+        this.store = store;
+        this.input =  input;
+    }
 
 
-    @Autowired
+//    @Autowired
     public void setInput(ConsoleInput input) {
         this.input = input;
     }
