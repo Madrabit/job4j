@@ -29,4 +29,6 @@ public abstract class BaseAction implements UserAction {
     public String infoMenu() {
         return String.format("%s", this.name);
     }
+
+    public abstract void execute(Input input, ITracker tracker);
 }

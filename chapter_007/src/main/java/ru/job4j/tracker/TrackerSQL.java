@@ -141,6 +141,21 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         return items;
     }
 
+
+    public List<Item> findAll(Observe observe) {
+        List<Item> items = new LinkedList<>();
+        try (PreparedStatement st = connection.prepareStatement("SELECT * FROM task")) {
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+                Item item = new Item(result.getString("task_name"), result.getString("description"), System.currentTimeMillis());
+                observe.receive(item);
+            }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return items;
+    }
+
     /**
      * Find an item by name.
      *
