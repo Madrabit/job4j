@@ -1,11 +1,13 @@
 package ru.job4j.tracker;
 
+import javax.persistence.*;
 import java.util.Objects;
 /**
  * @author madrabit on 26.07.2019
  * @version 1$
  * @since 0.1
  */
+
 public class Item {
     private String id;
     private String name;
@@ -21,6 +23,9 @@ public class Item {
         this.name = name;
         this.decs = decs;
         this.time = time;
+    }
+
+    public Item(Object o) {
     }
 
     public String getId() {

@@ -25,9 +25,10 @@ public class MenuTracker {
 
     /**
      * Конструктор.
-     *  @param input   объект типа Input
+     *
+     * @param input   объект типа Input
      * @param tracker объект типа Tracker
-     * @param output Consumer.
+     * @param output  Consumer.
      */
     public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
@@ -81,6 +82,7 @@ public class MenuTracker {
      */
     private static class AddItem extends BaseAction {
         private final Consumer<String> output;
+
         public AddItem(int key, String name, Consumer<String> output) {
             super(key, name);
             this.output = output;
@@ -104,10 +106,12 @@ public class MenuTracker {
      */
     private static class ShowItems extends BaseAction {
         private final Consumer<String> output;
+
         public ShowItems(int key, String name, Consumer<String> output) {
             super(key, name);
-            this.output =  output;
+            this.output = output;
         }
+
         @Override
         public void execute(Input input, ITracker tracker) {
             output.accept("------------ Получение списка заявок --------------");
@@ -120,6 +124,7 @@ public class MenuTracker {
                         + " " + element.getTime());
             }
         }
+
     }
 
     /**
@@ -127,10 +132,12 @@ public class MenuTracker {
      */
     private static class UpdateItem extends BaseAction {
         private final Consumer<String> output;
+
         public UpdateItem(int key, String name, Consumer<String> output) {
             super(key, name);
-            this.output =  output;
+            this.output = output;
         }
+
         @Override
         public void execute(Input input, ITracker tracker) {
             output.accept("------------ Редактирование заявки --------------");
@@ -154,10 +161,12 @@ public class MenuTracker {
      */
     private static class DeleteItem extends BaseAction {
         private final Consumer<String> output;
+
         public DeleteItem(int key, String name, Consumer<String> output) {
             super(key, name);
-            this.output =  output;
+            this.output = output;
         }
+
         @Override
         public void execute(Input input, ITracker tracker) {
             output.accept("------------ Удаление заявки --------------");
@@ -176,15 +185,17 @@ public class MenuTracker {
      */
     private static class FindItemById extends BaseAction {
         private final Consumer<String> output;
+
         public FindItemById(int key, String name, Consumer<String> output) {
             super(key, name);
-            this.output =  output;
+            this.output = output;
         }
+
         @Override
         public void execute(Input input, ITracker tracker) {
             output.accept("------------ Поиск заявки по ID --------------");
             String id = input.ask("Введите ID заявки, которую хотите найти: ");
-            Item item =  tracker.findById(id);
+            Item item = tracker.findById(id);
             if (item != null) {
                 System.out.println("------------ Найденная заявка: " + item.getName()
                         + "-----------"
@@ -201,15 +212,17 @@ public class MenuTracker {
      */
     private static class FindItemsByName extends BaseAction {
         private final Consumer<String> output;
+
         public FindItemsByName(int key, String name, Consumer<String> output) {
             super(key, name);
             this.output = output;
         }
+
         @Override
         public void execute(Input input, ITracker tracker) {
             output.accept("------------ Поиск заявки по имени --------------");
             String name = input.ask("Введите имя заявки, которую хотите найти: ");
-            List<Item> items =  tracker.findByName(name);
+            List<Item> items = tracker.findByName(name);
             for (Item el : items) {
                 if (el != null) {
                     output.accept("------------ Найденная заявка: " + el.getName()
