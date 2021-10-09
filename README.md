@@ -3,7 +3,7 @@
 
 # Учебные проекты JOB4j
 
-###Содержание:
+### Содержание:
 
 chapter_001. Базовый синтаксис Java: операторы ветвления, циклы, примитивные типы, массивы.
 
@@ -24,7 +24,7 @@ chapter_008. SOLID, TDD
 chapter_009. GC
 
 ***
-###Наиболее интересные задачи:
+### Наиболее интересные задачи:
 + [Tracker. Программа для учета заявок](https://github.com/Madrabit/job4j/tree/master/chapter_002/src/main/java/ru/job4j/tracker)
 + [Простая реализация HashMap.](https://github.com/Madrabit/job4j/tree/master/chapter_005/src/main/java/ru/job4j/map)
 + [Простой zip-архиватор по заданному расширению в указанной папке.](https://github.com/Madrabit/job4j/blob/master/chapter_006/src/main/java/ru/job4j/io/Zip.java)
